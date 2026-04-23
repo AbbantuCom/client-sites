@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jenga Constructions – Building Strong Foundations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sky: #38BDF8;
+      --navy: #0F172A;
+      --navy-mid: #1E3A5F;
+      --steel: #94A3B8;
+      --off-white: #F1F5F9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-family: 'Barlow', Arial, sans-serif; }
+
+    body { background: var(--navy); color: #fff; overflow-x: hidden; }
+
+    /* ===== TYPOGRAPHY ===== */
+    .font-display { font-family: 'Barlow Condensed', Arial, sans-serif; }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.3s, box-shadow 0.3s;
+      background: transparent;
+    }
+    #navbar.scrolled {
+      background: rgba(15,23,42,0.97);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link {
+      position: relative; font-weight: 500; font-size: 0.9rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: -3px;
+      width: 0; height: 2px; background: var(--sky);
+      transition: width 0.3s;
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    #hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        135deg,
+        rgba(15,23,42,0.88) 0%,
+        rgba(15,23,42,0.65) 50%,
+        rgba(56,189,248,0.15) 100%
+      );
+    }
+    .hero-content { position: relative; z-index: 2; }
+
+    /* diagonal accent line */
+    .diagonal-line {
+      position: absolute; width: 3px; height: 120px;
+      background: var(--sky); transform: rotate(25deg);
+      opacity: 0.7;
+    }
+
+    /* ===== SECTION STYLES ===== */
+    .section-label {
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sky);
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-weight: 800; line-height: 1.05;
+      color: #fff;
+    }
+
+    /* ===== CARDS ===== */
+    .material-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .material-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--sky);
+      box-shadow: 0 16px 40px rgba(56,189,248,0.15);
+    }
+    .material-card img {
+      width: 100%; height: 200px; object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .material-card:hover img { transform: scale(1.04); }
+
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .service-card:hover {
+      background: rgba(56,189,248,0.08);
+      border-color: rgba(56,189,248,0.4);
+    }
+    .service-icon {
+      width: 56px; height: 56px;
+      background: rgba(56,189,248,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background: rgba(56,189,248,0.3);
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--sky); color: var(--navy);
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.85rem 2rem; border-radius: 2px;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: #7DD3FC;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(56,189,248,0.4);
+    }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: #fff;
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.85rem 2rem; border-radius: 2px;
+      border: 2px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--sky); color: var(--sky);
+      transform: translateY(-2px);
+    }
+    .btn-sm {
+      display: inline-block;
+      background: transparent; color: var(--sky);
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.55rem 1.25rem;
+      border: 1px solid var(--sky);
+      border-radius: 2px; cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-sm:hover { background: var(--sky); color: var(--navy); }
+
+    /* ===== STAT BAR ===== */
+    .stat-bar {
+      background: rgba(56,189,248,0.1);
+      border-top: 2px solid rgba(56,189,248,0.3);
+      border-bottom: 2px solid rgba(56,189,248,0.3);
+    }
+
+    /* ===== PROJECTS ===== */
+    .project-card {
+      position: relative; overflow: hidden; border-radius: 4px;
+      cursor: pointer;
+    }
+    .project-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .project-card:hover img { transform: scale(1.08); }
+    .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,23,42,0.9) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 1.5rem;
+    }
+    .project-card:hover .project-overlay { opacity: 1; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px; padding: 2rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-size: 6rem; font-weight: 900;
+      color: rgba(56,189,248,0.15);
+      position: absolute; top: -10px; left: 16px;
+      line-height: 1;
+    }
+
+    /* ===== FORM ===== */
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      color: #fff; padding: 0.85rem 1rem;
+      font-family: 'Barlow', Arial, sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: var(--sky);
+      background: rgba(56,189,248,0.06);
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.3); }
+
+    /* ===== FOOTER ===== */
+    .footer-link {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--sky); }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 58px; height: 58px;
+      background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      cursor: pointer;
+      animation: pulse-green 2.5s infinite;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 4px 32px rgba(37,211,102,0.8); }
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+    .fade-up-delay-4 { transition-delay: 0.4s; }
+    .fade-up-delay-5 { transition-delay: 0.5s; }
+
+    /* ===== MOBILE MENU ===== */
+    #mobile-menu {
+      display: none;
+      background: rgba(15,23,42,0.98);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(56,189,248,0.2);
+    }
+    #mobile-menu.open { display: block; }
+
+    /* ===== HORIZONTAL RULE ===== */
+    .sky-rule {
+      border: none;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--sky), transparent);
+      opacity: 0.4;
+    }
+
+    /* about section accent */
+    .about-accent {
+      position: absolute; right: -40px; top: -40px;
+      width: 280px; height: 280px;
+      border: 2px solid rgba(56,189,248,0.15);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav id="navbar" class="w-full py-4 px-6">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-3">
+      <div class="w-9 h-9 bg-sky-400 flex items-center justify-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
+        <span class="font-display font-black text-navy text-sm">J</span>
+      </div>
+      <div>
+        <span class="font-display font-black text-xl tracking-tight text-white">JENGA</span>
+        <span class="font-display font-light text-xl tracking-widest text-sky-400"> CONSTRUCTIONS</span>
+      </div>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden lg:flex items-center gap-8">
+      <a href="#materials" class="nav-link">Materials</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#contact" class="btn-primary text-sm py-2 px-5">Get a Quote</a>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="h1"></span>
+      <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="h2"></span>
+      <span class="block w-4 h-0.5 bg-sky-400 transition-all duration-300" id="h3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="lg:hidden mt-4 rounded">
+    <div class="flex flex-col py-4 px-4 gap-1">
+      <a href="#materials" class="nav-link py-3 px-4 block hover:bg-white/5 rounded">Materials</a>
+      <a href="#services" class="nav-link py-3 px-4 block hover:bg-white/5 rounded">Services</a>
+      <a href="#projects" class="nav-link py-3 px-4 block hover:bg-white/5 rounded">Projects</a>
+      <a href="#about" class="nav-link py-3 px-4 block hover:bg-white/5 rounded">About</a>
+      <a href="#contact" class="nav-link py-3 px-4 block hover:bg-white/5 rounded">Contact</a>
+      <div class="pt-3 px-4">
+        <a href="#contact" class="btn-primary w-full justify-center">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero" class="relative">
+  <!-- Video background (fallback to image if blocked) -->
+  <video id="hero-video" autoplay muted loop playsinline poster="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg">
+    <source src="https://www.pexels.com/download/video/10294768/">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <!-- Diagonal accent -->
+  <div class="diagonal-line" style="left: 12%; top: 20%;"></div>
+  <div class="diagonal-line" style="right: 10%; bottom: 25%; opacity: 0.3; height: 60px;"></div>
+
+  <div class="hero-content max-w-7xl mx-auto px-6 py-32 text-center">
+    <p class="section-label mb-4 fade-up">Uganda's Trusted Construction Partner</p>
+    <h1 class="font-display font-black text-white fade-up fade-up-delay-1"
+        style="font-size: clamp(3rem, 8vw, 7rem); line-height: 1; letter-spacing: -0.02em;">
+      BUILDING STRONG<br />
+      <span style="color: var(--sky); -webkit-text-stroke: 0px;">FOUNDATIONS</span><br />
+      FOR THE FUTURE
+    </h1>
+    <p class="mt-6 text-lg text-slate-300 max-w-xl mx-auto font-light fade-up fade-up-delay-2">
+      Quality construction materials and reliable services<br class="hidden md:block" /> across Uganda since 2008.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4 justify-center fade-up fade-up-delay-3">
+      <a href="#materials" class="btn-primary text-base py-3 px-7">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        View Materials
+      </a>
+      <a href="#contact" class="btn-outline text-base py-3 px-7">
+        Request a Quote
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="mt-20 flex justify-center fade-up fade-up-delay-4">
+      <div class="flex flex-col items-center gap-2 opacity-50">
+        <span class="text-xs tracking-widest uppercase" style="font-family:'Barlow Condensed',Arial,sans-serif;">Scroll</span>
+        <div class="w-px h-12 bg-gradient-to-b from-sky-400 to-transparent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATS BAR ==================== -->
+<div class="stat-bar py-6 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div class="fade-up">
+      <p class="font-display font-black text-sky-400" style="font-size: 2.5rem;">15+</p>
+      <p class="text-slate-400 text-sm uppercase tracking-widest font-medium">Years Experience</p>
+    </div>
+    <div class="fade-up fade-up-delay-1">
+      <p class="font-display font-black text-sky-400" style="font-size: 2.5rem;">500+</p>
+      <p class="text-slate-400 text-sm uppercase tracking-widest font-medium">Projects Completed</p>
+    </div>
+    <div class="fade-up fade-up-delay-2">
+      <p class="font-display font-black text-sky-400" style="font-size: 2.5rem;">1,200+</p>
+      <p class="text-slate-400 text-sm uppercase tracking-widest font-medium">Happy Clients</p>
+    </div>
+    <div class="fade-up fade-up-delay-3">
+      <p class="font-display font-black text-sky-400" style="font-size: 2.5rem;">10</p>
+      <p class="text-slate-400 text-sm uppercase tracking-widest font-medium">Districts Served</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MATERIALS ==================== -->
+<section id="materials" class="py-24 px-6" style="background: linear-gradient(180deg, #0F172A 0%, #0a1628 100%);">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 fade-up">
+      <p class="section-label mb-3">What We Supply</p>
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 4rem);">CONSTRUCTION<br/>MATERIALS</h2>
+        <p class="text-slate-400 max-w-sm font-light">Premium quality materials sourced and delivered directly to your construction site across Uganda.</p>
+      </div>
+    </div>
+    <hr class="sky-rule mb-14" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Cement -->
+      <div class="material-card fade-up">
+        <div class="overflow-hidden">
+          <img src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cement" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-xl text-white mb-2">Cement</h3>
+          <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">High-grade Portland and OPC cement from leading manufacturers. Available in bulk and retail quantities for all project scales.</p>
+          <a href="#contact" class="btn-sm">Request Quote</a>
+        </div>
+      </div>
+
+      <!-- Steel Bars -->
+      <div class="material-card fade-up fade-up-delay-1">
+        <div class="overflow-hidden">
+          <img src="https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Steel Bars" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-xl text-white mb-2">Steel Bars & Rebar</h3>
+          <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">Reinforced steel bars in various diameters for structural integrity. Ideal for columns, slabs, beams, and foundations.</p>
+          <a href="#contact" class="btn-sm">Request Quote</a>
+        </div>
+      </div>
+
+      <!-- Bricks -->
+      <div class="material-card fade-up fade-up-delay-2">
+        <div class="overflow-hidden">
+          <img src="https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bricks" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-xl text-white mb-2">Bricks & Blocks</h3>
+          <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">Kiln-fired clay bricks and concrete hollow blocks. Durable, load-bearing, and available in standard dimensions.</p>
+          <a href="#contact" class="btn-sm">Request Quote</a>
+        </div>
+      </div>
+
+      <!-- Sand & Aggregates -->
+      <div class="material-card fade-up fade-up-delay-1">
+        <div class="overflow-hidden">
+          <img src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sand and Aggregates" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-xl text-white mb-2">Sand & Aggregates</h3>
+          <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">Sharp sand, river sand, gravel, and crushed stone aggregates. Sourced locally and screened to meet construction standards.</p>
+          <a href="#contact" class="btn-sm">Request Quote</a>
+        </div>
+      </div>
+
+      <!-- Roofing -->
+      <div class="material-card fade-up fade-up-delay-2">
+        <div class="overflow-hidden">
+          <img src="https://images.pexels.com/photos/534220/pexels-photo-534220.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Roofing" loading="lazy" />
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-xl text-white mb-2">Roofing Materials</h3>
+          <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">Iron sheets, clay tiles, and timber trusses. UV-resistant and weather-proof roofing solutions suited to Uganda's climate.</p>
+          <a href="#contact" class="btn-sm">Request Quote</a>
+        </div>
+      </div>
+
+      <!-- Finishing Materials -->
+      <div class="material-card fade-up fade-up-delay-3">
+        <div style="background: linear-gradient(135deg, #1e3a5f, #0f172a); height:200px; display:flex; align-items:center; justify-content:center;">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="20" height="20" rx="2" fill="rgba(56,189,248,0.4)"/>
+            <rect x="35" y="10" width="20" height="20" rx="2" fill="rgba(56,189,248,0.25)"/>
+            <rect x="10" y="35" width="20" height="20" rx="2" fill="rgba(56,189,248,0.25)"/>
+            <rect x="35" y="35" width="20" height="20" rx="2" fill="rgba(56,189,248,0.4)"/>
+            <rect x="58" y="22" width="12" height="36" rx="2" fill="rgba(56,189,248,0.2)"/>
+            <rect x="10" y="60" width="60" height="10" rx="2" fill="rgba(56,189,248,0.15)"/>
+          </svg>
+        </div>
+        <div class="p-5">
+          <h3 class="font-display font-bold text-xl text-white mb-2">Finishing Materials</h3>
+          <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">Tiles, paint, plaster, adhesives, and waterproofing products. Complete your build with premium finishing materials.</p>
+          <a href="#contact" class="btn-sm">Request Quote</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services" class="py-24 px-6" style="background: #060d1a;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">What We Do</p>
+      <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 4rem);">OUR SERVICES</h2>
+      <p class="text-slate-400 max-w-lg mx-auto mt-4 font-light">From supply to delivery to expert consultation — we support your project at every stage.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- Material Supply -->
+      <div class="service-card fade-up">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Material Supply</h3>
+        <p class="text-slate-400 text-sm font-light leading-relaxed">We source and supply certified, high-quality construction materials at competitive prices across Uganda.</p>
+      </div>
+
+      <!-- Delivery -->
+      <div class="service-card fade-up fade-up-delay-1">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10l2-.001M13 16l2-.001M13 6l4.586.007a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16l-2 .001"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Delivery Services</h3>
+        <p class="text-slate-400 text-sm font-light leading-relaxed">Timely, reliable on-site delivery using our fleet of heavy-duty trucks — Kampala and beyond.</p>
+      </div>
+
+      <!-- Site Inspection -->
+      <div class="service-card fade-up fade-up-delay-2">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Site Inspection</h3>
+        <p class="text-slate-400 text-sm font-light leading-relaxed">Our qualified engineers conduct comprehensive site assessments to ensure safety and compliance standards are met.</p>
+      </div>
+
+      <!-- Consulting -->
+      <div class="service-card fade-up fade-up-delay-3">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-lg text-white mb-2">Construction Consulting</h3>
+        <p class="text-slate-400 text-sm font-light leading-relaxed">Expert advice on material selection, budgeting, and project planning to maximize value and reduce waste.</p>
+      </div>
+
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="mt-16 fade-up" style="background: linear-gradient(135deg, rgba(56,189,248,0.12) 0%, rgba(56,189,248,0.04) 100%); border: 1px solid rgba(56,189,248,0.25); border-radius: 4px; padding: 2.5rem 3rem;">
+      <div class="flex flex-wrap items-center justify-between gap-6">
+        <div>
+          <h3 class="font-display font-black text-white text-2xl">Ready to start your project?</h3>
+          <p class="text-slate-400 font-light mt-1">Get in touch for a free consultation and competitive quote.</p>
+        </div>
+        <a href="#contact" class="btn-primary text-base py-3 px-8">Talk to an Expert</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects" class="py-24 px-6" style="background: #0F172A;">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 fade-up">
+      <p class="section-label mb-3">Our Portfolio</p>
+      <div class="flex items-end justify-between flex-wrap gap-4">
+        <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 4rem);">COMPLETED<br/>PROJECTS</h2>
+        <p class="text-slate-400 max-w-sm font-light">A selection of completed builds across Uganda — residential, commercial, and infrastructure.</p>
+      </div>
+    </div>
+    <hr class="sky-rule mb-14" />
+
+    <!-- Masonry grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <div class="project-card h-72 fade-up">
+        <img src="https://images.pexels.com/photos/534220/pexels-photo-534220.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Commercial Tower Kampala" loading="lazy" style="height:100%;"/>
+        <div class="project-overlay">
+          <div>
+            <p class="font-display font-bold text-lg">Commercial Tower</p>
+            <p class="text-sky-400 text-sm">Kampala, 2023</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card md:row-span-2 h-64 md:h-auto fade-up fade-up-delay-1">
+        <img src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Residential Complex Entebbe" loading="lazy" style="height:100%;"/>
+        <div class="project-overlay">
+          <div>
+            <p class="font-display font-bold text-lg">Residential Complex</p>
+            <p class="text-sky-400 text-sm">Entebbe, 2022</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card h-72 fade-up fade-up-delay-2">
+        <img src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Highway Bridge Jinja" loading="lazy" style="height:100%;"/>
+        <div class="project-overlay">
+          <div>
+            <p class="font-display font-bold text-lg">Industrial Warehouse</p>
+            <p class="text-sky-400 text-sm">Jinja, 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card h-56 fade-up fade-up-delay-1">
+        <img src="https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Housing Estate Mbarara" loading="lazy" style="height:100%;"/>
+        <div class="project-overlay">
+          <div>
+            <p class="font-display font-bold text-lg">Housing Estate</p>
+            <p class="text-sky-400 text-sm">Mbarara, 2023</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card h-56 fade-up fade-up-delay-2">
+        <img src="https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=800" alt="School Block Gulu" loading="lazy" style="height:100%;"/>
+        <div class="project-overlay">
+          <div>
+            <p class="font-display font-bold text-lg">School & College Block</p>
+            <p class="text-sky-400 text-sm">Gulu, 2023</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="py-24 px-6 relative overflow-hidden" style="background: #060d1a;">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+    <!-- Image side -->
+    <div class="relative fade-up">
+      <img src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=800"
+           alt="Construction team at work"
+           class="w-full h-96 object-cover rounded"
+           loading="lazy" />
+      <!-- Offset label box -->
+      <div class="absolute -bottom-6 -right-4 md:-right-8 px-6 py-5 text-center" style="background: var(--sky); min-width: 160px; border-radius: 2px;">
+        <p class="font-display font-black text-navy text-3xl">15+</p>
+        <p class="font-display font-semibold text-navy text-sm uppercase tracking-wider">Years of Trust</p>
+      </div>
+    </div>
+
+    <!-- Text side -->
+    <div class="fade-up fade-up-delay-1">
+      <p class="section-label mb-3">Who We Are</p>
+      <h2 class="section-title mb-6" style="font-size: clamp(2rem, 4vw, 3.5rem);">BUILDING UGANDA'S<br/>FUTURE, ONE PROJECT<br/>AT A TIME</h2>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">
+        Founded in 2008, Jenga Constructions has grown to become one of Uganda's most trusted construction material suppliers and project partners. We serve contractors, developers, and individual homeowners across the country.
+      </p>
+      <p class="text-slate-400 font-light leading-relaxed mb-8">
+        Our commitment to quality, on-time delivery, and expert support has earned us the trust of over 1,200 clients. We don't just sell materials — we partner with you to ensure your project succeeds.
+      </p>
+
+      <!-- Mission / Values -->
+      <div class="grid grid-cols-2 gap-4 mb-8">
+        <div class="p-4" style="border-left: 2px solid var(--sky); background: rgba(56,189,248,0.05);">
+          <h4 class="font-display font-bold text-white mb-1">Our Mission</h4>
+          <p class="text-slate-400 text-sm font-light">Supply quality materials and expertise to build stronger communities across Uganda.</p>
+        </div>
+        <div class="p-4" style="border-left: 2px solid rgba(56,189,248,0.4); background: rgba(56,189,248,0.03);">
+          <h4 class="font-display font-bold text-white mb-1">Our Values</h4>
+          <p class="text-slate-400 text-sm font-light">Integrity, quality, reliability, and a commitment to long-term client relationships.</p>
+        </div>
+      </div>
+
+      <a href="#contact" class="btn-primary">Partner With Us</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section class="py-24 px-6" style="background: #0F172A;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <p class="section-label mb-3">Client Reviews</p>
+      <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 4rem);">WHAT OUR<br/>CLIENTS SAY</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="testimonial-card fade-up">
+        <p class="text-slate-300 font-light leading-relaxed mb-6 relative z-10 mt-6">
+          "Jenga delivered cement and steel bars to our site in Wakiso within 24 hours of ordering. Their pricing was fair and the materials were top quality. I wouldn't trust anyone else."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-display font-black" style="background: var(--sky); color: var(--navy);">KM</div>
+          <div>
+            <p class="font-display font-bold text-white">Kato Moses</p>
+            <p class="text-sky-400 text-xs uppercase tracking-wider">Site Engineer, Wakiso</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up fade-up-delay-1">
+        <p class="text-slate-300 font-light leading-relaxed mb-6 relative z-10 mt-6">
+          "We've been using Jenga for our housing estate in Entebbe for two years. Their consulting team helped us save 15% on materials without sacrificing structural quality. Highly recommended."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-display font-black" style="background: rgba(56,189,248,0.3); color: var(--sky);">AN</div>
+          <div>
+            <p class="font-display font-bold text-white">Akello Norah</p>
+            <p class="text-sky-400 text-xs uppercase tracking-wider">Real Estate Developer, Entebbe</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up fade-up-delay-2">
+        <p class="text-slate-300 font-light leading-relaxed mb-6 relative z-10 mt-6">
+          "From the first site inspection to final material delivery, Jenga Constructions was professional every step of the way. Our school block in Gulu was completed on time and on budget."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-display font-black" style="background: rgba(56,189,248,0.3); color: var(--sky);">OB</div>
+          <div>
+            <p class="font-display font-bold text-white">Odong Brian</p>
+            <p class="text-sky-400 text-xs uppercase tracking-wider">Project Manager, Gulu</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="py-24 px-6" style="background: #060d1a;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-up">
+      <p class="section-label mb-3">Get in Touch</p>
+      <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 4rem);">REQUEST A QUOTE</h2>
+      <p class="text-slate-400 max-w-md mx-auto mt-4 font-light">Fill in the form below and our team will get back to you within 24 hours.</p>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-12">
+      <!-- Form -->
+      <div class="md:col-span-3 fade-up">
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 4px; padding: 2.5rem;">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-slate-400 mb-2" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Full Name</label>
+              <input type="text" placeholder="e.g. John Ssemakula" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-xs uppercase tracking-widest text-slate-400 mb-2" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Phone Number</label>
+              <input type="tel" placeholder="+256 700 000 000" class="form-input" />
+            </div>
+          </div>
+          <div class="mb-5">
+            <label class="block text-xs uppercase tracking-widest text-slate-400 mb-2" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Email Address</label>
+            <input type="email" placeholder="you@example.com" class="form-input" />
+          </div>
+          <div class="mb-5">
+            <label class="block text-xs uppercase tracking-widest text-slate-400 mb-2" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Service Required</label>
+            <select class="form-input" style="cursor:pointer;">
+              <option value="" disabled selected>Select a service…</option>
+              <option>Material Supply</option>
+              <option>Delivery Services</option>
+              <option>Site Inspection</option>
+              <option>Construction Consulting</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="mb-7">
+            <label class="block text-xs uppercase tracking-widest text-slate-400 mb-2" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Project Details</label>
+            <textarea rows="4" placeholder="Describe your project and what you need…" class="form-input resize-none"></textarea>
+          </div>
+          <button type="button" onclick="handleSubmit(this)" class="btn-primary w-full justify-center text-base py-3">
+            Send Request
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="md:col-span-2 fade-up fade-up-delay-1 flex flex-col justify-center gap-8">
+        <div>
+          <p class="section-label mb-6">Contact Information</p>
+          <div class="flex flex-col gap-5">
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background: rgba(56,189,248,0.15);">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs uppercase tracking-wider mb-1" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Phone</p>
+                <p class="text-white font-medium">+256 700 123 456</p>
+                <p class="text-slate-400 text-sm">+256 772 789 000</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background: rgba(56,189,248,0.15);">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs uppercase tracking-wider mb-1" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Email</p>
+                <p class="text-white font-medium">info@jengaconstructions.co.ug</p>
+                <p class="text-slate-400 text-sm">sales@jengaconstructions.co.ug</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background: rgba(56,189,248,0.15);">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs uppercase tracking-wider mb-1" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Location</p>
+                <p class="text-white font-medium">Plot 24, Kampala Industrial Area</p>
+                <p class="text-slate-400 text-sm">Kampala, Uganda</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background: rgba(56,189,248,0.15);">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#38BDF8" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs uppercase tracking-wider mb-1" style="font-family:'Barlow Condensed',Arial,sans-serif; font-weight:600;">Working Hours</p>
+                <p class="text-white font-medium">Mon – Sat: 8:00 AM – 6:00 PM</p>
+                <p class="text-slate-400 text-sm">Sunday: By appointment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map embed placeholder -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63710.71830219!2d32.52878964!3d0.31628204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb5ad96ddb5f%3A0xca0a29d1c2f8dbc9!2sKampala%2C%20Uganda!5e0!3m2!1sen!2sus!4v1680000000000"
+            width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy"
+            title="Jenga Constructions location map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer style="background: #020810; border-top: 1px solid rgba(56,189,248,0.15);">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-sky-400 flex items-center justify-center" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
+            <span class="font-display font-black text-navy text-sm">J</span>
+          </div>
+          <span class="font-display font-black text-lg text-white tracking-tight">JENGA <span class="text-sky-400">CONSTRUCTIONS</span></span>
+        </div>
+        <p class="text-slate-400 text-sm font-light leading-relaxed max-w-xs">
+          Uganda's trusted partner for quality construction materials and professional services since 2008. Building stronger communities, one project at a time.
+        </p>
+        <!-- Social -->
+        <div class="flex gap-3 mt-6">
+          <a href="#" class="w-9 h-9 flex items-center justify-center rounded" style="background: rgba(255,255,255,0.07); transition: background 0.2s;" onmouseover="this.style.background='rgba(56,189,248,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'" aria-label="Facebook">
+            <svg width="16" height="16" fill="#94a3b8" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 flex items-center justify-center rounded" style="background: rgba(255,255,255,0.07); transition: background 0.2s;" onmouseover="this.style.background='rgba(56,189,248,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'" aria-label="Instagram">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#94a3b8" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 flex items-center justify-center rounded" style="background: rgba(255,255,255,0.07); transition: background 0.2s;" onmouseover="this.style.background='rgba(56,189,248,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'" aria-label="Twitter/X">
+            <svg width="16" height="16" fill="#94a3b8" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://wa.me/256700123456" class="w-9 h-9 flex items-center justify-center rounded" style="background: rgba(255,255,255,0.07); transition: background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'" aria-label="WhatsApp">
+            <svg width="16" height="16" fill="#94a3b8" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-display font-bold text-white uppercase tracking-wider text-sm mb-4">Quick Links</h4>
+        <ul class="flex flex-col gap-2">
+          <li><a href="#materials" class="footer-link">Materials</a></li>
+          <li><a href="#services" class="footer-link">Services</a></li>
+          <li><a href="#projects" class="footer-link">Projects</a></li>
+          <li><a href="#about" class="footer-link">About Us</a></li>
+          <li><a href="#contact" class="footer-link">Get a Quote</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Summary -->
+      <div>
+        <h4 class="font-display font-bold text-white uppercase tracking-wider text-sm mb-4">Contact Us</h4>
+        <ul class="flex flex-col gap-3">
+          <li class="text-slate-400 text-sm font-light">Plot 24, Kampala Industrial Area,<br/>Kampala, Uganda</li>
+          <li><a href="tel:+256700123456" class="footer-link">+256 700 123 456</a></li>
+          <li><a href="mailto:info@jengaconstructions.co.ug" class="footer-link text-xs">info@jengaconstructions.co.ug</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr class="sky-rule mb-8" />
+
+    <div class="flex flex-wrap items-center justify-between gap-4 text-slate-500 text-sm">
+      <p>© 2025 Jenga Constructions Ltd. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="footer-link text-xs">Privacy Policy</a>
+        <a href="#" class="footer-link text-xs">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== WHATSAPP FLOAT ==================== -->
+<a href="https://wa.me/256700123456?text=Hello%20Jenga%20Constructions%2C%20I%27d%20like%20to%20request%20a%20quote." target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const h1 = document.getElementById('h1');
+  const h2 = document.getElementById('h2');
+  const h3 = document.getElementById('h3');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    if (menuOpen) {
+      h1.style.transform = 'rotate(45deg) translateY(8px)';
+      h2.style.opacity = '0';
+      h3.style.transform = 'rotate(-45deg) translateY(-8px)';
+      h3.style.width = '24px';
+    } else {
+      h1.style.transform = '';
+      h2.style.opacity = '';
+      h3.style.transform = '';
+      h3.style.width = '';
+    }
+  });
+
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      h1.style.transform = ''; h2.style.opacity = ''; h3.style.transform = ''; h3.style.width = '';
+    });
+  });
+
+  // Scroll animations
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Trigger hero elements immediately
+  setTimeout(() => {
+    document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
+  }, 200);
+
+  // Form submit handler
+  function handleSubmit(btn) {
+    const original = btn.innerHTML;
+    btn.innerHTML = `<svg class="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-opacity="0.3"/><path d="M21 12a9 9 0 00-9-9" stroke-linecap="round"/></svg> Sending…`;
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = `<svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Message Sent!`;
+      btn.style.background = '#22c55e';
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 3000);
+    }, 1800);
+  }
+
+  // Add spin animation
+  const style = document.createElement('style');
+  style.textContent = `@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } .animate-spin { animation: spin 0.8s linear infinite; }`;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>

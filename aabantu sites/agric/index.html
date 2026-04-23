@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriVerde Solutions — Powering Sustainable Agriculture</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          forest:   '#1a3a2a',
+          pine:     '#2d5a3d',
+          moss:     '#4a7c5a',
+          sage:     '#7aab8a',
+          earth:    '#6b4c2a',
+          clay:     '#a0703f',
+          wheat:    '#d4a853',
+          cream:    '#f5f0e8',
+          linen:    '#ede8dc',
+          chalk:    '#faf8f4',
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'Georgia', 'serif'],
+          body:    ['"DM Sans"', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: #faf8f4; color: #1a3a2a; overflow-x: hidden; }
+
+  /* NAV */
+  #navbar { transition: background 0.4s, box-shadow 0.4s; }
+  #navbar.scrolled { background: rgba(26,58,42,0.97); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+
+  /* HERO */
+  .hero-section { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(26,58,42,0.82) 0%, rgba(45,90,61,0.55) 60%, rgba(26,58,42,0.3) 100%); z-index: 1; }
+  .hero-content { position: relative; z-index: 2; }
+
+  /* SECTION DIVIDER */
+  .leaf-divider { width: 60px; height: 3px; background: linear-gradient(90deg, #4a7c5a, #d4a853); border-radius: 2px; margin: 0 auto 1.5rem; }
+
+  /* CARDS */
+  .service-card { transition: transform 0.3s, box-shadow 0.3s; }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(26,58,42,0.13); }
+  .equip-card { transition: transform 0.3s, box-shadow 0.3s; }
+  .equip-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(107,76,42,0.15); }
+
+  /* IMPACT COUNTER */
+  .impact-num { font-family: 'Playfair Display', serif; }
+
+  /* MOBILE MENU */
+  #mobile-menu { transition: max-height 0.3s ease, opacity 0.3s; max-height: 0; opacity: 0; overflow: hidden; }
+  #mobile-menu.open { max-height: 400px; opacity: 1; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* FORM */
+  input, textarea { outline: none; }
+  input:focus, textarea:focus { border-color: #4a7c5a; box-shadow: 0 0 0 3px rgba(74,124,90,0.15); }
+
+  /* WHATSAPP */
+  .wa-btn { background: #25D366; }
+  .wa-btn:hover { background: #1ebe5d; }
+
+  /* HORIZONTAL RULE ORNAMENT */
+  .ornament { display: flex; align-items: center; gap: 12px; }
+  .ornament::before, .ornament::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.2; }
+
+  /* PROJECT CARD */
+  .project-card { overflow: hidden; border-radius: 1rem; position: relative; }
+  .project-card img { transition: transform 0.5s; }
+  .project-card:hover img { transform: scale(1.06); }
+  .project-overlay { background: linear-gradient(0deg, rgba(26,58,42,0.85) 0%, transparent 60%); }
+
+  /* SUSTAINABILITY */
+  .sustain-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(74,124,90,0.15); display: flex; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-full bg-wheat flex items-center justify-center">
+          <svg class="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21H5.71C5.71 17 7.5 11.5 17 8zm1.5 0C19 8 22 8 22 8c0 0-1.5 5-1.5 8.5H21C21 13 20 9.5 18.5 8z"/>
+            <path d="M12 22c-1.1 0-2-.9-2-2V10l2-2 2 2v10c0 1.1-.9 2-2 2z" opacity="0.7"/>
+          </svg>
+        </div>
+        <span class="font-display text-white text-lg font-bold tracking-wide leading-tight">Agri<span class="text-wheat">Verde</span></span>
+      </a>
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home"       class="text-white/80 hover:text-wheat text-sm font-medium transition-colors">Home</a>
+        <a href="#about"      class="text-white/80 hover:text-wheat text-sm font-medium transition-colors">About</a>
+        <a href="#services"   class="text-white/80 hover:text-wheat text-sm font-medium transition-colors">Services</a>
+        <a href="#equipment"  class="text-white/80 hover:text-wheat text-sm font-medium transition-colors">Equipment</a>
+        <a href="#projects"   class="text-white/80 hover:text-wheat text-sm font-medium transition-colors">Projects</a>
+        <a href="#contact"    class="bg-wheat text-forest px-5 py-2 rounded-full text-sm font-semibold hover:bg-amber-400 transition-colors">Contact Us</a>
+      </div>
+      <!-- Hamburger -->
+      <button id="menu-btn" class="md:hidden text-white p-2" aria-label="Toggle menu">
+        <svg id="icon-open"  class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-forest/97 px-4 pb-4">
+    <a href="#home"       class="block py-3 text-white/80 hover:text-wheat text-sm font-medium border-b border-white/10">Home</a>
+    <a href="#about"      class="block py-3 text-white/80 hover:text-wheat text-sm font-medium border-b border-white/10">About</a>
+    <a href="#services"   class="block py-3 text-white/80 hover:text-wheat text-sm font-medium border-b border-white/10">Services</a>
+    <a href="#equipment"  class="block py-3 text-white/80 hover:text-wheat text-sm font-medium border-b border-white/10">Equipment</a>
+    <a href="#projects"   class="block py-3 text-white/80 hover:text-wheat text-sm font-medium border-b border-white/10">Projects</a>
+    <a href="#contact"    class="block mt-3 bg-wheat text-forest px-5 py-2.5 rounded-full text-sm font-semibold text-center">Contact Us</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section id="home" class="hero-section">
+  <video class="hero-video" autoplay muted loop playsinline poster="https://images.pexels.com/photos/27539606/pexels-photo-27539606.jpeg">
+    <source src="https://www.pexels.com/download/video/14298887/" type="video/mp4" />
+    <img src="https://images.pexels.com/photos/27539606/pexels-photo-27539606.jpeg" alt="Farmland" class="hero-video" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content w-full px-4 sm:px-8 md:px-16 lg:px-24 max-w-7xl mx-auto">
+    <p class="text-wheat text-sm tracking-[0.22em] uppercase font-semibold mb-4 fade-in">Uganda's Agricultural Partner</p>
+    <h1 class="font-display text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.06] mb-6 max-w-3xl fade-in" style="animation-delay:0.1s">
+      Powering Sustainable Agriculture &amp; Rural Growth
+    </h1>
+    <p class="text-white/75 text-base sm:text-lg max-w-xl mb-10 leading-relaxed fade-in" style="animation-delay:0.2s">
+      From farm equipment supply to cooperative development — AgriVerde Solutions delivers integrated agricultural services that uplift farmers, boost productivity, and build a greener future.
+    </p>
+    <div class="flex flex-wrap gap-4 fade-in" style="animation-delay:0.3s">
+      <a href="#services"  class="bg-wheat hover:bg-amber-400 text-forest font-semibold px-7 py-3.5 rounded-full transition-colors text-base">Explore Services</a>
+      <a href="#equipment" class="bg-white/15 hover:bg-white/25 text-white border border-white/30 font-semibold px-7 py-3.5 rounded-full transition-colors backdrop-blur-sm text-base">View Equipment</a>
+    </div>
+    <!-- Trust bar -->
+    <div class="flex flex-wrap gap-8 mt-16 fade-in" style="animation-delay:0.4s">
+      <div>
+        <p class="font-display text-wheat text-2xl font-bold">5,200+</p>
+        <p class="text-white/60 text-xs mt-0.5">Farmers Supported</p>
+      </div>
+      <div class="w-px bg-white/20 self-stretch"></div>
+      <div>
+        <p class="font-display text-wheat text-2xl font-bold">38</p>
+        <p class="text-white/60 text-xs mt-0.5">Districts Reached</p>
+      </div>
+      <div class="w-px bg-white/20 self-stretch"></div>
+      <div>
+        <p class="font-display text-wheat text-2xl font-bold">12 Yrs</p>
+        <p class="text-white/60 text-xs mt-0.5">Industry Experience</p>
+      </div>
+    </div>
+  </div>
+  <!-- Scroll hint -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-60">
+    <span class="text-white text-xs tracking-widest uppercase">Scroll</span>
+    <div class="w-px h-10 bg-white/50 animate-pulse"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section id="about" class="py-20 md:py-28 bg-chalk">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Images -->
+      <div class="relative fade-in">
+        <div class="rounded-2xl overflow-hidden aspect-[4/3]">
+          <img src="https://images.openai.com/static-rsc-4/Vsji64iSE952r4j4D5IaBaAN6-C3x52lF71O9_gOeiMzSQuTGsaotYWng2TWeBVgzCCAH1l9Gq9hWO5dkTHnT8KnnGFdB1HehPx68hvQPbBM1-22HdH81i1YXs-yLdNKeVJ0X1MNrpqCjsEmJ9J7XFZTzVcXus7Po7981D5eDKtibvTcgHAP80cxTSVIz3Py?purpose=fullsize"
+               alt="Farmers in field" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute -bottom-6 -right-4 md:-right-8 w-40 h-40 md:w-52 md:h-52 rounded-xl overflow-hidden border-4 border-chalk shadow-xl">
+          <img src="https://images.openai.com/static-rsc-4/shM9jK4Rf_9mU8lcSli7-ere24fuLMe875GMh1hgch8koxjLJC5i5P0aecmPJlyXjCyGhgDzOYQ1XsucNR2PeqBVB1YJ_U9KlMjmeyZVpYxtDrNTcrujllWj7P9ZYugFwNCj9-DJicm7hEbmvcQtSH5ivWvfvWIuAlDXrnKuTdo-LnsGeC_g-IjSRCwOpee8?purpose=fullsize"
+               alt="Agriculture equipment" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <!-- Badge -->
+        <div class="absolute top-4 left-4 bg-forest text-white px-4 py-2 rounded-full text-xs font-semibold shadow">Est. 2012</div>
+      </div>
+      <!-- Text -->
+      <div class="pt-6 fade-in">
+        <p class="text-moss text-sm tracking-widest uppercase font-semibold mb-3">Who We Are</p>
+        <h2 class="font-display text-forest text-3xl sm:text-4xl font-black leading-tight mb-5">
+          Rooted in the Land,<br />Driven by Purpose
+        </h2>
+        <div class="leaf-divider !ml-0"></div>
+        <p class="text-earth/80 leading-relaxed mb-4 mt-4">
+          AgriVerde Solutions is a full-service agricultural development company committed to transforming farming across Uganda and East Africa. We bridge the gap between smallholder farmers and world-class resources.
+        </p>
+        <p class="text-earth/80 leading-relaxed mb-8">
+          From supplying modern farming equipment and quality inputs to running cooperative development programs and sustainability consulting, we are the partner that helps farmers thrive — season after season.
+        </p>
+        <!-- Pillars -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-linen rounded-xl p-4">
+            <div class="w-8 h-8 bg-pine rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-wheat" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            </div>
+            <p class="text-forest text-sm font-semibold">Equipment Supply</p>
+            <p class="text-earth/70 text-xs mt-1">Tractors, tools & inputs</p>
+          </div>
+          <div class="bg-linen rounded-xl p-4">
+            <div class="w-8 h-8 bg-pine rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-wheat" fill="currentColor" viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+            </div>
+            <p class="text-forest text-sm font-semibold">Cooperative Support</p>
+            <p class="text-earth/70 text-xs mt-1">Farmers &amp; groups</p>
+          </div>
+          <div class="bg-linen rounded-xl p-4">
+            <div class="w-8 h-8 bg-pine rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-wheat" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 10h-2v7h2v-7zm6 0h-2v7h2v-7zm8.5 9H2v2h19v-2zm-2.5-9h-2v7h2v-7zM11.5 1L2 6v2h19V6l-9.5-5z"/></svg>
+            </div>
+            <p class="text-forest text-sm font-semibold">Sustainability</p>
+            <p class="text-earth/70 text-xs mt-1">Climate-smart practices</p>
+          </div>
+          <div class="bg-linen rounded-xl p-4">
+            <div class="w-8 h-8 bg-pine rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-wheat" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.08L5 11.19V16c0 2.21 3.13 4 7 4s7-1.79 7-4v-4.81l-7 3.89z"/></svg>
+            </div>
+            <p class="text-forest text-sm font-semibold">Farmer Training</p>
+            <p class="text-earth/70 text-xs mt-1">Skills &amp; knowledge</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<section id="services" class="py-20 md:py-28 bg-linen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 fade-in">
+      <p class="text-moss text-sm tracking-widest uppercase font-semibold mb-2">What We Offer</p>
+      <h2 class="font-display text-forest text-3xl sm:text-4xl font-black mb-4">Our Core Services</h2>
+      <div class="leaf-divider"></div>
+      <p class="text-earth/75 max-w-xl mx-auto mt-4 text-sm leading-relaxed">
+        Comprehensive solutions for every stage of the agricultural value chain — from seed to sale.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card template inline -->
+      <div class="service-card bg-chalk rounded-2xl overflow-hidden shadow-sm fade-in">
+        <div class="h-44 overflow-hidden">
+          <img src="https://images.openai.com/static-rsc-4/NW1HHBgjWbF_7-FV__MZ3IPcradO-ePo2AXw5rxB7Vo6oiVfVyqZoc1CaWE5SH5biuuojzcw3xAqbcmnr3D8-lgTuTl-j5yzK7xWSs6GnT8N959t9cu57lohzyMebmTqFdsAxLZVrfKOI97d7bO7ZPQtJtbjjf3eqfCB8tYPwR-QFOwJIMmM-LE-U7ctd1H4?purpose=fullsize"
+               alt="Agricultural Development" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-6">
+          <div class="w-10 h-10 bg-pine/10 rounded-xl flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          </div>
+          <h3 class="font-display text-forest text-lg font-bold mb-2">Agricultural Development Programs</h3>
+          <p class="text-earth/70 text-sm leading-relaxed">Structured programs for smallholder and cooperative farmers to boost yields, access markets, and build resilient livelihoods.</p>
+        </div>
+      </div>
+
+      <div class="service-card bg-chalk rounded-2xl overflow-hidden shadow-sm fade-in">
+        <div class="h-44 overflow-hidden">
+          <img src="https://images.openai.com/static-rsc-4/jACC6L9vIsSXy4QRRFCh6CZMSAwiOdk5JXnci3aD6QPa034ZsyIBi2Rm49cGvxB8W_lM1SJTJToD9J6PSTg-FFA07TH5BXxKtOdWK5Zjn8CvXdMQHzXym96jjs4aKzUxcT9vNEqxFeWDuzXajR51-FHjO2e9OHFwMD59WhufHeaSYB0iM9a4idjwiS3TKNJh?purpose=fullsize"
+               alt="Farm Equipment" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-6">
+          <div class="w-10 h-10 bg-pine/10 rounded-xl flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5z"/></svg>
+          </div>
+          <h3 class="font-display text-forest text-lg font-bold mb-2">Farm Equipment Supply</h3>
+          <p class="text-earth/70 text-sm leading-relaxed">We supply tractors, ploughs, harvesters, and precision tools from trusted manufacturers — with after-sales support included.</p>
+        </div>
+      </div>
+
+      <div class="service-card bg-chalk rounded-2xl overflow-hidden shadow-sm fade-in">
+        <div class="h-44 overflow-hidden bg-gradient-to-br from-pine to-forest flex items-center justify-center">
+          <svg class="w-20 h-20 text-sage opacity-40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="w-10 h-10 bg-pine/10 rounded-xl flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          </div>
+          <h3 class="font-display text-forest text-lg font-bold mb-2">Irrigation Solutions</h3>
+          <p class="text-earth/70 text-sm leading-relaxed">Drip irrigation, sprinkler systems, and water management infrastructure designed for smallholder efficiency and climate resilience.</p>
+        </div>
+      </div>
+
+      <div class="service-card bg-chalk rounded-2xl overflow-hidden shadow-sm fade-in">
+        <div class="h-44 overflow-hidden bg-gradient-to-br from-clay to-earth flex items-center justify-center">
+          <svg class="w-20 h-20 text-wheat opacity-30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 12.08L5 11.19V16c0 2.21 3.13 4 7 4s7-1.79 7-4v-4.81l-7 3.89z"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="w-10 h-10 bg-pine/10 rounded-xl flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+          </div>
+          <h3 class="font-display text-forest text-lg font-bold mb-2">Farmer Training &amp; Support</h3>
+          <p class="text-earth/70 text-sm leading-relaxed">Hands-on workshops, digital learning tools, and field mentorship to equip farmers with modern, science-based techniques.</p>
+        </div>
+      </div>
+
+      <div class="service-card bg-chalk rounded-2xl overflow-hidden shadow-sm fade-in">
+        <div class="h-44 overflow-hidden bg-gradient-to-br from-moss to-pine flex items-center justify-center">
+          <svg class="w-20 h-20 text-cream opacity-25" fill="currentColor" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="w-10 h-10 bg-pine/10 rounded-xl flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+          </div>
+          <h3 class="font-display text-forest text-lg font-bold mb-2">Produce Distribution</h3>
+          <p class="text-earth/70 text-sm leading-relaxed">Connecting farmers to regional and national markets through an efficient logistics and cold-chain distribution network.</p>
+        </div>
+      </div>
+
+      <div class="service-card bg-chalk rounded-2xl overflow-hidden shadow-sm fade-in">
+        <div class="h-44 overflow-hidden bg-gradient-to-br from-wheat to-clay flex items-center justify-center">
+          <svg class="w-20 h-20 text-forest opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71C5.71 17 7.5 11.5 17 8z"/></svg>
+        </div>
+        <div class="p-6">
+          <div class="w-10 h-10 bg-pine/10 rounded-xl flex items-center justify-center mb-3">
+            <svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71C5.71 17 7.5 11.5 17 8z"/></svg>
+          </div>
+          <h3 class="font-display text-forest text-lg font-bold mb-2">Sustainability Consulting</h3>
+          <p class="text-earth/70 text-sm leading-relaxed">Strategic advisory on climate-smart agriculture, soil health, water efficiency, and renewable energy integration for farms and cooperatives.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ EQUIPMENT ═══════════════════ -->
+<section id="equipment" class="py-20 md:py-28 bg-chalk">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 fade-in">
+      <p class="text-moss text-sm tracking-widest uppercase font-semibold mb-2">Product Catalogue</p>
+      <h2 class="font-display text-forest text-3xl sm:text-4xl font-black mb-4">Equipment &amp; Supplies</h2>
+      <div class="leaf-divider"></div>
+      <p class="text-earth/75 max-w-xl mx-auto mt-4 text-sm leading-relaxed">
+        Industrial-grade machinery and quality farm inputs built for African terrain and growing conditions.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+
+      <div class="equip-card bg-white rounded-2xl overflow-hidden shadow-sm border border-linen col-span-1 sm:col-span-2 lg:col-span-2 fade-in">
+        <div class="h-52 overflow-hidden">
+          <img src="https://images.openai.com/static-rsc-4/AlJ5_rw-c6cD5UdtfHxbvyggOK_i16lItbizf0OT6eNDbFDrdj4eNkfwLD82i2cAst4fVHDMDJvwTFdWPCz6hK0VsbM-6XiEi_fDFhG-pEPvuzLF_N2KRB4uOkKwDp_mwgFRwmhy3f0XiKP755cSxNo0SUbrPUjMkqZRwf8OYLyrJeDbS4VYHi9EQucHpEKa?purpose=fullsize"
+               alt="Tractors" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-5">
+          <span class="bg-pine/10 text-pine text-xs font-semibold px-2.5 py-1 rounded-full">Heavy Machinery</span>
+          <h3 class="font-display text-forest text-xl font-bold mt-3 mb-1">Tractors</h3>
+          <p class="text-earth/70 text-sm">4WD and 2WD options from 40HP to 130HP. Suitable for smallholder to large-scale mechanized farming.</p>
+          <a href="#contact" class="inline-block mt-4 text-pine text-sm font-semibold hover:text-forest transition-colors">Inquire →</a>
+        </div>
+      </div>
+
+      <div class="equip-card bg-white rounded-2xl overflow-hidden shadow-sm border border-linen fade-in">
+        <div class="h-36 overflow-hidden">
+          <img src="https://images.openai.com/static-rsc-4/-_0cucSLEpOxiN6kMU_tDxzDwVu_3NDy0NBNbzyYm6Q8E2DPoHrPXWJd52UBe5DwuD4u-Gvipa2vOcgt_4S5mJA-k8VDl9OsKzmVYBvPqTSp-4PVXlIJ7mZK6-bLWRUFx8oWfLhAjJ8UBEpX6m-f68KHofv4YV9r1o63984x-Ay7zqIzhaz1oUwfjmvA35-f?purpose=fullsize"
+               alt="Ploughs" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-display text-forest font-bold mb-1">Ploughs &amp; Harvesters</h3>
+          <p class="text-earth/70 text-xs">Disc ploughs, maize shellers, combine harvesters.</p>
+          <a href="#contact" class="inline-block mt-3 text-pine text-xs font-semibold hover:text-forest">Inquire →</a>
+        </div>
+      </div>
+
+      <div class="equip-card bg-white rounded-2xl overflow-hidden shadow-sm border border-linen fade-in">
+        <div class="h-36 bg-gradient-to-br from-pine to-moss flex items-center justify-center">
+           <img src="https://images.openai.com/static-rsc-4/6uJm3PpSt5vMLYWQ1fOttHzl6VsXMqGnSFYHZbM-pnzX6X4rGoLMtP9oLDOb-qVx0QTSMjuRARDI7tPbkBhuiWSx4ROs05B3gIGJTroGeCzKV3dBd8Iqelrr5fbRmsCyF2qUgMaoTyuNiwInTNln27EFJwvQlu5bNkaQBMp6fdc3qqzgUW1P1nkubdkJKTlI?purpose=fullsize"
+               alt="Ploughs" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-display text-forest font-bold mb-1">Irrigation Systems</h3>
+          <p class="text-earth/70 text-xs">Drip lines, sprinklers, pumps &amp; pipes.</p>
+          <a href="#contact" class="inline-block mt-3 text-pine text-xs font-semibold hover:text-forest">Inquire →</a>
+        </div>
+      </div>
+
+      <div class="equip-card bg-white rounded-2xl overflow-hidden shadow-sm border border-linen fade-in">
+        <div class="h-36 bg-gradient-to-br from-clay to-earth flex items-center justify-center">
+          <img src="https://images.openai.com/static-rsc-4/6uJm3PpSt5vMLYWQ1fOttHzl6VsXMqGnSFYHZbM-pnzX6X4rGoLMtP9oLDOb-qVx0QTSMjuRARDI7tPbkBhuiWSx4ROs05B3gIGJTroGeCzKV3dBd8Iqelrr5fbRmsCyF2qUgMaoTyuNiwInTNln27EFJwvQlu5bNkaQBMp6fdc3qqzgUW1P1nkubdkJKTlI?purpose=fullsize"
+               alt="Ploughs" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-display text-forest font-bold mb-1">Storage Silos</h3>
+          <p class="text-earth/70 text-xs">Steel and galvanised grain storage solutions.</p>
+          <a href="#contact" class="inline-block mt-3 text-pine text-xs font-semibold hover:text-forest">Inquire →</a>
+        </div>
+      </div>
+
+      <div class="equip-card bg-white rounded-2xl overflow-hidden shadow-sm border border-linen sm:col-span-2 lg:col-span-1 xl:col-span-1 fade-in">
+        <div class="h-36 bg-gradient-to-br from-sage to-pine flex items-center justify-center">
+          <img src="https://images.openai.com/static-rsc-4/buyfKgpmLZtOwdTsJUkkd4Tl4eHRXO7puO4gT11ba4rP9epGWua-jEihHKcEm1RrxFbyI2IAPppbs5jxDG9P4AaCzkxidYQzA5n49PAK3FcBtFj8Y-wjBsN-1SvtY_zw4LrApaUPUNNcHjMbrJ6PnAa3On-n81vv6ubu-D_jIfbR9tUMKnQUlpODVLpHGkqL?purpose=fullsize"
+               alt="Seeds & Fertilizers" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-display text-forest font-bold mb-1">Seeds &amp; Fertilizers</h3>
+          <p class="text-earth/70 text-xs">Certified hybrid seeds and NPK fertilizers.</p>
+          <a href="#contact" class="inline-block mt-3 text-pine text-xs font-semibold hover:text-forest">Inquire →</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-center mt-10 fade-in">
+      <a href="#contact" class="inline-block bg-forest hover:bg-pine text-white font-semibold px-8 py-3.5 rounded-full transition-colors">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ IMPACT ═══════════════════ -->
+<section id="impact" class="relative py-24 overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="https://images.pexels.com/photos/9798971/pexels-photo-9798971.jpeg"
+         alt="Fields" class="w-full h-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-forest/80"></div>
+  </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 fade-in">
+      <p class="text-wheat text-sm tracking-widest uppercase font-semibold mb-2">Our Impact</p>
+      <h2 class="font-display text-white text-3xl sm:text-4xl font-black">Numbers That Matter</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="fade-in">
+        <p class="impact-num text-wheat text-5xl md:text-6xl font-black" data-target="5200">0</p>
+        <p class="text-white/70 text-sm mt-2 font-medium">Farmers Supported</p>
+      </div>
+      <div class="fade-in">
+        <p class="impact-num text-wheat text-5xl md:text-6xl font-black" data-target="84000">0</p>
+        <p class="text-white/70 text-sm mt-2 font-medium">Acres Cultivated</p>
+      </div>
+      <div class="fade-in">
+        <p class="impact-num text-wheat text-5xl md:text-6xl font-black" data-target="1200">0</p>
+        <p class="text-white/70 text-sm mt-2 font-medium">Equipment Supplied</p>
+      </div>
+      <div class="fade-in">
+        <p class="impact-num text-wheat text-5xl md:text-6xl font-black" data-target="38">0</p>
+        <p class="text-white/70 text-sm mt-2 font-medium">Regions Covered</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+<section id="projects" class="py-20 md:py-28 bg-linen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 fade-in">
+      <p class="text-moss text-sm tracking-widest uppercase font-semibold mb-2">Field Work</p>
+      <h2 class="font-display text-forest text-3xl sm:text-4xl font-black mb-4">Projects on the Ground</h2>
+      <div class="leaf-divider"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="project-card fade-in">
+        <img src="https://images.openai.com/static-rsc-4/nPH4aQzm41NI_EzxTCePcRX-pyGVT2HLsy-xbI4uUyraV7KDUB34amk8vDpgm-HBBAwCvxXivnZXpmzOF3NOe8o2cuBynHMvKhkiBcoXDJTExHi8cCHCWFKSFekUgtWX6l619i8L4BoEcaRB8rbCcxAnhv3TUsmgz53wB3G9U37Mqtq9CnKoC5lduuR1072h?purpose=fullsize"
+             alt="Cooperative Farming" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="absolute inset-0 project-overlay flex flex-col justify-end p-6">
+          <span class="bg-wheat text-forest text-xs font-semibold px-2.5 py-1 rounded-full w-fit mb-2">Cooperative</span>
+          <h3 class="font-display text-white text-xl font-bold">Cooperative Farming Initiatives</h3>
+          <p class="text-white/70 text-sm mt-1">Organizing farmers into productive cooperatives across Northern Uganda to access bulk inputs and markets.</p>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <img src="https://images.openai.com/static-rsc-4/lCMzB5K5A9QB5-FJn_f_ORGltAtxuxO3_cOsAXvyGweexXMvFm_pkCLYR4141rkp3r_k4fVjZvfLxUuP7xKu_KdmluuzO8LHy9Zk2SMFzUW2bt5UR15pyKI04b0HlRq4NzMs4DCUy12KxKpS2XxzlK5jwRfZYZWvATLINEj-F1mZivoYNYuVTM7dsGmjQjXw?purpose=fullsize"
+             alt="Irrigation Installation" loading="lazy" class="w-full aspect-[4/3] object-cover" />
+        <div class="absolute inset-0 project-overlay flex flex-col justify-end p-6">
+          <span class="bg-wheat text-forest text-xs font-semibold px-2.5 py-1 rounded-full w-fit mb-2">Irrigation</span>
+          <h3 class="font-display text-white text-xl font-bold">Irrigation Installations</h3>
+          <p class="text-white/70 text-sm mt-1">Installing drip and sprinkler systems across 12,000 acres in semi-arid districts to enable year-round production.</p>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="w-full aspect-[4/3] bg-gradient-to-br from-forest via-pine to-moss flex items-center justify-center">
+          <svg class="w-24 h-24 text-sage opacity-30" fill="currentColor" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+        </div>
+        <div class="absolute inset-0 project-overlay flex flex-col justify-end p-6">
+          <span class="bg-wheat text-forest text-xs font-semibold px-2.5 py-1 rounded-full w-fit mb-2">Mechanization</span>
+          <h3 class="font-display text-white text-xl font-bold">Mechanized Farming Support</h3>
+          <p class="text-white/70 text-sm mt-1">Deploying tractor hire schemes and mechanization hubs to reduce post-harvest losses for 800+ smallholders.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SUSTAINABILITY ═══════════════════ -->
+<section id="sustainability" class="py-20 md:py-28 bg-chalk">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="fade-in">
+        <p class="text-moss text-sm tracking-widest uppercase font-semibold mb-2">Our Commitment</p>
+        <h2 class="font-display text-forest text-3xl sm:text-4xl font-black mb-5">
+          Farming in Harmony<br />with the Earth
+        </h2>
+        <div class="leaf-divider !ml-0"></div>
+        <p class="text-earth/75 leading-relaxed mt-4 mb-8 text-sm">
+          Climate change is Africa's greatest agricultural threat. AgriVerde Solutions builds resilience through science-backed sustainability programs that protect the land while improving harvests.
+        </p>
+        <div class="space-y-5">
+          <div class="flex gap-4 items-start">
+            <div class="sustain-icon shrink-0"><svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M7 16l-4-4 4-4 1.41 1.41L6.83 11H21v2H6.83l1.58 1.59L7 16zm10-8l4 4-4 4-1.41-1.41L17.17 13H3v-2h14.17l-1.58-1.59L17 8z"/></svg></div>
+            <div>
+              <h4 class="font-semibold text-forest text-sm">Climate-Smart Farming</h4>
+              <p class="text-earth/70 text-xs mt-0.5 leading-relaxed">Drought-resistant seeds, conservation tillage, and agroforestry to adapt to erratic rainfall patterns.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="sustain-icon shrink-0"><svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+            <div>
+              <h4 class="font-semibold text-forest text-sm">Soil Conservation</h4>
+              <p class="text-earth/70 text-xs mt-0.5 leading-relaxed">Soil testing, composting programs, and erosion control to maintain productivity for future generations.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="sustain-icon shrink-0"><svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+            <div>
+              <h4 class="font-semibold text-forest text-sm">Water Efficiency Systems</h4>
+              <p class="text-earth/70 text-xs mt-0.5 leading-relaxed">Smart irrigation and rainwater harvesting to conserve water while maximising crop output.</p>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="sustain-icon shrink-0"><svg class="w-5 h-5 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg></div>
+            <div>
+              <h4 class="font-semibold text-forest text-sm">Renewable Energy in Agriculture</h4>
+              <p class="text-earth/70 text-xs mt-0.5 leading-relaxed">Solar-powered irrigation pumps and cold storage to cut emissions and reduce energy costs for rural farmers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 fade-in">
+        <div class="rounded-2xl overflow-hidden aspect-square">
+          <img src="https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg"
+               alt="Sustainability" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="rounded-2xl overflow-hidden aspect-square mt-8">
+          <img src="https://images.pexels.com/photos/2165688/pexels-photo-2165688.jpeg"
+               alt="Green farming" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+        </div>
+        <!-- SDG badge -->
+        <div class="col-span-2 bg-forest text-white rounded-2xl p-5 flex items-center gap-4">
+          <div class="w-12 h-12 bg-wheat rounded-full flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-forest" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71C5.71 17 7.5 11.5 17 8z"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-sm">Aligned with UN SDGs</p>
+            <p class="text-white/60 text-xs mt-0.5">Goal 2: Zero Hunger · Goal 13: Climate Action · Goal 15: Life on Land</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<section id="contact" class="py-20 md:py-28 bg-linen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 fade-in">
+      <p class="text-moss text-sm tracking-widest uppercase font-semibold mb-2">Get In Touch</p>
+      <h2 class="font-display text-forest text-3xl sm:text-4xl font-black mb-4">Let's Grow Together</h2>
+      <div class="leaf-divider"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+      <!-- Form -->
+      <div class="bg-chalk rounded-2xl p-8 shadow-sm fade-in">
+        <h3 class="font-display text-forest text-xl font-bold mb-6">Send Us a Message</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-earth text-xs font-semibold mb-1.5 uppercase tracking-wide">Full Name</label>
+            <input type="text" placeholder="Your full name" class="w-full border border-linen bg-white rounded-xl px-4 py-3 text-forest text-sm transition-all" />
+          </div>
+          <div>
+            <label class="block text-earth text-xs font-semibold mb-1.5 uppercase tracking-wide">Email Address</label>
+            <input type="email" placeholder="you@example.com" class="w-full border border-linen bg-white rounded-xl px-4 py-3 text-forest text-sm transition-all" />
+          </div>
+          <div>
+            <label class="block text-earth text-xs font-semibold mb-1.5 uppercase tracking-wide">Subject</label>
+            <input type="text" placeholder="Equipment inquiry, partnership, training…" class="w-full border border-linen bg-white rounded-xl px-4 py-3 text-forest text-sm transition-all" />
+          </div>
+          <div>
+            <label class="block text-earth text-xs font-semibold mb-1.5 uppercase tracking-wide">Message</label>
+            <textarea rows="5" placeholder="Tell us how we can help…" class="w-full border border-linen bg-white rounded-xl px-4 py-3 text-forest text-sm transition-all resize-none"></textarea>
+          </div>
+          <button onclick="alert('Message sent! We\'ll be in touch soon.')" class="w-full bg-forest hover:bg-pine text-white font-semibold py-3.5 rounded-xl transition-colors text-sm">
+            Send Message
+          </button>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="space-y-6 fade-in">
+        <!-- Hero image -->
+        <div class="rounded-2xl overflow-hidden h-48">
+          <img src="https://images.pexels.com/photos/8540214/pexels-photo-8540214.jpeg"
+               alt="Contact" loading="lazy" class="w-full h-full object-cover" />
+        </div>
+        <!-- Contact cards -->
+        <div class="grid grid-cols-1 gap-4">
+          <a href="https://wa.me/256700000000?text=Hello%20AgriVerde%20Solutions" target="_blank"
+             class="wa-btn flex items-center gap-4 text-white rounded-xl px-5 py-4 transition-colors">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <div>
+              <p class="font-semibold text-sm">WhatsApp</p>
+              <p class="text-white/80 text-xs">+256 700 000 000</p>
+            </div>
+          </a>
+          <a href="mailto:info@agriverde.ug"
+             class="flex items-center gap-4 bg-forest text-white rounded-xl px-5 py-4 hover:bg-pine transition-colors">
+            <svg class="w-8 h-8 text-wheat" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <div>
+              <p class="font-semibold text-sm">Email Us</p>
+              <p class="text-white/70 text-xs">info@agriverde.ug</p>
+            </div>
+          </a>
+          <div class="flex items-center gap-4 bg-white border border-linen rounded-xl px-5 py-4">
+            <svg class="w-8 h-8 text-pine" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <div>
+              <p class="font-semibold text-forest text-sm">Head Office</p>
+              <p class="text-earth/70 text-xs">Plot 14, Agricultural House, Kampala, Uganda</p>
+            </div>
+          </div>
+        </div>
+        <!-- Map placeholder -->
+        <div class="bg-pine/10 rounded-xl p-6 text-center border-2 border-dashed border-pine/30">
+          <svg class="w-8 h-8 text-pine mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5z"/></svg>
+          <p class="text-pine text-sm font-semibold">Kampala, Uganda</p>
+          <p class="text-earth/60 text-xs mt-1">Serving all regions of Uganda and East Africa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="bg-forest text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+      <div class="sm:col-span-2 md:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 rounded-full bg-wheat flex items-center justify-center">
+            <svg class="w-5 h-5 text-forest" fill="currentColor" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.71C5.71 17 7.5 11.5 17 8zm1.5 0C19 8 22 8 22 8c0 0-1.5 5-1.5 8.5H21C21 13 20 9.5 18.5 8z"/></svg>
+          </div>
+          <span class="font-display text-lg font-bold">Agri<span class="text-wheat">Verde</span></span>
+        </div>
+        <p class="text-white/60 text-sm leading-relaxed">
+          Powering sustainable agriculture and rural growth across East Africa since 2012.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-wheat text-sm mb-4 uppercase tracking-wide">Company</h4>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li><a href="#about" class="hover:text-wheat transition-colors">About Us</a></li>
+          <li><a href="#services" class="hover:text-wheat transition-colors">Services</a></li>
+          <li><a href="#projects" class="hover:text-wheat transition-colors">Projects</a></li>
+          <li><a href="#contact" class="hover:text-wheat transition-colors">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-wheat text-sm mb-4 uppercase tracking-wide">Solutions</h4>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li><a href="#equipment" class="hover:text-wheat transition-colors">Equipment</a></li>
+          <li><a href="#services" class="hover:text-wheat transition-colors">Irrigation</a></li>
+          <li><a href="#services" class="hover:text-wheat transition-colors">Training</a></li>
+          <li><a href="#sustainability" class="hover:text-wheat transition-colors">Sustainability</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-wheat text-sm mb-4 uppercase tracking-wide">Contact</h4>
+        <ul class="space-y-2 text-sm text-white/60">
+          <li>+256 700 000 000</li>
+          <li>info@agriverde.ug</li>
+          <li>Kampala, Uganda</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/40">
+      <p>© 2025 AgriVerde Solutions. All rights reserved.</p>
+      <p>Designed for sustainable agriculture</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Navbar scroll effect ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── Mobile menu ──
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen  = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  let menuOpen = false;
+  menuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    iconOpen.classList.toggle('hidden', menuOpen);
+    iconClose.classList.toggle('hidden', !menuOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    iconOpen.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+  }));
+
+  // ── Intersection Observer fade-in ──
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => io.observe(el));
+
+  // ── Counter animation ──
+  const counters = document.querySelectorAll('[data-target]');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = +el.dataset.target;
+      const duration = 1800;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current).toLocaleString();
+        if (current >= target) clearInterval(timer);
+      }, 16);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(c => counterIO.observe(c));
+</script>
+</body>
+</html>
