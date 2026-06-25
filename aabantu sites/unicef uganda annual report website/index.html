@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light only"/>
+<title>UNICEF Uganda: Annual Report 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    color-scheme: light only;
+    --unicef-blue: #1CABE2;
+    --unicef-dark: #00567D;
+    --unicef-navy: #002B45;
+    --unicef-cyan: #80C8E0;
+    --unicef-light: #EBF6FC;
+    --unicef-yellow: #8B2635;
+    --text-dark: #1A1A2E;
+    --text-body: #3A4A5A;
+    --text-muted: #6B7F8E;
+    --white: #FFFFFF;
+    --off-white: #F7FBFD;
+    --border: #D4EBF5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-body);
+    background: var(--white);
+    overflow-x: hidden;
+    font-size: 22px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(0, 43, 69, 0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    border-bottom: 2px solid var(--unicef-blue);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .nav-logo-img {
+    height: 44px; width: auto;
+    object-fit: contain; display: block;
+  }
+  .nav-title {
+    color: white; font-size: 15px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 24px; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); font-size: 13px; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.8px; text-transform: uppercase;
+    transition: color 0.2s; white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--unicef-blue); }
+  .nav-links a.active { color: var(--unicef-blue); }
+  .nav-pdf-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--unicef-yellow); color: #fff;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 8px 18px; border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-pdf-btn:hover { background: #6e1e2a; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, rgba(0,43,69,0.88) 0%, rgba(0,86,125,0.80) 50%, rgba(0,144,196,0.75) 100%),
+                url('https://images.pexels.com/photos/1250452/pexels-photo-1250452.jpeg?auto=compress&cs=tinysrgb&w=1400&q=80') center/cover no-repeat;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 80px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(28,171,226,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -100px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,38,53,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(28,171,226,0.2); border: 1px solid rgba(28,171,226,0.4);
+    border-radius: 30px; padding: 6px 16px;
+    color: var(--unicef-cyan); font-size: 13px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero-eyebrow span { width: 6px; height: 6px; background: var(--unicef-blue); border-radius: 50%; }
+  .hero-title {
+    font-family: 'Roboto Slab', serif;
+    font-size: clamp(46px, 5vw, 76px);
+    font-weight: 700; color: white; line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--unicef-blue);
+  }
+  .hero-country {
+    font-family: 'Roboto Slab', serif;
+    font-size: clamp(25px, 3vw, 41px);
+    font-weight: 300; color: var(--unicef-cyan);
+    margin-bottom: 32px; letter-spacing: 4px; text-transform: uppercase;
+  }
+  .hero-desc {
+    font-size: 21px; color: rgba(255,255,255,0.75);
+    line-height: 1.8; max-width: 500px; margin-bottom: 48px;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--unicef-blue); color: white;
+    padding: 14px 32px; border-radius: 4px;
+    font-size: 15px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #0090C4; transform: translateY(-1px); }
+  .btn-download {
+    background: transparent; color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 14px 24px; border-radius: 4px;
+    font-size: 15px; font-weight: 500; letter-spacing: 0.5px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-download:hover { color: white; border-color: rgba(255,255,255,0.5); }
+  .btn-pdf {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--unicef-yellow); color: #fff;
+    padding: 16px 36px; border-radius: 4px;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase; text-decoration: none;
+    box-shadow: 0 8px 24px rgba(139,38,53,0.35);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-pdf:hover { background: #6e1e2a; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(139,38,53,0.45); }
+  .btn-outline {
+    padding: 14px 32px; border-radius: 4px;
+    font-size: 15px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: white; transform: translateY(-1px); }
+
+  .hero-visual { position: relative; z-index: 2; display: flex; justify-content: flex-end; }
+  .hero-card-panel {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 100%; max-width: 380px;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .hero-card-item { padding: 20px 0; }
+  .hero-card-num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 48px; font-weight: 700;
+    color: var(--unicef-blue); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .hero-card-label {
+    font-size: 17px; color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+  .hero-card-divider {
+    height: 1px; background: rgba(255,255,255,0.12);
+  }
+
+  /* ── SCROLL ARROW ── */
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2;
+  }
+  .scroll-hint span {
+    color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .scroll-arrow { animation: bounce 2s infinite; }
+  .scroll-arrow svg { display: block; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ── KEY STATS BAR ── */
+  .stats-bar {
+    background: var(--unicef-navy);
+    padding: 0;
+  }
+  .stats-bar-inner {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    padding: 40px 32px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .stat-item:hover { background: rgba(28,171,226,0.1); }
+  .stat-item:last-child { border-right: none; }
+  .stat-item .num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 48px; font-weight: 700; color: var(--unicef-blue);
+    line-height: 1;
+  }
+  .stat-item .unit { font-size: 23px; color: var(--unicef-cyan); }
+  .stat-item .label {
+    font-size: 16px; color: rgba(255,255,255,0.6);
+    margin-top: 8px; line-height: 1.5; letter-spacing: 0.5px;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 80px; }
+  .section-eyebrow {
+    font-size: 15px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--unicef-blue);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-eyebrow::after {
+    content: ''; flex: 1; max-width: 48px;
+    height: 2px; background: var(--unicef-blue); display: block;
+  }
+  .section-title {
+    font-family: 'Roboto Slab', serif;
+    font-size: clamp(32px, 3vw, 48px); font-weight: 700;
+    color: var(--unicef-navy); line-height: 1.2; margin-bottom: 24px;
+  }
+  .section-lead {
+    font-size: 22px; color: var(--text-body);
+    line-height: 1.8; max-width: 700px;
+  }
+
+  /* ── CONTEXT ── */
+  .context-section {
+    background: var(--off-white);
+  }
+  .context-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px;
+  }
+  .context-img-wrap { position: relative; }
+  .context-img-wrap img {
+    width: 100%; border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(0,43,69,0.12);
+    display: block;
+  }
+  .context-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,43,69,0.85));
+    padding: 40px 24px 24px; border-radius: 0 0 10px 10px;
+    color: white; font-size: 15px; line-height: 1.5;
+  }
+  .challenge-list { list-style: none; display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+  .challenge-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; background: white; border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,43,69,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .challenge-item:hover { transform: translateX(4px); box-shadow: 0 4px 24px rgba(0,43,69,0.1); }
+  .challenge-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: var(--unicef-light); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .challenge-icon svg { width: 20px; height: 20px; stroke: var(--unicef-dark); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .challenge-item h4 { font-size: 18px; font-weight: 600; color: var(--unicef-navy); margin-bottom: 4px; }
+  .challenge-item p { font-size: 17px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── ACHIEVEMENTS ── */
+  .achievements-section { background: white; }
+  .achievements-intro {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 80px;
+  }
+  .achievements-img img {
+    width: 100%; border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(0,43,69,0.12); display: block;
+  }
+  .program-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .program-card {
+    background: var(--off-white); border-radius: 12px;
+    padding: 32px 28px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .program-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,43,69,0.12); }
+  .program-card.accent { background: var(--unicef-navy); }
+  .program-card.accent h3, .program-card.accent p { color: white; }
+  .program-card.accent .card-eyebrow { color: var(--unicef-cyan); }
+  .card-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--unicef-blue); margin-bottom: 16px; }
+  .card-icon { width: 44px; height: 44px; margin-bottom: 16px; background: var(--unicef-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 22px; height: 22px; stroke: var(--unicef-dark); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .program-card.accent .card-icon { background: rgba(28,171,226,0.15); }
+  .program-card.accent .card-icon svg { stroke: var(--unicef-cyan); }
+  .program-card h3 { font-family: 'Roboto Slab', serif; font-size: 23px; font-weight: 700; color: var(--unicef-navy); margin-bottom: 12px; line-height: 1.3; }
+  .program-card p { font-size: 17px; line-height: 1.8; color: var(--text-muted); }
+  .program-card .card-stat { font-family: 'Roboto Slab', serif; font-size: 32px; font-weight: 700; color: var(--unicef-blue); margin-top: 20px; }
+  .program-card.accent .card-stat { color: var(--unicef-yellow); }
+
+  /* ── STORIES / SPOTLIGHT ── */
+  .spotlight-section {
+    background: linear-gradient(135deg, var(--unicef-navy) 0%, var(--unicef-dark) 100%);
+    position: relative; overflow: hidden;
+  }
+  .spotlight-section::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 400px; height: 100%;
+    background: url('https://images.pexels.com/photos/1250452/pexels-photo-1250452.jpeg?auto=compress&cs=tinysrgb&w=600&q=80') center/cover;
+    opacity: 0.12; pointer-events: none;
+  }
+  .spotlight-section .section-eyebrow { color: var(--unicef-cyan); }
+  .spotlight-section .section-eyebrow::after { background: var(--unicef-cyan); }
+  .spotlight-section .section-title { color: white; }
+  .spotlight-section .section-lead { color: rgba(255,255,255,0.75); max-width: 560px; }
+  .spotlight-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px;
+  }
+  .story-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .story-card:hover { background: rgba(255,255,255,0.1); }
+  .story-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+  .story-body { padding: 28px; }
+  .story-tag {
+    display: inline-block; background: var(--unicef-blue);
+    color: white; font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  .story-card h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 23px; font-weight: 600; color: white; line-height: 1.4; margin-bottom: 12px;
+  }
+  .story-card p { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+  .story-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .story-card.featured img { height: 100%; }
+  .story-card.featured .story-body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+  .story-card.featured h3 { font-size: 32px; }
+
+  /* ── DATA / CHALLENGE SECTION ── */
+  .data-section { background: var(--unicef-light); }
+  .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+  .data-img img { width: 100%; border-radius: 10px; box-shadow: 0 24px 60px rgba(0,43,69,0.12); display: block; }
+  .insight-list { display: flex; flex-direction: column; gap: 24px; }
+  .insight-item { display: flex; gap: 20px; align-items: flex-start; }
+  .insight-num {
+    font-family: 'Roboto Slab', serif;
+    font-size: 37px; font-weight: 700; color: var(--unicef-blue);
+    line-height: 1; flex-shrink: 0; min-width: 60px;
+  }
+  .insight-item h4 { font-size: 20px; font-weight: 600; color: var(--unicef-navy); margin-bottom: 6px; }
+  .insight-item p { font-size: 17px; color: var(--text-muted); line-height: 1.7; }
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  /* ── FUNDING OUTLOOK ── */
+  .funding-section { background: white; }
+  .funding-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .funding-bars { display: flex; flex-direction: column; gap: 20px; }
+  .fund-bar-item h4 { font-size: 17px; font-weight: 600; color: var(--unicef-navy); margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .fund-bar-item h4 span { color: var(--unicef-blue); font-family: 'Roboto Slab', serif; }
+  .bar-track { height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--unicef-dark), var(--unicef-blue)); transition: width 1s ease; }
+  .funding-callout {
+    background: var(--unicef-navy); border-radius: 14px;
+    padding: 48px 40px; color: white;
+    position: relative; overflow: hidden;
+  }
+  .funding-callout::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(28,171,226,0.15); pointer-events: none;
+  }
+  .funding-callout h3 { font-family: 'Roboto Slab', serif; font-size: 30px; margin-bottom: 16px; line-height: 1.3; }
+  .funding-callout p { font-size: 18px; color: rgba(255,255,255,0.75); line-height: 1.8; margin-bottom: 24px; }
+  .funding-amounts { display: flex; gap: 32px; margin-top: 28px; }
+  .amt { }
+  .amt .val { font-family: 'Roboto Slab', serif; font-size: 32px; font-weight: 700; color: var(--unicef-yellow); }
+  .amt .desc { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--unicef-navy);
+    padding: 60px 80px;
+    border-top: 3px solid var(--unicef-blue);
+  }
+  .footer-inner {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px;
+  }
+  .footer-brand .logo-text {
+    font-family: 'Roboto Slab', serif; font-size: 23px; font-weight: 700;
+    color: white; margin-bottom: 6px;
+  }
+  .footer-brand .logo-sub { font-size: 14px; color: var(--unicef-cyan); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-brand p { font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1.8; margin-top: 16px; }
+  .footer-col h5 { font-size: 13px; font-weight: 700; color: var(--unicef-cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 17px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--unicef-blue); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; color: rgba(255,255,255,0.35);
+  }
+  .footer-bottom a { color: var(--unicef-blue); text-decoration: none; }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-section {
+    background: var(--unicef-blue);
+    padding: 80px;
+    text-align: center;
+  }
+  .quote-section blockquote {
+    font-family: 'Roboto Slab', serif;
+    font-size: clamp(23px, 3vw, 34px); font-weight: 300;
+    color: white; line-height: 1.6; max-width: 860px;
+    margin: 0 auto 24px; font-style: italic;
+  }
+  .quote-section cite { font-size: 17px; color: rgba(255,255,255,0.7); font-style: normal; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 6px;
+    background: none; border: none; outline: none;
+    -webkit-appearance: none; appearance: none;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: #ffffff !important; border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* ── MOBILE DRAWER ── */
+  .nav-drawer {
+    display: none; position: fixed; top: 64px; left: 0; right: 0;
+    background: rgba(0,43,69,0.98); backdrop-filter: blur(12px);
+    padding: 24px 32px 32px; z-index: 99;
+    border-bottom: 2px solid var(--unicef-blue);
+    flex-direction: column; gap: 0;
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    color: rgba(255,255,255,0.8); font-size: 17px; font-weight: 500;
+    text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; gap: 10px;
+    transition: color 0.2s;
+  }
+  .nav-drawer a:last-child { border-bottom: none; }
+  .nav-drawer a:hover, .nav-drawer a.active { color: var(--unicef-blue); }
+  .nav-drawer a svg { flex-shrink: 0; }
+
+  /* ── CONTEXT IMAGE MOSAIC ── */
+  .context-img-mosaic { display: flex; gap: 12px; }
+  .mosaic-main { position: relative; flex: 1.4; }
+  .mosaic-main img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block; box-shadow: 0 24px 60px rgba(0,43,69,0.12); }
+  .mosaic-side { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .mosaic-side img { width: 100%; flex: 1; object-fit: cover; border-radius: 10px; display: block; box-shadow: 0 12px 32px rgba(0,43,69,0.10); }
+
+  /* ── CARD PHOTO ── */
+  .card-photo {
+    width: calc(100% + 56px); margin: -32px -28px 24px -28px;
+    height: 180px; object-fit: cover;
+    border-radius: 12px 12px 0 0; display: block;
+  }
+  .program-card.accent .card-photo { opacity: 0.85; }
+  @media (max-width: 1024px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-pdf-btn span { display: none; }
+    section { padding: 70px 40px; }
+    .hero { grid-template-columns: 1fr; padding: 120px 40px 80px; }
+    .hero-visual { justify-content: center; margin-top: 48px; }
+    .hero-card-panel { max-width: 100%; }
+    .stats-bar-inner { grid-template-columns: repeat(2,1fr); }
+    .context-grid, .achievements-intro, .data-grid, .funding-grid { grid-template-columns: 1fr; gap: 48px; }
+    .program-cards { grid-template-columns: 1fr; }
+    .spotlight-grid { grid-template-columns: 1fr; }
+    .story-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .story-card.featured img { height: 250px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer { padding: 48px 40px; }
+    .quote-section { padding: 60px 40px; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 24px; }
+    .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+    .funding-amounts { flex-direction: column; gap: 16px; }
+    .hero { padding: 100px 24px 60px; }
+    footer { padding: 48px 24px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .hero-animate {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .hero-animate.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── LIVE STAT PULSE ── */
+  .stat-item .num, .hero-card-num, .program-card .card-stat {
+    transition: color 0.3s;
+  }
+  .stat-item:hover .num { color: var(--unicef-cyan); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/UNICEF_Logo_%28cropped%29.png" alt="UNICEF Logo" class="nav-logo-img"/>
+    <div class="nav-title">UNICEF Uganda</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#context">Update on Context</a></li>
+    <li><a href="#achievements">Major Achievements</a></li>
+    <li><a href="#stories">Real Impact</a></li>
+    <li><a href="#outlook">Challenges &amp; Outlook</a></li>
+    <li><a href="#funding">Resource Mobilisation</a></li>
+  </ul>
+  <a href="https://open.unicef.org/download-pdf?country-name=Uganda&year=2025" target="_blank" class="nav-pdf-btn">
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <span>Download PDF</span>
+  </a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#context" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Update on Context
+  </a>
+  <a href="#achievements" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Major Achievements
+  </a>
+  <a href="#stories" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Real Impact, Real Lives
+  </a>
+  <a href="#outlook" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Challenges &amp; Outlook
+  </a>
+  <a href="#funding" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    Resource Mobilisation
+  </a>
+  <a href="https://open.unicef.org/download-pdf?country-name=Uganda&year=2025" target="_blank" style="color:var(--unicef-blue);margin-top:8px;">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download Full Report PDF
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:100px;">
+  <div class="hero-content">
+    <div class="hero-eyebrow hero-animate"><span></span> Annual Report 2025</div>
+    <h1 class="hero-title hero-animate" style="transition-delay:0.1s">Strong Results<br>for <em>Every Child</em></h1>
+    <p class="hero-country hero-animate" style="transition-delay:0.2s">Uganda</p>
+    <p class="hero-desc hero-animate" style="transition-delay:0.3s">Despite unprecedented funding volatility and eight public health emergencies, UNICEF Uganda delivered direct support to close to six million children, leveraged partnerships to reach eleven million more.</p>
+    <div class="hero-cta hero-animate" style="transition-delay:0.4s">
+      <a href="https://open.unicef.org/download-pdf?country-name=Uganda&year=2025" target="_blank" class="btn-pdf">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Full Report PDF
+      </a>
+    </div>
+  </div>
+  <div class="hero-visual hero-animate" style="transition-delay:0.3s">
+    <div class="hero-card-panel">
+      <div class="hero-card-item">
+        <div class="hero-card-num">~6M</div>
+        <div class="hero-card-label">Children received direct UNICEF support</div>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-item">
+        <div class="hero-card-num">11M+</div>
+        <div class="hero-card-label">Reached through leveraged partnerships</div>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-item">
+        <div class="hero-card-num">8</div>
+        <div class="hero-card-label">Public health emergencies responded to</div>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-item">
+        <div class="hero-card-num">146</div>
+        <div class="hero-card-label">Districts supported across Uganda</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow">
+      <svg width="20" height="20" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="context">
+  <div class="stats-bar-inner">
+    <div class="stat-item fade-up">
+      <div class="num">~6<span class="unit">M</span></div>
+      <div class="label">children received<br>direct programme support</div>
+    </div>
+    <div class="stat-item fade-up" style="transition-delay:0.1s">
+      <div class="num">11<span class="unit">M+</span></div>
+      <div class="label">reached through<br>leveraged partnerships</div>
+    </div>
+    <div class="stat-item fade-up" style="transition-delay:0.2s">
+      <div class="num">8</div>
+      <div class="label">public health emergencies<br>responded to in 2025</div>
+    </div>
+    <div class="stat-item fade-up" style="transition-delay:0.3s">
+      <div class="num">1.9<span class="unit">M</span></div>
+      <div class="label">refugees in Uganda<br>77% women &amp; children</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT SECTION -->
+<section class="context-section">
+  <div class="section-eyebrow fade-up">Section 1</div>
+  <h2 class="section-title fade-up" style="transition-delay:0.1s">Update on the Context</h2>
+  <p class="section-lead fade-up" style="transition-delay:0.2s">In 2025, UNICEF Uganda delivered strong results for children, despite significant disruptions in external funding, public health emergencies and a slowdown in implementation due to preparation for the general elections in 2026.</p>
+
+  <div class="context-grid">
+    <div class="context-img-mosaic fade-up">
+      <div class="mosaic-main">
+        <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Children in Uganda receiving care"/>
+        <div class="context-caption">Uganda's under-5 mortality decreased 19% since 2019, yet multidimensional child poverty remains at 44%.</div>
+      </div>
+      <div class="mosaic-side">
+        <img src="https://images.pexels.com/photos/6647035/pexels-photo-6647035.jpeg?auto=compress&cs=tinysrgb&w=400&q=80" alt="Refugee children Uganda"/>
+        <img src="https://images.pexels.com/photos/8926549/pexels-photo-8926549.jpeg?auto=compress&cs=tinysrgb&w=400&q=80" alt="Girls in school Uganda"/>
+      </div>
+    </div>
+
+    <div>
+      <ul class="challenge-list">
+        <li class="challenge-item fade-up">
+          <div class="challenge-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 6v2m0 8v2M9.5 9.5c0-1.1.9-1.5 2.5-1.5s2.5.4 2.5 1.5-1 1.5-2.5 1.5S9.5 12.1 9.5 13s1 1.5 2.5 1.5 2.5-.4 2.5-1.5"/></svg></div>
+          <div>
+            <h4>Constrained Fiscal Space</h4>
+            <p>Debt servicing consumed 49% of domestic revenues in FY2025/26, with education at 7% and health at 6.3% of the national budget. Investment in social protection remained below one per cent of the national budget.</p>
+          </div>
+        </li>
+        <li class="challenge-item fade-up" style="transition-delay:0.1s">
+          <div class="challenge-icon"><svg viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div>
+          <div>
+            <h4>Unprecedented Funding Cuts</h4>
+            <p>16 donors, including the UK, France, Netherlands, Sweden and Germany, announced foreign aid cuts. The cumulative impact on the UN was estimated at US$162.5 million, undermining core humanitarian lifelines.</p>
+          </div>
+        </li>
+        <li class="challenge-item fade-up" style="transition-delay:0.2s">
+          <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div>
+            <h4>Eight Public Health Emergencies</h4>
+            <p>Ebola, Mpox, measles, cholera, yellow fever, anthrax, CCHF and Rift Valley fever affecting 83% of districts tested Uganda's response systems and UNICEF's capacity to deliver.</p>
+          </div>
+        </li>
+        <li class="challenge-item fade-up" style="transition-delay:0.3s">
+          <div class="challenge-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div>
+            <h4>Growing Refugee Crisis</h4>
+            <p>Instability in DRC, Sudan and South Sudan brought 153,933 new asylum-seekers, bringing Uganda's total refugee population to 1.9 million, of which 77% are women and children.</p>
+          </div>
+        </li>
+        <li class="challenge-item fade-up" style="transition-delay:0.4s">
+          <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <h4>Persistent Child Poverty</h4>
+            <p>Multidimensional child poverty stands at 44%. Adolescent girls account for one third of all new HIV infections, and 24% of girls give birth before the age of 18 years.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS SECTION -->
+<section class="achievements-section" id="achievements">
+  <div class="section-eyebrow fade-up">Section 2</div>
+  <h2 class="section-title fade-up" style="transition-delay:0.1s">Major Achievements &amp; UNICEF's Contribution</h2>
+  <p class="section-lead fade-up" style="transition-delay:0.2s">From immunisation campaigns reaching millions to protecting refugee children from exploitation, UNICEF Uganda's 2025 results span every dimension of child well-being.</p>
+
+  <div class="achievements-intro" style="margin-top:60px;">
+    <div class="achievements-img fade-up">
+      <img src="https://images.pexels.com/photos/6346833/pexels-photo-6346833.jpeg" alt="UNICEF Uganda programme delivery"/>
+    </div>
+    <div class="fade-up" style="transition-delay:0.2s;">
+      <p style="font-size: 21px;line-height:1.9;color:var(--text-body);margin-bottom:24px;">High-impact results achieved during 2025 contributed to Uganda's National Development Plan III and all five Goal areas of UNICEF's Strategic Plan 2022–2025. UNICEF Uganda implemented its programme with agility, adapting rapidly to the volatile financing environment while maintaining a child-rights focus.</p>
+      <p style="font-size: 21px;line-height:1.9;color:var(--text-body);">The CO secured <strong style="color:var(--unicef-navy)">US$29.3 million in development funding</strong> and <strong style="color:var(--unicef-navy)">US$7.8 million in emergency funding</strong>, engaging with new partners from Austria, Denmark, Turkiye, the UAE and the private sector.</p>
+    </div>
+  </div>
+
+  <div class="program-cards">
+    <div class="program-card fade-up">
+      <img src="https://images.pexels.com/photos/5863365/pexels-photo-5863365.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="Health immunisation Uganda" class="card-photo"/>
+      <div class="card-eyebrow">Health &amp; Immunisation</div>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="m22 3-8.5 8.5"/><path d="m19 6-2.5-2.5"/><path d="m16 3-2.5 2.5"/><path d="m8 16 2-2"/><path d="m11.5 8.5L4 16a2 2 0 0 0 0 2.83l1.17 1.17a2 2 0 0 0 2.83 0l7.5-7.5"/><path d="m2 22 3-1-2-2Z"/></svg></div>
+      <h3>97% DPT1 &amp; 95% DPT3 Coverage Achieved</h3>
+      <p>UNICEF supported the Expanded Programme on Immunisation across all 146 districts. Two yellow fever mass campaigns reached 9.2 million people at 93% coverage. The Hepatitis B birth dose vaccine was launched for the first time.</p>
+      <div class="card-stat">1.56M</div>
+      <p style="font-size: 15px;color:var(--text-muted);margin-top:4px;">children vaccinated against measles (92% first dose coverage)</p>
+    </div>
+
+    <div class="program-card fade-up" style="transition-delay:0.1s">
+      <img src="https://images.pexels.com/photos/6647037/pexels-photo-6647037.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="Child nutrition Uganda" class="card-photo"/>
+      <div class="card-eyebrow">Nutrition</div>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
+      <h3>Treating Malnutrition, Sustaining Supply Chains</h3>
+      <p>68,218 children with severe acute malnutrition were reached through timely RUTF procurement. Vitamin A supplementation reached 5.2 million children in the first round, and 3.9 million in the second.</p>
+      <div class="card-stat">342,727</div>
+      <p style="font-size: 15px;color:var(--text-muted);margin-top:4px;">students reached with weekly iron supplementation in 360 schools</p>
+    </div>
+
+    <div class="program-card accent fade-up" style="transition-delay:0.2s">
+      <img src="https://images.pexels.com/photos/1250452/pexels-photo-1250452.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="Child protection Uganda" class="card-photo"/>
+      <div class="card-eyebrow">Child Protection</div>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Justice, Psychosocial Support &amp; Safe Care</h3>
+      <p>371,139 children accessed integrated services through district-level Child Well-Being Committees. Some 806 unaccompanied children benefited from safe alternative care and family reunification.</p>
+      <div class="card-stat">199,470</div>
+      <p style="font-size: 15px;color:rgba(255,255,255,0.7);margin-top:4px;">children and adolescents received community-based psychosocial support</p>
+    </div>
+<!--  -->
+    <div class="program-card fade-up" style="transition-delay:0.3s">
+      <img src="https://images.pexels.com/photos/36467878/pexels-photo-36467878.jpeg" alt="Children education Uganda" class="card-photo"/>
+      <div class="card-eyebrow">Education</div>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h3>Foundational Learning &amp; Inclusion</h3>
+      <p>578,764 learners, including 8,449 with disabilities, benefited from improved foundational learning. 43,782 learners accessed remedial catch-up lessons. 55,577 children reached through mobile ECD models.</p>
+      <div class="card-stat">760</div>
+      <p style="font-size: 15px;color:var(--text-muted);margin-top:4px;">child mothers re-enrolled into primary school</p>
+    </div>
+
+    <div class="program-card fade-up" style="transition-delay:0.4s">
+      <img src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="WASH water Uganda" class="card-photo"/>
+      <div class="card-eyebrow">WASH</div>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+      <h3>Climate-Resilient Water &amp; Sanitation</h3>
+      <p>214,500 people and children supported with WASH interventions. Korea-funded WASH in Karamoja drove a 44% increase in school enrolment and 38% rise in girls' enrolment. WASH facilities upgraded in 30 schools and 410 health centres.</p>
+      <div class="card-stat">24,800</div>
+      <p style="font-size: 15px;color:var(--text-muted);margin-top:4px;">people benefiting from climate-resilient water infrastructure</p>
+    </div>
+
+    <div class="program-card fade-up" style="transition-delay:0.5s">
+      <img src="https://images.pexels.com/photos/8926549/pexels-photo-8926549.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="Birth registration Uganda" class="card-photo"/>
+      <div class="card-eyebrow">Birth Registration</div>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+      <h3>From Project to Institutionalised Service</h3>
+      <p>UNICEF advocacy shifted birth registration from a project-based intervention to a permanent government service. 217,813 births were notified; 38.6% of children under one registered. 17,960 children received free birth certificates.</p>
+      <div class="card-stat">64%</div>
+      <p style="font-size: 15px;color:var(--text-muted);margin-top:4px;">of birth notifications now through health facilities</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES SPOTLIGHT -->
+<section class="spotlight-section" id="stories">
+  <div class="section-eyebrow fade-up">Field Stories</div>
+  <h2 class="section-title fade-up" style="color:white;transition-delay:0.1s">Real Impact, Real Lives</h2>
+  <p class="section-lead fade-up" style="transition-delay:0.2s">Behind every statistic is a child, a family, a community. Here are snapshots from UNICEF Uganda's frontline work in 2025.</p>
+
+  <div class="spotlight-grid">
+    <div class="story-card featured fade-up">
+      <img src="https://images.pexels.com/photos/5863365/pexels-photo-5863365.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Vaccination in Uganda"/>
+      <div class="story-body">
+        <span class="story-tag">Public Health Emergency</span>
+        <h3>Responding to Ebola &amp; Mpox Outbreaks</h3>
+        <p>When Uganda faced its eighth Ebola outbreak in January 2025, UNICEF mobilised rapidly. Over 1,014 village health teams were trained for household outreach. A risk communication campaign reached 7.8 million people. On Mpox: UNICEF supported vaccination of 215,680 people, trained 2,310 community health workers, and brought Mpox information to 160,895 learners across 1,685 schools.</p>
+      </div>
+    </div>
+
+    <div class="story-card fade-up" style="transition-delay:0.1s">
+      <img src="https://images.pexels.com/photos/8926549/pexels-photo-8926549.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="Girls education Uganda"/>
+      <div class="story-body">
+        <span class="story-tag">Girls' Education</span>
+        <h3>Girls Empowering Girls in Kampala</h3>
+        <p>Impact analysis of the Belgium-supported GEG programme showed substantial gains in learning outcomes. Kampala Capital City Authority has now integrated the GEG model into its five-year city strategy, a landmark moment for institutionalised girls' education.</p>
+      </div>
+    </div>
+
+    <div class="story-card fade-up" style="transition-delay:0.2s">
+      <img src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=500&q=80" alt="Karamoja children"/>
+      <div class="story-body">
+        <span class="story-tag">Karamoja Region</span>
+        <h3>WASH Fuelling School Enrolment</h3>
+        <p>Korea-funded WASH interventions in Karamoja produced remarkable results: overall school enrolment increased 44% and girls' enrolment rose 38%. In a region where multidimensional poverty reaches 84.9%, this is transformational.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <blockquote class="fade-up">"Prevention may be quiet work, but over time it reshapes systems. The gains belong to the children."</blockquote>
+  <cite class="fade-up" style="transition-delay:0.15s">UNICEF Uganda Country Office Reflection, 2025</cite>
+</div>
+
+<!-- DATA / CHALLENGES -->
+<section class="data-section" id="outlook">
+  <div class="section-eyebrow fade-up">Section 3</div>
+  <h2 class="section-title fade-up" style="transition-delay:0.1s">Challenges, Lessons &amp; Future Outlook</h2>
+  <p class="section-lead fade-up" style="transition-delay:0.2s">The year tested Uganda's systems and UNICEF's agility. Key lessons shaped the new Country Programme Document 2026–2030, now finalised.</p>
+
+  <div class="data-grid">
+    <div class="data-img fade-up">
+      <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Community gathering Uganda"/>
+    </div>
+    <div>
+      <div class="insight-list">
+        <div class="insight-item fade-up">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>Institutionalise, Don't Projectise</h4>
+            <p>Sustainable results come when models move from project-based delivery into government-led systems, as seen with birth registration, immunisation, and social work quality standards.</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="insight-item fade-up" style="transition-delay:0.1s">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Multisectoral Coordination is Pivotal</h4>
+            <p>District-level Child Well-Being Committees brought together health, education, justice, local government and the private sector, enabling pooled resources and more accountable child services.</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="insight-item fade-up" style="transition-delay:0.2s">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>Digital Innovation Accelerates Equity</h4>
+            <p>eCHIS interoperability with DHIS2, digital dashboards, e-courts and interactive radio reached children in remote and underserved areas, improving precision and reducing delays in service delivery.</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="insight-item fade-up" style="transition-delay:0.3s">
+          <div class="insight-num">04</div>
+          <div>
+            <h4>Social Norms Remain a Stubborn Barrier</h4>
+            <p>High teenage pregnancy rates, child marriage, and school dropout, especially for girls, persist. Engagement with Busoga, Buganda and Lango kingdoms alongside CSO and private sector partners is critical to lasting change.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING OUTLOOK -->
+<section class="funding-section" id="funding">
+  <div class="section-eyebrow fade-up">Resource Mobilisation</div>
+  <h2 class="section-title fade-up" style="transition-delay:0.1s">Diversifying Partnerships for Children</h2>
+  <p class="section-lead fade-up" style="transition-delay:0.2s">UNICEF Uganda's robust Resource Mobilisation and Partnership Strategy maintained stable funding levels in 2025 despite unprecedented ODA volatility.</p>
+
+  <div class="funding-grid">
+    <div class="funding-bars fade-up">
+      <div class="fund-bar-item">
+        <h4>Development Funding <span>US$29.3M</span></h4>
+        <div class="bar-track"><div class="bar-fill" style="width:79%"></div></div>
+      </div>
+      <div class="fund-bar-item" style="margin-top:8px;">
+        <h4>Emergency Funding <span>US$7.8M</span></h4>
+        <div class="bar-track"><div class="bar-fill" style="width:21%; background:linear-gradient(90deg, var(--unicef-yellow), #C0392B);"></div></div>
+      </div>
+      <div class="fund-bar-item" style="margin-top:8px;">
+        <h4>Health Domestic Allocation <span>US$146M</span></h4>
+        <div class="bar-track"><div class="bar-fill" style="width:65%; background:linear-gradient(90deg,#00567D,#1CABE2);"></div></div>
+      </div>
+      <p style="margin-top:28px;font-size: 18px;color:var(--text-muted);line-height:1.8;">New partnerships were established with the governments of Austria, Denmark, Turkiye and the UAE, alongside private sector partners including Eli Lilly, First Food Africa, Qatar Foundation and the Roger Family Foundation.</p>
+    </div>
+
+    <div class="funding-callout fade-up" style="transition-delay:0.2s;">
+      <h3>Looking to 2026–2030</h3>
+      <p>UNICEF Uganda's new Country Programme Document prioritises upstream policy work and nationwide coverage with a focus on pockets of vulnerability. The CO completed a careful affordability analysis, preserving core functions within a lean, agile structure.</p>
+      <p>Core commitments include: sustaining social sector budget advocacy, expanding digital innovation, strengthening multisectoral platforms, and mobilising innovative domestic financing for children.</p>
+      <div class="funding-amounts">
+        <div class="amt">
+          <div class="val">2026</div>
+          <div class="desc">New CPD begins</div>
+        </div>
+        <div class="amt">
+          <div class="val">146</div>
+          <div class="desc">Districts supported</div>
+        </div>
+        <div class="amt">
+          <div class="val">17M+</div>
+          <div class="desc">Children in Uganda</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-text">UNICEF Uganda</div>
+      <div class="logo-sub">For Every Child</div>
+      <p>This report summarises key programme results achieved by UNICEF in Uganda in 2025. For detailed outcome, output-level and financial data, visit the UNICEF Transparency Portal.</p>
+      <a href="https://open.unicef.org/download-pdf?country-name=Uganda&year=2025" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size: 16px;color:var(--unicef-blue);text-decoration:none;border:1px solid rgba(28,171,226,0.4);padding:10px 18px;border-radius:4px;">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Full Report PDF
+      </a>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#context">Update on Context</a></li>
+        <li><a href="#achievements">Major Achievements</a></li>
+        <li><a href="#stories">Field Stories</a></li>
+        <li><a href="#outlook">Challenges &amp; Outlook</a></li>
+        <li><a href="#funding">Resource Mobilisation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Key Programmes</h5>
+      <ul>
+        <li><a href="#">Health &amp; Immunisation</a></li>
+        <li><a href="#">Nutrition</a></li>
+        <li><a href="#">Child Protection</a></li>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">WASH</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>UNICEF Uganda Annual Report 2025. </span>
+    <span>Contact: <a href="mailto:ugkampala@unicef.org">ugkampala@unicef.org</a></span>
+  </div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('navDrawer');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open');
+  });
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    navDrawer.classList.remove('open');
+  }
+  // Close drawer on outside click
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navDrawer.contains(e.target)) {
+      closeDrawer();
+    }
+  });
+
+  // Hero entrance animation (runs immediately on load, not scroll-triggered)
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.hero-animate').forEach(el => el.classList.add('visible'));
+  });
+
+  // Fade-up observer (re-animates every time a section re-enters the viewport)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      e.target.classList.toggle('visible', e.isIntersecting);
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const scrollSpy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const match = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => scrollSpy.observe(s));
+
+  // Animate bar fills on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => { bar.style.width = w; }, 100);
+        });
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.funding-bars').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>
