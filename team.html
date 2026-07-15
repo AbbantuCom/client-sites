@@ -8,17 +8,19 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/responsive.css" />
   </head>
-  <body>
+  <body class="team-page">
     <a class="skip-link" href="#main">Skip to content</a>
     <div data-site-header></div>
     <main id="main">
-      <section class="inner-hero">
-        <div class="container">
+      <section class="inner-hero team-hero">
+        <div class="team-hero-signal" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="team-hero-beam" aria-hidden="true"></div>
+        <div class="container" data-reveal="hero">
           <nav class="breadcrumb">
             <a href="index.html">Home</a><span>/</span><span>Our Team</span>
           </nav>
           <p class="eyebrow">Our people</p>
-          <h1>One team. Clear purpose.</h1>
+          <h1><span>One team.</span> <span>Clear purpose.</span></h1>
         </div>
       </section>
       <section class="section">
@@ -31,7 +33,7 @@
             </p>
           </div>
           <div class="rule"></div>
-          <div class="filters" aria-label="Filter team">
+          <div class="filters team-filters" aria-label="Filter team" data-reveal>
             <button class="filter-button active" data-filter="all">All</button
             ><button class="filter-button" data-filter="leadership">
               Leadership</button
@@ -39,7 +41,7 @@
               Associates
             </button>
           </div>
-          <div class="team-grid">
+          <div class="team-grid team-grid--animated" data-reveal="stagger">
             <a
               class="person-card"
               data-filter-item
@@ -86,10 +88,9 @@
               data-category="associate"
               href="team-profile.html?person=priscilla"
               ><img class="person-photo" src="images/team-priscilla.png" alt="Priscilla Nayiga" />
-              <span class="placeholder-badge">Title required</span>
               <div class="person-info">
                 <h3>Priscilla Nayiga</h3>
-                <p>Original title required</p>
+                <p>Associate</p>
               </div></a
             ><a
               class="person-card"
@@ -107,10 +108,9 @@
               data-category="associate"
               href="team-profile.html?person=magada"
               ><img class="person-photo" src="images/team-magada.png" alt="Magada Julius" />
-              <span class="placeholder-badge">Title required</span>
               <div class="person-info">
                 <h3>Magada Julius</h3>
-                <p>Orig</p>
+                <p>Legal Assistant</p>
               </div></a
             ><a
               class="person-card"
@@ -127,7 +127,7 @@
         </div>
       </section>
       <section class="section section--navy cta">
-        <div class="container">
+        <div class="container" data-reveal>
           <p class="eyebrow">Our shared direction</p>
           <h2>
             Guided by global vision and grounded in strong legal foundations.

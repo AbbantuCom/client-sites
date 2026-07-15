@@ -61,6 +61,23 @@
     }
   });
 
+  const sectionLinks = [...document.querySelectorAll('.section-nav a[href^="#"]')];
+  const trackedSections = sectionLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  if (sectionLinks.length && 'IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        sectionLinks.forEach((link) => {
+          const active = link.getAttribute('href') === `#${entry.target.id}`;
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-25% 0px -60% 0px', threshold: 0 });
+    trackedSections.forEach((section) => sectionObserver.observe(section));
+  }
+
   const searchInput = document.querySelector('[data-filter-search]');
   const filterButtons = document.querySelectorAll('[data-filter]');
   const filterItems = document.querySelectorAll('[data-filter-item]');
@@ -71,7 +88,14 @@
       const category = item.dataset.category || '';
       const text = item.textContent.toLowerCase();
       const categoryMatch = activeFilter === 'all' || category.includes(activeFilter);
-      item.classList.toggle('hidden', !(categoryMatch && text.includes(query)));
+      const hide = !(categoryMatch && text.includes(query));
+      const wasHidden = item.classList.contains('hidden');
+      item.classList.toggle('hidden', hide);
+      if (wasHidden && !hide) {
+        item.classList.remove('filter-enter');
+        void item.offsetWidth;
+        item.classList.add('filter-enter');
+      }
     });
   };
   searchInput?.addEventListener('input', filterContent);
