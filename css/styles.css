@@ -175,7 +175,8 @@ p { margin: 0 0 1.25rem; }
 .service-list li::before { position: absolute; left: 0; color: var(--gold-500); content: '—'; }
 .content-placeholder { padding: 24px; color: var(--slate-500); border: 1px dashed rgba(10,32,56,.3); background: var(--ivory); font-size: .85rem; }
 .profile-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(40px,8vw,110px); }
-.profile-portrait { aspect-ratio: 4/5; display: grid; place-items: center; color: rgba(255,255,255,.55); background: var(--navy-900); text-align: center; }
+.profile-portrait { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--navy-900); }
+.profile-portrait img { width: 100%; height: 100%; object-fit: cover; }
 .profile-copy h1 { margin-bottom: 8px; font-size: clamp(3rem,5vw,5rem); }
 .profile-role { margin-bottom: 38px; color: var(--gold-500); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
