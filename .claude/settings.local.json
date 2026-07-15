@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" -D - https://diamondadvocates.com/ -o /tmp/claude-1000/-home-maria-Documents-Work-diamond-advocates/6a74274a-25f5-43b5-b72d-1115f3b7222e/scratchpad/da_raw.html)"
+    ]
+  }
+}
