@@ -77,17 +77,52 @@
     card.addEventListener('pointerleave', () => { card.style.transform = ''; });
   });
 
-  const heroSlides = document.querySelectorAll('.hero-slide');
-  const heroKickerWords = document.querySelectorAll('.hero-kicker-word');
-  if (heroSlides.length > 1 && !reducedMotion) {
-    let heroIndex = 0;
-    setInterval(() => {
-      heroSlides[heroIndex].classList.remove('is-active');
-      heroKickerWords[heroIndex]?.classList.remove('is-active');
-      heroIndex = (heroIndex + 1) % heroSlides.length;
-      heroSlides[heroIndex].classList.add('is-active');
-      heroKickerWords[heroIndex]?.classList.add('is-active');
-    }, 4500);
+  const heroSlides = [...document.querySelectorAll('.hero-slide')];
+  const heroIndexEl = document.querySelector('.hero-index');
+  const heroBar = document.querySelector('.hero-bar');
+  const practiceWord = document.getElementById('practiceWord');
+  if (heroSlides.length > 1 && heroIndexEl) {
+    const DURATION = 4500;
+    let current = Math.max(0, heroSlides.findIndex((slide) => slide.classList.contains('is-active')));
+    let start = performance.now();
+
+    const buttons = heroSlides.map((slide) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = slide.dataset.word || '';
+      heroIndexEl.appendChild(button);
+      return button;
+    });
+
+    const goToSlide = (index) => {
+      heroSlides[current].classList.remove('is-active');
+      buttons[current].classList.remove('active');
+      current = (index + heroSlides.length) % heroSlides.length;
+      heroSlides[current].classList.add('is-active');
+      buttons[current].classList.add('active');
+      if (practiceWord) {
+        practiceWord.style.animation = 'none';
+        void practiceWord.offsetWidth;
+        practiceWord.textContent = heroSlides[current].dataset.word || practiceWord.textContent;
+        practiceWord.style.animation = '';
+      }
+      start = performance.now();
+    };
+
+    buttons.forEach((button, index) => button.addEventListener('click', () => goToSlide(index)));
+    buttons[current].classList.add('active');
+
+    if (reducedMotion) {
+      if (heroBar) heroBar.style.display = 'none';
+    } else {
+      const tick = (now) => {
+        const progress = Math.min((now - start) / DURATION, 1);
+        if (heroBar) heroBar.style.width = `${progress * 100}%`;
+        if (progress >= 1) goToSlide(current + 1);
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
   }
 
   document.querySelectorAll('.team-grid--animated .person-card').forEach((card) => {
