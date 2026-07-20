@@ -77,6 +77,19 @@
     card.addEventListener('pointerleave', () => { card.style.transform = ''; });
   });
 
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroKickerWords = document.querySelectorAll('.hero-kicker-word');
+  if (heroSlides.length > 1 && !reducedMotion) {
+    let heroIndex = 0;
+    setInterval(() => {
+      heroSlides[heroIndex].classList.remove('is-active');
+      heroKickerWords[heroIndex]?.classList.remove('is-active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('is-active');
+      heroKickerWords[heroIndex]?.classList.add('is-active');
+    }, 4500);
+  }
+
   document.querySelectorAll('.team-grid--animated .person-card').forEach((card) => {
     card.addEventListener('pointermove', (event) => {
       if (event.pointerType === 'touch') return;

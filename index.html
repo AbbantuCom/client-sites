@@ -114,14 +114,37 @@
     <main id="main">
       <section class="hero">
         <div class="hero-media" data-parallax aria-hidden="true">
-          <img src="images/tech-workspace.jpg" alt="" /><span
-            class="hero-media-scan"
-          ></span>
+          <div class="hero-slide is-active">
+            <img src="images/hero-tech.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="images/hero-ai.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="images/hero-tax.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="images/hero-real-estate.jpg" alt="" />
+          </div>
+          <div class="hero-slide">
+            <img src="images/hero-insurance.jpg" alt="" />
+          </div>
+          <span class="hero-media-scan"></span>
         </div>
         <div class="hero-orbit hero-orbit--one" aria-hidden="true"></div>
         <div class="hero-orbit hero-orbit--two" aria-hidden="true"></div>
         <div class="container hero-content" data-reveal="hero">
-          <p class="hero-kicker">Tech · AI · Tax · Real Estate · Insurance</p>
+          <p class="hero-kicker">
+            <span class="hero-kicker-word is-active">Tech</span
+            ><span aria-hidden="true"> · </span
+            ><span class="hero-kicker-word">AI</span
+            ><span aria-hidden="true"> · </span
+            ><span class="hero-kicker-word">Tax</span
+            ><span aria-hidden="true"> · </span
+            ><span class="hero-kicker-word">Real Estate</span
+            ><span aria-hidden="true"> · </span
+            ><span class="hero-kicker-word">Insurance</span>
+          </p>
           <h1>Award Winning <em>Tech Law</em> Firm</h1>
           <p class="hero-practices">
             Guided by global vision. Grounded in strong legal foundations.
@@ -487,6 +510,8 @@
       </div>
     </footer>
     <button class="back-to-top" aria-label="Back to top">↑</button>
+    <script src="js/vendor/lenis.min.js"></script>
+    <script src="js/smooth-scroll.js"></script>
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
   </body>

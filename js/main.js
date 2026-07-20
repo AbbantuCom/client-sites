@@ -50,7 +50,10 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  backToTop?.addEventListener('click', () => {
+    if (window.__lenis) window.__lenis.scrollTo(0);
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   const currentFile = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('[data-page]').forEach((link) => {
