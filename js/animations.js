@@ -87,7 +87,7 @@
       heroIndex = (heroIndex + 1) % heroSlides.length;
       heroSlides[heroIndex].classList.add('is-active');
       heroKickerWords[heroIndex]?.classList.add('is-active');
-    }, 4500);
+    }, 3000);
   }
 
   document.querySelectorAll('.team-grid--animated .person-card').forEach((card) => {
