@@ -80,7 +80,6 @@
   const heroSlides = [...document.querySelectorAll('.hero-slide')];
   const heroIndexEl = document.querySelector('.hero-index');
   const heroBar = document.querySelector('.hero-bar');
-  const practiceWord = document.getElementById('practiceWord');
   if (heroSlides.length > 1 && heroIndexEl) {
     const DURATION = 4500;
     let current = Math.max(0, heroSlides.findIndex((slide) => slide.classList.contains('is-active')));
@@ -100,12 +99,6 @@
       current = (index + heroSlides.length) % heroSlides.length;
       heroSlides[current].classList.add('is-active');
       buttons[current].classList.add('active');
-      if (practiceWord) {
-        practiceWord.style.animation = 'none';
-        void practiceWord.offsetWidth;
-        practiceWord.textContent = heroSlides[current].dataset.word || practiceWord.textContent;
-        practiceWord.style.animation = '';
-      }
       start = performance.now();
     };
 
