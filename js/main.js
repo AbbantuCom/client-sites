@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "\nOrganisation: " + org +
         "\nArea of Interest: " + topic +
         "\nMessage: " + msg;
-
+// 
       var mailto = "mailto:info@aclpit.org" +
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
