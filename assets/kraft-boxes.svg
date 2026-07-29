@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 460" role="img" aria-label="Kraft box packaging illustration">
+  <rect width="420" height="460" rx="30" fill="#fbf9f5"/>
+  <rect x="74" y="125" width="120" height="200" rx="14" fill="#c7884c" opacity="0.85"/>
+  <rect x="198" y="84" width="132" height="180" rx="12" fill="#d0a372"/>
+  <rect x="132" y="160" width="168" height="160" rx="14" fill="#f4ebdd"/>
+  <path d="M132 190l168 0" stroke="#c7884c" stroke-width="4"/>
+  <path d="M132 230l168 0" stroke="#c7884c" stroke-width="4"/>
+  <text x="148" y="270" fill="#123B5D" font-size="20" font-family="Arial, sans-serif" font-weight="700">Kraft Packaging</text>
+  <text x="148" y="298" fill="#667681" font-size="14" font-family="Arial, sans-serif">For business and retail distribution</text>
+</svg>

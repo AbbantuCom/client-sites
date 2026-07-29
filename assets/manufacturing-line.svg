@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 520" role="img" aria-label="Clean manufacturing and packaging environment illustration">
+  <rect width="700" height="520" rx="32" fill="#f7fbfd"/>
+  <rect x="44" y="82" width="612" height="356" rx="24" fill="#ffffff" stroke="#dceef2" stroke-width="2"/>
+  <rect x="84" y="124" width="170" height="160" rx="12" fill="#DDF4F4"/>
+  <rect x="284" y="124" width="170" height="160" rx="12" fill="#F4EBDD"/>
+  <rect x="484" y="124" width="126" height="160" rx="12" fill="#E7F4FB"/>
+  <rect x="102" y="202" width="136" height="44" rx="8" fill="#123B5D" opacity="0.88"/>
+  <rect x="302" y="202" width="136" height="44" rx="8" fill="#2F80C9" opacity="0.88"/>
+  <rect x="502" y="202" width="90" height="44" rx="8" fill="#E75A83" opacity="0.9"/>
+  <path d="M42 358h616" stroke="#123B5D" stroke-width="12" stroke-linecap="round" opacity="0.14"/>
+  <path d="M136 390c34-20 57-20 87 0" stroke="#2F80C9" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="166" cy="390" r="10" fill="#DDF4F4"/>
+  <circle cx="224" cy="390" r="10" fill="#DDF4F4"/>
+  <text x="84" y="380" fill="#123B5D" font-size="24" font-family="Arial, sans-serif" font-weight="700">Product preparation • Packaging • Distribution</text>
+</svg>

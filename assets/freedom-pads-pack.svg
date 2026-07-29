@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 460" role="img" aria-label="Freedom Pads packaging mockup">
+  <defs>
+    <linearGradient id="fbg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fff8fb" />
+      <stop offset="100%" stop-color="#feeff5" />
+    </linearGradient>
+  </defs>
+  <rect width="420" height="460" rx="30" fill="url(#fbg)" />
+  <rect x="45" y="45" width="330" height="370" rx="24" fill="#ffffff" stroke="#E75A83" stroke-width="2"/>
+  <rect x="70" y="78" width="280" height="130" rx="16" fill="#E75A83"/>
+  <text x="95" y="122" fill="#ffffff" font-size="32" font-family="Arial, sans-serif" font-weight="700">FREEDOM</text>
+  <text x="95" y="152" fill="#ffffff" font-size="21" font-family="Arial, sans-serif">PADS</text>
+  <path d="M110 210c30 20 55 24 85 0c30 24 55 24 86 0" stroke="#E75A83" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <rect x="90" y="238" width="240" height="112" rx="18" fill="#F4EBDD"/>
+  <text x="110" y="284" fill="#6B2238" font-size="18" font-family="Arial, sans-serif" font-weight="700">Comfort and confidence</text>
+  <text x="110" y="310" fill="#667681" font-size="14" font-family="Arial, sans-serif">Accessible sanitary care</text>
+  <circle cx="310" cy="118" r="18" fill="#fff" opacity="0.28"/>
+</svg>

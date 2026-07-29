@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 460" role="img" aria-label="Swan toilet paper packaging mockup">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#edf8fd" />
+    </linearGradient>
+  </defs>
+  <rect width="420" height="460" rx="30" fill="url(#bg)" />
+  <rect x="42" y="42" width="336" height="376" rx="24" fill="#123B5D"/>
+  <rect x="64" y="64" width="292" height="110" rx="14" fill="#ffffff" opacity="0.9" />
+  <path d="M106 114c34-24 64-24 96 0" stroke="#2F80C9" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M148 113c16 18 29 18 45 0" stroke="#123B5D" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <circle cx="125" cy="171" r="7" fill="#2F80C9" opacity="0.8"/>
+  <circle cx="296" cy="171" r="7" fill="#2F80C9" opacity="0.8"/>
+  <text x="76" y="240" fill="#ffffff" font-size="34" font-family="Arial, sans-serif" font-weight="700">SWAN</text>
+  <text x="76" y="273" fill="#DDF4F4" font-size="18" font-family="Arial, sans-serif">Soft Toilet Tissue</text>
+  <rect x="76" y="290" width="268" height="86" rx="14" fill="#DDF4F4"/>
+  <text x="96" y="328" fill="#123B5D" font-size="18" font-family="Arial, sans-serif" font-weight="700">Everyday essentials</text>
+  <text x="96" y="352" fill="#667681" font-size="14" font-family="Arial, sans-serif">Home • Office • Institutions</text>
+</svg>

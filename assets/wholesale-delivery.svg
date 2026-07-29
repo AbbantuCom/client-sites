@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" role="img" aria-label="Wholesale delivery boxes illustration">
+  <rect width="560" height="420" rx="28" fill="#112f49"/>
+  <rect x="62" y="86" width="168" height="142" rx="14" fill="#f7f9fc"/>
+  <rect x="108" y="44" width="156" height="160" rx="14" fill="#d8eef7"/>
+  <rect x="268" y="112" width="176" height="116" rx="14" fill="#2F80C9"/>
+  <rect x="386" y="90" width="102" height="138" rx="14" fill="#f4ebdd"/>
+  <text x="84" y="276" fill="#ffffff" font-size="22" font-family="Arial, sans-serif" font-weight="700">Wholesale distribution</text>
+  <text x="84" y="304" fill="#dff5f6" font-size="16" font-family="Arial, sans-serif">Retail • Pharmacy • Institutions</text>
+  <path d="M130 98l96 0" stroke="#123B5D" stroke-width="6"/>
+  <path d="M130 130l96 0" stroke="#123B5D" stroke-width="6"/>
+</svg>

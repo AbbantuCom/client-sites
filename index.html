@@ -1,572 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>African Centre for Law and Public Interest Technology | Law, Technology and the Public Interest in Africa</title>
-  <meta name="description" content="The African Centre for Law and Public Interest Technology (ACLPIT) researches, litigates, advises and convenes on the legal and regulatory dimensions of technology in Africa.">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
-  <link href="vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blue Swan Products Ltd | Hygiene, Tissue and Sanitary Products Uganda</title>
+    <meta
+      name="description"
+      content="Blue Swan Products Ltd supplies toilet paper, sanitary pads, serviettes, dispensing envelopes and packaging products for homes, retailers and institutions in Uganda."
+    />
+    <meta property="og:title" content="Blue Swan Products Ltd | Hygiene, Tissue and Sanitary Products Uganda" />
+    <meta
+      property="og:description"
+      content="Blue Swan Products Ltd supplies toilet paper, sanitary pads, serviettes, dispensing envelopes and packaging products for homes, retailers and institutions in Uganda."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/swan-toilet-paper-pack.svg" />
+    <meta name="theme-color" content="#123B5D" />
+    <meta
+      name="keywords"
+      content="hygiene products Uganda, toilet paper Kampala, sanitary pads Uganda, serviettes, kraft packaging boxes, pharmaceutical envelopes, wholesale tissue products"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: '#123B5D',
+              swan: '#2F80C9',
+              aqua: '#DDF4F4',
+              sand: '#F4EBDD',
+              pink: '#E75A83',
+              text: '#17222B',
+              muted: '#667681',
+            },
+            fontFamily: {
+              sans: ['DM Sans', 'sans-serif'],
+              display: ['Manrope', 'sans-serif'],
+            },
+            boxShadow: {
+              soft: '0 14px 40px rgba(18, 59, 93, 0.08)',
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-[#FAFCFD] text-text antialiased">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="page-shell">
+      <header class="sticky top-0 z-50">
+        <nav id="site-nav" class="nav-bar transition-all duration-300">
+          <div class="nav-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            <a href="#home" class="flex items-center gap-3 text-navy font-display font-extrabold text-lg tracking-tight">
+              <span class="swan-mark" aria-hidden="true"></span>
+              <span>Blue Swan</span>
+            </a>
 
-  <!-- ===================== Navigation ===================== -->
-  <nav class="navbar navbar-expand-lg navbar-aclpit sticky-top" aria-label="Main navigation">
-    <div class="container">
-      <a class="navbar-brand navbar-brand-aclpit" href="index.html">
-        <img src="assets/logo-icon.png" alt="ACLPIT logo">
-        <span class="brand-name">
-          <span class="brand-top">ACLPIT</span>
-        </span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="practice-areas.html">Practice Areas</a></li>
-          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="publications.html">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="dialogues.html">Legal Tech Dialogues</a></li>
-          <li class="nav-item ms-lg-3 mt-3 mt-lg-0"><a class="btn btn-wine" href="#contact">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+            <button id="menu-toggle" class="md:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/90 p-2 text-navy" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+              <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
 
-  <!-- ===================== Hero ===================== -->
-  <header class="hero">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 reveal">
-          <span class="kicker">Independent. Africa Rooted. Public Interest First.</span>
-          <h1>Where African law meets <span>technology</span>, we stand for the public interest.</h1>
-          <div class="arch-divider" aria-hidden="true"><span></span><span></span></div>
-          <p class="lead-lg">The African Centre for Law and Public Interest Technology researches, litigates, advises and convenes on the legal and regulatory dimensions of technology, so that Africa's digital transformation is grounded in the rule of law, respects fundamental rights and serves every community.</p>
-          <div class="d-flex flex-wrap gap-3 mt-4">
-            <a class="btn btn-wine" href="#contact">Work With Us</a>
-            <a class="btn btn-outline-wine" href="practice-areas.html">Explore Our Focus</a>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="hero-figure reveal reveal-delay-1">
-            <div class="frame">
-              <img src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=1200" data-fallback="assets/logo-icon.png" alt="Black professionals collaborating in a modern workspace">
-            </div>
-            <div class="badge-arch">
-              <strong>Our Vision</strong>
-              An Africa where law and technology work together to advance justice, protect rights and drive inclusive development for all.
+            <div id="nav-menu" class="nav-menu md:flex md:items-center md:justify-between md:gap-8">
+              <div class="nav-links flex flex-col md:flex-row md:items-center gap-4 md:gap-6 text-sm font-medium text-navy">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#brands" class="nav-link">Brands</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#wholesale" class="nav-link">Wholesale</a>
+                <a href="#contact" class="nav-link">Contact</a>
+              </div>
+              <a href="#enquiry" class="btn btn-solid">Request a Quote</a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </header>
+        </nav>
+      </header>
 
-  <!-- ===================== About Preview ===================== -->
-  <section class="section section-sand" id="about-preview">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-5 reveal">
-          <div class="split-figure">
-            <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="assets/logo-icon.png" alt="Professionals in discussion at a boardroom table">
-          </div>
-        </div>
-        <div class="col-lg-7 reveal reveal-delay-1">
-          <span class="eyebrow">About the Centre</span>
-          <h2>An institution built for a defining challenge of this decade</h2>
-          <p class="lead-lg mt-3">Africa's rapid digitalisation is reshaping economies and societies faster than the legal frameworks meant to govern them. ACLPIT was conceived to close that gap: an independent, Africa rooted centre that combines rigorous legal expertise with a genuine understanding of technology.</p>
-          <p>We bridge the divide between policymakers, technologists, regulators and the communities affected by digital transformation, so that law becomes a tool not only for managing risk but for enabling responsible innovation and protecting fundamental rights, particularly for underserved and vulnerable communities.</p>
-          <a class="btn btn-outline-wine mt-3" href="about.html">Read Our Full Story</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      <main id="main-content">
+        <section id="home" class="hero-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20">
+          <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+            <div class="reveal">
+              <p class="eyebrow">Ugandan Hygiene & Paper Products</p>
+              <h1 class="hero-title">Everyday essentials, made for cleaner living.</h1>
+              <p class="hero-copy max-w-xl">
+                Blue Swan Products Ltd supplies dependable hygiene, sanitary, paper and packaging products for households, retailers, offices, schools and institutions.
+              </p>
+              <div class="hero-actions flex flex-col sm:flex-row gap-3 mt-7">
+                <a href="#products" class="btn btn-solid">Explore Our Products</a>
+                <a href="https://wa.me/256787475558?text=Hello%20Blue%20Swan%20Products%20Ltd%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank" rel="noreferrer" class="btn btn-outline">Order on WhatsApp</a>
+              </div>
+              <div class="hero-trust grid sm:grid-cols-3 gap-3 mt-8 max-w-2xl">
+                <div class="trust-pill">Locally supplied</div>
+                <div class="trust-pill">Wholesale ready</div>
+                <div class="trust-pill">Household and institutional products</div>
+              </div>
+            </div>
 
-  <!-- ===================== Practice Areas Preview ===================== -->
-  <section class="section" id="practice-preview">
-    <div class="container">
-      <div class="text-center mb-5 reveal">
-        <span class="eyebrow">Practice Areas</span>
-        <h2>Six pillars of law and public interest technology</h2>
-        <p class="lead-lg mx-auto" style="max-width: 760px;">Each pillar addresses a distinct but interconnected dimension of digital transformation across the continent.</p>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4 reveal">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-shield-lock"></i></div>
-              <h3>Data Protection and Privacy</h3>
-              <p>Supporting the development and enforcement of data protection laws and advising on responsible data governance.</p>
-              <a class="card-link" href="practice-areas.html#data">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-cpu"></i></div>
-              <h3>AI and Algorithmic Accountability</h3>
-              <p>Examining the legal and ethical implications of AI deployment across public and private sectors.</p>
-              <a class="card-link" href="practice-areas.html#ai">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-bank"></i></div>
-              <h3>Digital Justice and Legal Technology</h3>
-              <p>Advancing technology that improves access to justice, court efficiency and legal service delivery.</p>
-              <a class="card-link" href="practice-areas.html#justice">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-phone"></i></div>
-              <h3>Fintech, Competition, and Consumer Protection</h3>
-              <p>Supporting sound regulation of mobile money, digital lending and other financial technologies.</p>
-              <a class="card-link" href="practice-areas.html#fintech">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-diagram-3"></i></div>
-              <h3>Blockchain and Public Registries</h3>
-              <p>Exploring distributed ledger technology for land administration, business registration and public records.</p>
-              <a class="card-link" href="practice-areas.html#blockchain">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-globe-europe-africa"></i></div>
-              <h3>Digital Rights and Internet Governance</h3>
-              <p>Protecting freedom of expression, association and access to information in digital spaces.</p>
-              <a class="card-link" href="practice-areas.html#rights">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Why Us ===================== -->
-  <section class="section section-sand" id="why-us">
-    <div class="container">
-      <div class="row g-5 align-items-center">
-        <div class="col-lg-6 reveal">
-          <span class="eyebrow">Why ACLPIT</span>
-          <h2>Legal rigour with technological literacy</h2>
-          <p class="lead-lg mt-3">Our position between policymakers, technologists, regulators and communities is what makes our work possible. It is also what makes it credible.</p>
-          <div class="why-item">
-            <div class="why-mark" aria-hidden="true"></div>
-            <div>
-              <h3>Independent and non partisan</h3>
-              <p>We maintain independence from government and commercial interests to preserve the credibility of our research and advocacy.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-mark" aria-hidden="true"></div>
-            <div>
-              <h3>Africa rooted expertise</h3>
-              <p>Our research and advice are built for African contexts and challenges, not imported from elsewhere.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-mark" aria-hidden="true"></div>
-            <div>
-              <h3>From evidence to accountability</h3>
-              <p>We move fluidly between generating evidence, shaping policy, building capacity and, where rights are at stake, pursuing accountability through the courts.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-mark" aria-hidden="true"></div>
-            <div>
-              <h3>A convener trusted across sectors</h3>
-              <p>Government, industry, civil society and academia meet at our table to build shared understanding and coordinated solutions.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 reveal reveal-delay-1">
-          <div class="split-figure">
-            <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1000" data-fallback="assets/logo-icon.png" alt="Professional presenting to colleagues in a modern office">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Services Preview ===================== -->
-  <section class="section section-wine" id="services-preview">
-    <div class="container">
-      <div class="text-center mb-5 reveal">
-        <span class="eyebrow on-dark">What We Do</span>
-        <h2>Services that carry ideas into impact</h2>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4 reveal">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-journal-text"></i></div>
-              <h3>Research and Publications</h3>
-              <p>Independent, high quality research on the legal, regulatory and ethical dimensions of emerging technologies.</p>
-              <a class="card-link" href="services.html#research">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-clipboard-check"></i></div>
-              <h3>Technical Advisory</h3>
-              <p>Advice to governments, regulators and public institutions on legal and policy frameworks that keep pace with change.</p>
-              <a class="card-link" href="services.html#advisory">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-mortarboard"></i></div>
-              <h3>Training and Capacity Building</h3>
-              <p>Programmes for lawyers, judges, regulators, technologists and policymakers on the intersection of law and technology.</p>
-              <a class="card-link" href="services.html#training">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 offset-lg-2 reveal">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-people"></i></div>
-              <h3>Convenings and Dialogues</h3>
-              <p>Multi stakeholder platforms where government, industry, civil society and academia solve problems together.</p>
-              <a class="card-link" href="services.html#convening">Explore</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <div class="card-aclpit">
-            <div class="card-body">
-              <div class="card-icon"><i class="bi bi-megaphone"></i></div>
-              <h3>Public Interest Litigation</h3>
-              <p>Strategic litigation and advocacy that protect digital rights when they are at stake.</p>
-              <a class="card-link" href="services.html#litigation">Explore</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-5 reveal">
-        <a class="btn btn-ivory" href="services.html">View All Services</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Publications Preview ===================== -->
-  <section class="section" id="publications-preview">
-    <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-end mb-5 gap-3 reveal">
-        <div>
-          <span class="eyebrow">Publications</span>
-          <h2 class="mb-0">Research that shapes the conversation</h2>
-        </div>
-        <a class="btn btn-outline-wine" href="publications.html">All Publications</a>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4 reveal">
-          <article class="card-aclpit">
-            <div class="placeholder-media pdf-cover" role="img" aria-label="Borderless Identity cover">
-              <img src="https://drive.google.com/thumbnail?id=1IdFuBI1SRZb353gPZqOJB_tWNexyC11c&amp;sz=w800" alt="" data-fallback="assets/logo-icon.png">
-            </div>
-            <div class="card-body">
-              <div class="pub-meta"><span>Policy Brief</span></div>
-              <h3>Borderless Identity</h3>
-              <p>Examines the AfCFTA Digital Trade Protocol, focusing on implementation gaps in cross-border digital identity systems and KYC baselines&hellip;</p>
-              <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-id="1IdFuBI1SRZb353gPZqOJB_tWNexyC11c" data-pdf-title="Borderless Identity">Explore More</a>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <article class="card-aclpit">
-            <div class="placeholder-media pdf-cover" role="img" aria-label="E-Discovery and Litigation cover">
-              <img src="https://drive.google.com/thumbnail?id=1G0d0dGr_KJR81e9esAwN46S3sedbsGse&amp;sz=w800" alt="" data-fallback="assets/logo-icon.png">
-            </div>
-            <div class="card-body">
-              <div class="pub-meta"><span>Research Note</span></div>
-              <h3>E-Discovery and Litigation</h3>
-              <p>Explores electronic discovery and evidence in litigation, outlining the seven-stage EDRM framework and data protection balancing under Ugandan law&hellip;</p>
-              <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-id="1G0d0dGr_KJR81e9esAwN46S3sedbsGse" data-pdf-title="E-Discovery and Litigation">Explore More</a>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
-          <article class="card-aclpit">
-            <div class="placeholder-media pdf-cover" role="img" aria-label="Intellectual Property Protection for Financial Innovators cover">
-              <img src="https://drive.google.com/thumbnail?id=1LJa9TnOPMjBNVwkjAYZLJ47k4pp9m1Oe&amp;sz=w800" alt="" data-fallback="assets/logo-icon.png">
-            </div>
-            <div class="card-body">
-              <div class="pub-meta"><span>Case Analysis</span></div>
-              <h3>Intellectual Property Protection for Financial Innovators</h3>
-              <p>Analyzing Kenya's landmark copyright judgment against Safaricom, this article urges Ugandan founders to document and legalise software innovations early&hellip;</p>
-              <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-id="1LJa9TnOPMjBNVwkjAYZLJ47k4pp9m1Oe" data-pdf-title="Intellectual Property Protection for Financial Innovators">Explore More</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Legal Tech Dialogues ===================== -->
-  <section class="section section-sand" id="dialogues-preview">
-    <div class="container">
-      <div class="d-flex flex-wrap justify-content-between align-items-end mb-5 gap-3 reveal">
-        <div>
-          <span class="eyebrow">Legal Tech Dialogues</span>
-          <h2 class="mb-0">Conversations at the intersection of law and technology</h2>
-        </div>
-        <a class="btn btn-outline-wine" href="dialogues.html">Watch the Series</a>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4 reveal">
-          <article class="card-aclpit video-card">
-            <div class="placeholder-media">
-              <img src="https://img.youtube.com/vi/NZZkLlvyX1A/hqdefault.jpg" alt="" data-fallback="assets/logo-icon.png">
-              <a class="play-btn" href="https://www.youtube.com/watch?v=NZZkLlvyX1A" aria-label="Play: Rethinking Unit Trusts, T-Bills &amp; Bonds" data-bs-toggle="modal" data-bs-target="#videoModal" data-yt-id="NZZkLlvyX1A" data-yt-title="Rethinking Unit Trusts, T-Bills &amp; Bonds"><i class="bi bi-play-fill"></i></a>
-            </div>
-            <div class="card-body">
-              <h3>Rethinking Unit Trusts, T-Bills &amp; Bonds</h3>
-              <p>Legal expert Luis Kisto demystifies unit trusts, treasury bills, and government bonds in Uganda's capital markets&hellip;</p>
-              <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-yt-id="NZZkLlvyX1A" data-yt-title="Rethinking Unit Trusts, T-Bills &amp; Bonds">Watch Video</a>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
-          <article class="card-aclpit video-card">
-            <div class="placeholder-media">
-              <img src="https://img.youtube.com/vi/iOCYecdRklY/hqdefault.jpg" alt="" data-fallback="assets/logo-icon.png">
-              <a class="play-btn" href="https://youtu.be/iOCYecdRklY" aria-label="Play: Courts, Counsel &amp; Cybersecurity" data-bs-toggle="modal" data-bs-target="#videoModal" data-yt-id="iOCYecdRklY" data-yt-title="Courts, Counsel &amp; Cybersecurity: Navigating the Paperless Frontier"><i class="bi bi-play-fill"></i></a>
-            </div>
-            <div class="card-body">
-              <h3>Courts, Counsel &amp; Cybersecurity</h3>
-              <p>A conversation on courts, legal counsel and cybersecurity as Uganda's justice sector transitions toward paperless systems&hellip;</p>
-              <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-yt-id="iOCYecdRklY" data-yt-title="Courts, Counsel &amp; Cybersecurity: Navigating the Paperless Frontier">Watch Video</a>
-            </div>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
-          <article class="card-aclpit video-card">
-            <div class="placeholder-media">
-              <img src="https://img.youtube.com/vi/3XE7fpZ5RUk/hqdefault.jpg" alt="" data-fallback="assets/logo-icon.png">
-              <a class="play-btn" href="https://www.youtube.com/watch?v=3XE7fpZ5RUk" aria-label="Play: Mental Health in the Age of Legal AI" data-bs-toggle="modal" data-bs-target="#videoModal" data-yt-id="3XE7fpZ5RUk" data-yt-title="Mental Health in the Age of Legal AI: Opportunities, Ethics and Safeguards"><i class="bi bi-play-fill"></i></a>
-            </div>
-            <div class="card-body">
-              <h3>Mental Health in the Age of Legal AI</h3>
-              <p>Exploring the opportunities, ethics and safeguards raised by AI for mental health and wellbeing in the legal profession&hellip;</p>
-              <a class="card-link" href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-yt-id="3XE7fpZ5RUk" data-yt-title="Mental Health in the Age of Legal AI: Opportunities, Ethics and Safeguards">Watch Video</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Contact ===================== -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="text-center mb-5 reveal">
-        <span class="eyebrow">Contact Us</span>
-        <h2>Let us shape Africa's digital future together</h2>
-        <p class="lead-lg mx-auto" style="max-width: 720px;">Whether you are a government, regulator, technology company, civil society organisation or researcher, we would like to hear from you.</p>
-      </div>
-      <div class="row g-5">
-        <div class="col-lg-7 reveal">
-          <div class="contact-panel">
-            <div id="formSuccess" class="alert alert-success d-none" role="status">
-              Thank you. Your email app should now open with your message ready to send to info@aclpit.org.
-            </div>
-            <form id="contactForm" novalidate>
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <label class="form-label" for="cName">Full Name</label>
-                  <input class="form-control" type="text" id="cName" required>
-                  <div class="invalid-feedback">Please enter your name.</div>
+            <div class="hero-visual reveal relative">
+              <div class="hero-ripple"></div>
+              <div class="hero-composition">
+                <div class="packaging-card swan-pack">
+                  <img src="assets/swan-toilet-paper-pack.svg" alt="Swan-branded toilet paper packaging mockup" />
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="cEmail">Email Address</label>
-                  <input class="form-control" type="email" id="cEmail" required>
-                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                <div class="packaging-card freedom-pack">
+                  <img src="assets/freedom-pads-pack.svg" alt="Freedom Pads sanitary pad packaging mockup" />
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="cAddress">Address</label>
-                  <input class="form-control" type="text" id="cAddress">
+                <div class="packaging-card serviette-pack">
+                  <img src="assets/swan-serviettes.svg" alt="Serviette packaging mockup" />
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="cOrg">Organisation</label>
-                  <input class="form-control" type="text" id="cOrg">
+                <div class="packaging-card kraft-pack">
+                  <img src="assets/kraft-boxes.svg" alt="Kraft boxes and paper packaging mockup" />
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label" for="cTopic">Area of Interest</label>
-                  <select class="form-select" id="cTopic">
-                    <option>General Enquiry</option>
-                    <option>Research and Publications</option>
-                    <option>Technical Advisory</option>
-                    <option>Training and Capacity Building</option>
-                    <option>Convenings and Dialogues</option>
-                    <option>Public Interest Litigation</option>
-                    <option>Partnerships and Media</option>
-                  </select>
+                <div class="paper-sheet paper-sheet-1"></div>
+                <div class="paper-sheet paper-sheet-2"></div>
+                <div class="wing-mark"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="products" class="section-shell">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Product Categories</p>
+              <h2 class="section-title">Products made for everyday life</h2>
+              <p class="section-copy">From household paper products to sanitary care and packaging supplies, Blue Swan supports homes, businesses and institutions with practical essentials.</p>
+            </div>
+            <div class="product-grid mt-8">
+              <article class="product-tile reveal tile-large">
+                <img src="assets/swan-toilet-paper-pack.svg" alt="Swan toilet paper packaging illustration" class="product-image" />
+                <div class="tile-body">
+                  <div class="tile-top"><h3>Toilet Paper</h3><span class="tile-arrow"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span></div>
+                  <p>Soft, dependable tissue products suited for homes, offices, hospitality spaces and institutions.</p>
                 </div>
-                <div class="col-12">
-                  <label class="form-label" for="cMsg">Message</label>
-                  <textarea class="form-control" id="cMsg" rows="5" required></textarea>
-                  <div class="invalid-feedback">Please include a short message.</div>
+              </article>
+              <article class="product-tile reveal tile-tall">
+                <img src="assets/freedom-pads-pack.svg" alt="Freedom Pads packaging illustration" class="product-image" />
+                <div class="tile-body">
+                  <div class="tile-top"><h3>Sanitary Pads</h3><span class="tile-arrow"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span></div>
+                  <p>Freedom Pads are designed to support comfort, confidence and everyday feminine care.</p>
                 </div>
-                <div class="col-12">
-                  <button class="btn btn-wine" type="submit">Send Message</button>
+              </article>
+              <article class="product-tile reveal tile-wide">
+                <img src="assets/swan-serviettes.svg" alt="Serviette packaging illustration" class="product-image" />
+                <div class="tile-body">
+                  <div class="tile-top"><h3>Serviettes and Tissue</h3><span class="tile-arrow"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span></div>
+                  <p>Practical paper products for homes, restaurants, events, workplaces and retail shelves.</p>
+                </div>
+              </article>
+              <article class="product-tile reveal tile-compact">
+                <img src="assets/kraft-boxes.svg" alt="Kraft packaging boxes illustration" class="product-image" />
+                <div class="tile-body">
+                  <div class="tile-top"><h3>Kraft Boxes</h3><span class="tile-arrow"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span></div>
+                  <p>Simple and versatile packaging solutions for businesses, retailers and product distribution.</p>
+                </div>
+              </article>
+              <article class="product-tile reveal tile-compact">
+                <img src="assets/dispensing-envelopes.svg" alt="Pharmaceutical dispensing envelopes illustration" class="product-image" />
+                <div class="tile-body">
+                  <div class="tile-top"><h3>Dispensing Envelopes</h3><span class="tile-arrow"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span></div>
+                  <p>Paper dispensing and pharmaceutical envelopes suitable for pharmacies, clinics and institutions.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="brands" class="section-shell brand-split">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="grid lg:grid-cols-2 gap-6">
+              <article class="brand-panel brand-swan reveal">
+                <div class="brand-copy">
+                  <p class="eyebrow text-navy">Swan</p>
+                  <h2 class="section-title text-navy">Everyday paper and hygiene essentials</h2>
+                  <p class="section-copy text-navy/80">Swan represents practical, dependable household and institutional products designed for daily use.</p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="label-pill">Toilet Paper</span>
+                    <span class="label-pill">Serviettes</span>
+                    <span class="label-pill">Tissue Products</span>
+                    <span class="label-pill">Hygiene Supplies</span>
+                  </div>
+                </div>
+                <img src="assets/swan-toilet-paper-pack.svg" alt="Swan packaging mockup" class="brand-pack" />
+              </article>
+
+              <article class="brand-panel brand-freedom reveal">
+                <div class="brand-copy">
+                  <p class="eyebrow text-pink">Freedom Pads</p>
+                  <h2 class="section-title text-[#6B2238]">Comfort and confidence, every day</h2>
+                  <p class="section-copy text-[#6B2238]/80">Freedom Pads support women and girls with accessible sanitary-care products designed for comfort and dependable protection.</p>
+                  <a href="#enquiry" class="btn btn-pink mt-5">Enquire About Freedom Pads</a>
+                </div>
+                <div class="freedom-illustration">
+                  <img src="assets/freedom-pads-pack.svg" alt="Freedom Pads packaging illustration" class="brand-pack" />
+                  <div class="flower-mark" aria-hidden="true"></div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="why" class="section-shell">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Why Blue Swan</p>
+              <h2 class="section-title">Dependable products. Practical partnerships.</h2>
+            </div>
+            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mt-8">
+              <article class="benefit-card reveal">
+                <i data-lucide="package" class="benefit-icon"></i>
+                <h3>Everyday Essentials</h3>
+                <p>Products designed to serve real household, workplace and institutional needs.</p>
+              </article>
+              <article class="benefit-card reveal">
+                <i data-lucide="store" class="benefit-icon"></i>
+                <h3>Wholesale Supply</h3>
+                <p>Flexible supply options for retailers, schools, offices, pharmacies and organisations.</p>
+              </article>
+              <article class="benefit-card reveal">
+                <i data-lucide="map-pin" class="benefit-icon"></i>
+                <h3>Local Understanding</h3>
+                <p>Products and supply solutions shaped around the needs of the Ugandan market.</p>
+              </article>
+              <article class="benefit-card reveal">
+                <i data-lucide="message-circle" class="benefit-icon"></i>
+                <h3>Responsive Service</h3>
+                <p>Direct communication for product enquiries, quotations and distribution opportunities.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="wholesale" class="section-shell wholesale-shell">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="grid lg:grid-cols-[1fr_0.9fr] gap-10 items-center">
+              <div class="reveal">
+                <p class="eyebrow text-aqua">Wholesale & Institutional Supply</p>
+                <h2 class="section-title text-white">Supply solutions for growing organisations</h2>
+                <p class="section-copy text-white/80">Blue Swan works with retailers, pharmacies, schools, offices, hospitality businesses, healthcare facilities and distributors seeking dependable hygiene and paper products.</p>
+                <div class="chip-row mt-6 flex flex-wrap gap-2">
+                  <span class="chip">Retailers</span>
+                  <span class="chip">Pharmacies</span>
+                  <span class="chip">Schools</span>
+                  <span class="chip">Offices</span>
+                  <span class="chip">Hotels and Restaurants</span>
+                  <span class="chip">Healthcare Facilities</span>
+                  <span class="chip">Distributors</span>
+                  <span class="chip">NGOs and Community Organisations</span>
+                </div>
+                <div class="cta-stack mt-7 flex flex-col sm:flex-row gap-3">
+                  <a href="#enquiry" class="btn btn-solid-white">Request Wholesale Pricing</a>
+                  <a href="https://wa.me/256787475558?text=Hello%20Blue%20Swan%20Products%20Ltd%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank" rel="noreferrer" class="btn btn-outline-white">Speak to us on WhatsApp</a>
                 </div>
               </div>
-            </form>
+              <div class="wholesale-visual reveal">
+                <img src="assets/wholesale-delivery.png" alt="Kraft cartons and packaged paper products prepared for wholesale delivery" loading="lazy" decoding="async" />
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-5 reveal reveal-delay-1">
-          <ul class="contact-list mb-4">
-            <li>
-              <i class="bi bi-envelope"></i>
-              <div><strong>Email</strong><a href="mailto:info@aclpit.org">info@aclpit.org</a></div>
-            </li>
-            <li>
-              <i class="bi bi-telephone"></i>
-              <div><strong>Phone</strong><a href="tel:+256414671838">+256 414 671 838</a></div>
-            </li>
-            <li>
-              <i class="bi bi-geo-alt"></i>
-              <div><strong>Physical Address</strong>Plot 1 Lourdel Road, Lourdel Towers, 5th Floor</div>
-            </li>
-            <li>
-              <i class="bi bi-mailbox"></i>
-              <div><strong>Postal Address</strong>P.O. BOX 133174 Kampala&ndash;Uganda</div>
-            </li>
-            <li>
-              <i class="bi bi-clock"></i>
-              <div><strong>Office Hours</strong>Monday to Friday, 8:30 am to 5:30 pm EAT</div>
-            </li>
-          </ul>
-          <div class="map-frame mb-4">
-            <iframe title="ACLPIT office location map" src="https://maps.google.com/maps?q=Plot%201%20Lourdel%20Road%2C%20Kampala%2C%20Uganda&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-          <div class="social-links">
-            <a href="https://www.linkedin.com/company/african-centre-for-law-and-public-interest-technology/about/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="#" aria-label="X"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.youtube.com/@LegalTechDialogues" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
 
-  <!-- ===================== Footer ===================== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row g-5">
-        <div class="col-lg-4 footer-brand">
-          <img src="assets/logo-icon-white.png" alt="ACLPIT logo">
-          <p><strong>African Centre for Law and Public Interest Technology(ACLPIT)</strong></p>
-          <p>An independent, Africa rooted centre shaping the legal, regulatory and policy environment for technology in the public interest.</p>
-          <div class="social-links mt-4">
-            <a href="https://www.linkedin.com/company/african-centre-for-law-and-public-interest-technology/about/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="#" aria-label="X"><i class="bi bi-twitter-x"></i></a>
-            <a href="https://www.youtube.com/@LegalTechDialogues" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <section id="manufacturing" class="section-shell bg-[#FAFCFD]">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="grid lg:grid-cols-[1fr_1fr] gap-10 items-center">
+              <div class="reveal">
+                <img src="assets/manufacturing-line.png" alt="Workers preparing tissue rolls and paper products in a clean, organised packaging environment" class="manufacturing-image" loading="lazy" decoding="async" />
+              </div>
+              <div class="reveal">
+                <p class="eyebrow">Manufacturing & Quality</p>
+                <h2 class="section-title">Prepared with care, supplied with purpose</h2>
+                <p class="section-copy">From packaging to distribution, Blue Swan focuses on practical products, clean presentation and reliable customer service.</p>
+                <div class="process-list mt-6">
+                  <div class="process-step"><span>1</span><div><h3>Product preparation</h3><p>Everyday essentials are arranged for dependable delivery and presentation.</p></div></div>
+                  <div class="process-step"><span>2</span><div><h3>Quality and packaging</h3><p>Clean, neatly packed products support better shelf presentation and customer confidence.</p></div></div>
+                  <div class="process-step"><span>3</span><div><h3>Wholesale distribution</h3><p>Institutional supply is supported with practical coordination and direct communication.</p></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section-shell">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-center">
+              <div class="reveal about-portrait-wrap">
+                <div class="about-portrait">
+                  <div class="portrait-silhouette"></div>
+                </div>
+              </div>
+              <div class="reveal">
+                <p class="eyebrow">About the Company</p>
+                <h2 class="section-title">A Ugandan company serving everyday needs</h2>
+                <p class="section-copy">Blue Swan Products Ltd is a Ugandan supplier of sanitary, tissue, hygiene and packaging products. Through its Swan and Freedom Pads brands, the company serves households, businesses, retailers and institutions with practical products for daily life.</p>
+                <div class="leader-card mt-6">
+                  <h3>Led by Mr. Swithin Beijuka, Managing Director</h3>
+                  <p>Our focus is to build trusted product brands while making essential hygiene and paper products accessible to more customers.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="enquiry" class="section-shell bg-[#F4EBDD]">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+              <div class="reveal">
+                <p class="eyebrow">Product Enquiry</p>
+                <h2 class="section-title">Tell us what you need</h2>
+                <p class="section-copy">Share your product interest and quantity, and we can help you move to the next step quickly.</p>
+              </div>
+              <form id="enquiry-form" class="enquiry-form reveal" novalidate>
+                <div class="form-grid">
+                  <label class="field">
+                    <span>Full name</span>
+                    <input type="text" name="fullName" autocomplete="name" required />
+                  </label>
+                  <label class="field">
+                    <span>Organisation or business</span>
+                    <input type="text" name="organisation" autocomplete="organization" required />
+                  </label>
+                  <label class="field">
+                    <span>Phone number</span>
+                    <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required />
+                  </label>
+                  <label class="field">
+                    <span>Email address</span>
+                    <input type="email" name="email" autocomplete="email" inputmode="email" required />
+                  </label>
+                  <label class="field">
+                    <span>Product of interest</span>
+                    <select name="product" required>
+                      <option value="">Select</option>
+                      <option>Toilet Paper</option>
+                      <option>Freedom Pads</option>
+                      <option>Serviettes</option>
+                      <option>Kraft Boxes</option>
+                      <option>Dispensing Envelopes</option>
+                      <option>Multiple Products</option>
+                      <option>Other</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span>Estimated quantity</span>
+                    <input type="text" name="quantity" required />
+                  </label>
+                  <label class="field">
+                    <span>Customer type</span>
+                    <select name="customerType" required>
+                      <option value="">Select</option>
+                      <option>Individual</option>
+                      <option>Retailer</option>
+                      <option>Pharmacy</option>
+                      <option>School</option>
+                      <option>Office</option>
+                      <option>Hospitality Business</option>
+                      <option>Healthcare Facility</option>
+                      <option>Distributor</option>
+                      <option>NGO</option>
+                      <option>Other</option>
+                    </select>
+                  </label>
+                  <label class="field field-full">
+                    <span>Message</span>
+                    <textarea name="message" rows="4" required></textarea>
+                  </label>
+                </div>
+                <div class="form-actions mt-5 flex flex-col sm:flex-row items-start gap-3">
+                  <button type="submit" class="btn btn-solid">Send Product Enquiry</button>
+                  <div id="form-message" class="form-status" aria-live="polite"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="section-shell">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+            <div class="grid lg:grid-cols-[1fr_0.9fr] gap-10 items-center">
+              <div class="reveal">
+                <p class="eyebrow">Contact</p>
+                <h2 class="section-title">Let’s talk products and supply</h2>
+                <div class="contact-list mt-5 space-y-3">
+                  <div class="contact-item"><span>Address</span><strong>Plot 3825, Nsawo, Kampala, Uganda</strong></div>
+                  <div class="contact-item"><span>Telephone</span><strong>078 747 5558</strong></div>
+                  <div class="contact-item"><span>Email</span><strong><a href="mailto:beijuka@gmail.com">beijuka@gmail.com</a></strong></div>
+                  <div class="contact-item"><span>Facebook</span><strong>Blue Swan</strong></div>
+                  <div class="contact-item"><span>Contact person</span><strong>Mr. Swithin Beijuka</strong></div>
+                  <div class="contact-item"><span>Designation</span><strong>Managing Director</strong></div>
+                </div>
+                <div class="action-stack mt-6 flex flex-wrap gap-3">
+                  <a href="tel:+256787475558" class="btn btn-solid">Call</a>
+                  <a href="https://wa.me/256787475558?text=Hello%20Blue%20Swan%20Products%20Ltd%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank" rel="noreferrer" class="btn btn-outline">WhatsApp</a>
+                  <a href="mailto:beijuka@gmail.com" class="btn btn-outline">Email</a>
+                  <a href="https://maps.google.com/?q=Plot+3825,+Nsawo,+Kampala,+Uganda" target="_blank" rel="noreferrer" class="btn btn-outline">Directions</a>
+                </div>
+              </div>
+              <div class="reveal contact-map-wrap">
+                <div class="location-map" aria-label="Illustrated location map placeholder">
+                  <div class="map-pin"></div>
+                  <div class="map-flow map-flow-1"></div>
+                  <div class="map-flow map-flow-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <a id="wa-float" class="float-whatsapp" href="https://wa.me/256787475558?text=Hello%20Blue%20Swan%20Products%20Ltd%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank" rel="noreferrer" aria-label="Chat with Blue Swan" data-tooltip="Chat with Blue Swan">
+        <i data-lucide="message-circle" class="h-6 w-6"></i>
+      </a>
+
+      <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div class="grid lg:grid-cols-[1.15fr_0.85fr_0.85fr_1fr] gap-8">
+            <div>
+              <div class="flex items-center gap-3 text-white font-display font-extrabold text-lg">
+                <span class="swan-mark light"></span>
+                <span>Blue Swan</span>
+              </div>
+              <p class="mt-3 text-sm text-white/75">Blue Swan Products Ltd. Everyday essentials for cleaner living.</p>
+              <p class="mt-2 text-xs text-white/60">Website demo created for presentation purposes.</p>
+            </div>
+            <div>
+              <h3>Navigation</h3>
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#brands">Brands</a></li>
+                <li><a href="#about">About</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Products</h3>
+              <ul>
+                <li><a href="#products">Toilet Paper</a></li>
+                <li><a href="#products">Sanitary Pads</a></li>
+                <li><a href="#products">Serviettes</a></li>
+                <li><a href="#products">Packaging</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Contact</h3>
+              <ul>
+                <li><a href="mailto:beijuka@gmail.com">beijuka@gmail.com</a></li>
+                <li><a href="tel:+256787475558">078 747 5558</a></li>
+                <li><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook: Blue Swan</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom mt-8 pt-4 border-t border-white/10 text-sm text-white/65">
+            <p>© 2026 Blue Swan Products Ltd. All rights reserved.</p>
           </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h4>Navigate</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="practice-areas.html">Practice Areas</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="publications.html">Publications</a></li>
-            <li><a href="dialogues.html">Legal Tech Dialogues</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-lg-3">
-          <h4>Practice Areas</h4>
-          <ul>
-            <li><a href="practice-areas.html#data">Data Protection and Privacy</a></li>
-            <li><a href="practice-areas.html#ai">AI and Accountability</a></li>
-            <li><a href="practice-areas.html#justice">Digital Justice</a></li>
-            <li><a href="practice-areas.html#fintech">Fintech, Competition, and Consumer Protections</a></li>
-            <li><a href="practice-areas.html#blockchain">Blockchain and Registries</a></li>
-            <li><a href="practice-areas.html#rights">Digital Rights</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-3">
-          <h4>Contact</h4>
-          <ul>
-            <li><i class="bi bi-envelope me-2"></i><a href="mailto:info@aclpit.org">info@aclpit.org</a></li>
-            <li><i class="bi bi-telephone me-2"></i><a href="tel:+256414671838">+256 414 671 838</a></li>
-            <li><i class="bi bi-geo-alt me-2"></i>Plot 1 Lourdel Road, Lourdel Towers, 5th Floor</li>
-            <li><i class="bi bi-mailbox me-2"></i>P.O. Box 133174, Kampala–Uganda</li>
-            <li><i class="bi bi-clock me-2"></i>Mon to Fri, 8:30 am to 5:30 pm</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
-        <span>&copy; <span data-year>2026</span> African Centre for Law and Public Interest Technology. All rights reserved.</span>
-        <span>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Use</a>
-        </span>
-      </div>
+      </footer>
     </div>
-  </footer>
 
-  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content video-modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="videoModalLabel">Video</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-0">
-          <div class="ratio ratio-16x9">
-            <iframe id="videoModalFrame" src="" title="Legal Tech Dialogues video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Blue Swan Products Ltd",
+        "description": "Blue Swan Products Ltd supplies toilet paper, sanitary pads, serviettes, dispensing envelopes and packaging products for homes, retailers and institutions in Uganda.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Plot 3825, Nsawo",
+          "addressLocality": "Kampala",
+          "addressCountry": "UG"
+        },
+        "telephone": "+256787475558",
+        "email": "beijuka@gmail.com",
+        "founder": "Mr. Swithin Beijuka",
+        "areaServed": "Uganda",
+        "keywords": ["hygiene products Uganda", "toilet paper Uganda", "sanitary pads Uganda", "tissue products Uganda", "packaging supplies Uganda"]
+      }
+    </script>
 
-  <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content pdf-modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="pdfModalLabel">Publication</h5>
-          <div class="d-flex align-items-center">
-            <a id="pdfModalDownload" class="btn btn-wine btn-sm me-3" href="#" download><i class="bi bi-download me-1"></i>Download</a>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-        </div>
-        <div class="modal-body p-0">
-          <iframe id="pdfModalFrame" src="" title="Publication PDF viewer" class="pdf-modal-frame"></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
