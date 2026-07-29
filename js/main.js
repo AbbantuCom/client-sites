@@ -64,4 +64,42 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
+
+  /* Video modal (Legal Tech Dialogues) */
+  var videoModalEl = document.getElementById("videoModal");
+  if (videoModalEl && window.bootstrap) {
+    var videoFrame = document.getElementById("videoModalFrame");
+    var videoTitleEl = document.getElementById("videoModalLabel");
+    document.querySelectorAll("[data-yt-id]").forEach(function (trigger) {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = trigger.getAttribute("data-yt-id");
+        videoFrame.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+        videoTitleEl.textContent = trigger.getAttribute("data-yt-title") || "Video";
+      });
+    });
+    videoModalEl.addEventListener("hidden.bs.modal", function () {
+      videoFrame.src = "";
+    });
+  }
+
+  /* PDF modal (Publications) */
+  var pdfModalEl = document.getElementById("pdfModal");
+  if (pdfModalEl && window.bootstrap) {
+    var pdfFrame = document.getElementById("pdfModalFrame");
+    var pdfTitleEl = document.getElementById("pdfModalLabel");
+    var pdfDownload = document.getElementById("pdfModalDownload");
+    document.querySelectorAll("[data-pdf-id]").forEach(function (trigger) {
+      trigger.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = trigger.getAttribute("data-pdf-id");
+        pdfFrame.src = "https://drive.google.com/file/d/" + id + "/preview";
+        pdfTitleEl.textContent = trigger.getAttribute("data-pdf-title") || "Publication";
+        pdfDownload.href = "https://drive.google.com/uc?export=download&id=" + id;
+      });
+    });
+    pdfModalEl.addEventListener("hidden.bs.modal", function () {
+      pdfFrame.src = "";
+    });
+  }
 });
