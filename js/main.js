@@ -49,6 +49,27 @@ document.addEventListener("DOMContentLoaded", function () {
         form.classList.add("was-validated");
         return;
       }
+
+      var name = document.getElementById("cName").value.trim();
+      var email = document.getElementById("cEmail").value.trim();
+      var address = document.getElementById("cAddress") ? document.getElementById("cAddress").value.trim() : "";
+      var org = document.getElementById("cOrg").value.trim();
+      var topic = document.getElementById("cTopic").value;
+      var msg = document.getElementById("cMsg").value.trim();
+
+      var subject = "Email of " + name + " from ACLPIT website";
+      var body = "Full Name: " + name +
+        "\nEmail: " + email +
+        "\nAddress: " + address +
+        "\nOrganisation: " + org +
+        "\nArea of Interest: " + topic +
+        "\nMessage: " + msg;
+
+      var mailto = "mailto:info@aclpit.org" +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+      window.location.href = mailto;
+
       var success = document.getElementById("formSuccess");
       if (success) {
         success.classList.remove("d-none");
