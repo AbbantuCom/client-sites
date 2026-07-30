@@ -123,4 +123,61 @@ document.addEventListener("DOMContentLoaded", function () {
       pdfFrame.src = "";
     });
   }
+
+  /* Cookie consent banner */
+  var CONSENT_COOKIE = "aclpit_cookie_consent";
+  var CONSENT_MAX_AGE_DAYS = 180;
+
+  function setCookie(name, value, days) {
+    var expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/; SameSite=Lax";
+  }
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  var banner = document.createElement("div");
+  banner.className = "cookie-banner";
+  banner.setAttribute("role", "region");
+  banner.setAttribute("aria-label", "Cookie consent");
+  banner.innerHTML =
+    '<div class="cookie-banner__inner">' +
+      '<div class="cookie-banner__text">' +
+        "<p>We use a cookie to remember your cookie preference. Accept or reject cookies, and change your choice anytime. Read our <a href=\"cookies.html\">Cookie Policy</a>.</p>" +
+      "</div>" +
+      '<div class="cookie-banner__actions">' +
+        '<button type="button" class="btn btn-outline-ivory" data-cookie-reject>Reject</button>' +
+        '<button type="button" class="btn btn-ivory" data-cookie-accept>Accept</button>' +
+      "</div>" +
+    "</div>";
+  document.body.appendChild(banner);
+
+  var acceptBtn = banner.querySelector("[data-cookie-accept]");
+  var rejectBtn = banner.querySelector("[data-cookie-reject]");
+
+  function hideBanner() {
+    banner.classList.remove("is-visible");
+  }
+  function showBanner() {
+    banner.classList.add("is-visible");
+  }
+  function setConsent(value) {
+    setCookie(CONSENT_COOKIE, value, CONSENT_MAX_AGE_DAYS);
+    hideBanner();
+  }
+
+  acceptBtn.addEventListener("click", function () { setConsent("accepted"); });
+  rejectBtn.addEventListener("click", function () { setConsent("rejected"); });
+
+  if (!getCookie(CONSENT_COOKIE)) {
+    showBanner();
+  }
+
+  document.querySelectorAll("[data-cookie-preferences]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      showBanner();
+    });
+  });
 });
