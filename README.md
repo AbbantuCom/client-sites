@@ -32,6 +32,12 @@ production domain in [lib/site.ts](lib/site.ts) (`site.url`) so canonical URLs, 
 | `public/images/` | Brand, hero, practice and portrait images |
 | `legacy/` | The original static site, kept for reference |
 | `content/` | Source copy documents supplied by the client |
+| `scripts/` | One-off asset tooling, not part of the build |
+
+The browser and home-screen icons (`app/favicon.ico`, `app/icon.png`,
+`app/apple-icon.png`) are the DA monogram in white on brand navy. They are committed, and
+`python3 scripts/make-icons.py` regenerates all three from `public/images/logo-diamond-advocates.png`
+if the logo ever changes.
 
 ### Routes
 
