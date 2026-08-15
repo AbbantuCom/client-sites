@@ -69,11 +69,29 @@ inbound links keep working.
   original multi-megabyte PNGs. File names were normalised (`images/Practices/energy  law.png` →
   `public/images/practices/energy-law.png`).
 
+## The appointment form
+
+The form in [components/appointment-form.tsx](components/appointment-form.tsx) validates in the
+browser and then opens the visitor's own email application with the enquiry pre-composed and
+addressed to `site.email`:
+
+```
+To:      info@diamondadvocates.com
+Subject: Appointment request from <name>
+Body:    Name / Email / Phone, then the details, then the sending domain
+```
+
+Nothing is posted to a server, so no enquiry data leaves the visitor's device until they press send
+in their mail client — which also means no privacy notice or spam protection is required for it. The
+fields stay filled after submitting and the confirmation panel carries the same `mailto:` link, so
+the visitor can still reach us if no mail client is configured.
+
+To switch to server-side delivery later (a transactional email provider, a CRM, an inbox
+integration), replace the `window.location.href = href` line with a server action or route handler.
+`buildMailtoHref` shows exactly which fields the firm expects to receive.
+
 ## Known gaps carried over from the original
 
-These were placeholders in the static site and remain placeholders here:
-
-- The appointment form validates in the browser and **does not transmit anything**. Connect a server
-  action or form endpoint, plus a privacy notice, in `components/appointment-form.tsx` before launch.
-- Insights beyond the E-Discovery brief, the downloadable Diamond Brief document, business hours,
-  the office map embed, and the Privacy Policy / Legal Disclaimer pages still need real content.
+These were placeholders in the static site and remain placeholders here: insights beyond the
+E-Discovery brief, the downloadable Diamond Brief document, business hours, the office map embed,
+and the Privacy Policy / Legal Disclaimer pages all still need real content.

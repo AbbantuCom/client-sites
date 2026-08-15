@@ -1,6 +1,8 @@
 'use client';
 
-import { useRef, useState, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
+
+import { site } from '@/lib/site';
 
 type FieldName = 'name' | 'email' | 'phone' | 'details';
 
@@ -38,19 +40,40 @@ const fields: {
   },
 ];
 
+type Enquiry = Record<FieldName, string>;
+
+/** Builds the `mailto:` link that carries the enquiry to the firm's inbox. */
+export function buildMailtoHref(enquiry: Enquiry) {
+  const subject = `Appointment request from ${enquiry.name}`;
+  const body = [
+    `Name: ${enquiry.name}`,
+    `Email: ${enquiry.email}`,
+    `Phone: ${enquiry.phone}`,
+    '',
+    'Details:',
+    // Mail clients are happiest with CRLF throughout the body.
+    enquiry.details.replace(/\r?\n/g, '\r\n'),
+    '',
+    `Sent from the appointment form at ${new URL(site.url).host}`,
+  ].join('\r\n');
+
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 /**
- * Prototype appointment form: it validates in the browser and never transmits.
- * Wire a server action or form endpoint here during backend integration.
+ * Appointment form: it validates in the browser, then hands the enquiry to the
+ * visitor's email application addressed to the firm. Nothing is posted to a server,
+ * so no enquiry data leaves the visitor's device until they press send themselves.
  */
 export function AppointmentForm() {
-  const formRef = useRef<HTMLFormElement>(null);
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [mailtoHref, setMailtoHref] = useState<string | null>(null);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const nextInvalid: Record<string, boolean> = {};
+    const values = {} as Enquiry;
 
     fields.forEach((field) => {
       const control = form.elements.namedItem(field.name) as
@@ -58,6 +81,7 @@ export function AppointmentForm() {
         | HTMLTextAreaElement
         | null;
       if (!control) return;
+      values[field.name] = control.value.trim();
       nextInvalid[field.name] = !(control.checkValidity() && control.value.trim() !== '');
     });
 
@@ -65,19 +89,21 @@ export function AppointmentForm() {
     const firstInvalid = fields.find((field) => nextInvalid[field.name]);
     if (firstInvalid) {
       (form.elements.namedItem(firstInvalid.name) as HTMLElement | null)?.focus();
-      setSubmitted(false);
+      setMailtoHref(null);
       return;
     }
 
-    setSubmitted(true);
-    form.reset();
+    // The fields stay filled so the fallback link still works if no mail client opens.
+    const href = buildMailtoHref(values);
+    setMailtoHref(href);
+    window.location.href = href;
   };
 
   const clearError = (name: FieldName) =>
     setInvalid((current) => (current[name] ? { ...current, [name]: false } : current));
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate>
+    <form onSubmit={onSubmit} noValidate>
       <div className="form-grid">
         {fields.map((field) => (
           <div
@@ -115,15 +141,16 @@ export function AppointmentForm() {
         ))}
         <div className="field full">
           <p className="form-note">
-            This prototype does not transmit your information. A privacy notice and secure endpoint
-            must be connected before launch.
+            Submitting opens your email application with this request addressed to {site.email}.
+            Your details are not sent anywhere until you press send there.
           </p>
           <button className="btn btn--navy" type="submit">
             Submit request <span>↗</span>
           </button>
-          <div className={`form-success${submitted ? ' show' : ''}`} role="status">
-            Thank you. Your appointment request has passed the prototype validation. No information
-            was transmitted.
+          <div className={`form-success${mailtoHref ? ' show' : ''}`} role="status">
+            Thank you. Your email application should now be open with your request addressed to{' '}
+            {site.email} — press send there to reach us. If nothing opened,{' '}
+            <a href={mailtoHref ?? `mailto:${site.email}`}>open the message manually</a>.
           </div>
         </div>
       </div>
