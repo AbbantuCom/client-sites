@@ -31,7 +31,7 @@ export default function TeamPage() {
           </h1>
         </div>
       </section>
-
+{/*  */}
       <section className="section">
         <div className="container">
           <div className="grid-2" data-reveal>
