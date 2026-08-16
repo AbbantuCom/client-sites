@@ -54,6 +54,7 @@ if the logo ever changes.
 | `/blogs/[slug]` | new: one brief, with PDF reader |
 | `/contact` | `contact.html` |
 | `/cookie-policy` | new: cookie policy and consent controls |
+| `/privacy-policy` | new: privacy policy |
 
 Every page is statically prerendered at build time. The old `.html` URLs (including their query
 strings) are 301-redirected to the new routes in [next.config.ts](next.config.ts), so existing
@@ -118,6 +119,20 @@ embed, or to open the map or PDF directly in a new tab.
 If you add another third party later (analytics, a chat widget, embedded video), wrap it in
 `ConsentGate` too and add a line to the policy page, or the reject button stops telling the truth.
 
+## Privacy policy
+
+[/privacy-policy](app/privacy-policy/page.tsx) describes what the site actually does: no analytics
+or tracking, a mailto-only appointment form, the consent choice in local storage, and technical
+request data held by the host. It is written against Uganda's Data Protection and Privacy Act, 2019.
+
+**It is a draft for the firm to review and approve before launch.** Two dashed
+`.content-placeholder` blocks mark the facts only the firm can supply — response times, who handles
+data protection requests, whether the firm is registered with the Personal Data Protection Office,
+and real retention periods. Update `lastUpdated` in the page whenever the text changes.
+
+Keep the policy true as the site grows: adding a form endpoint, analytics or any new third party
+changes what this page has to say.
+
 ## The appointment form
 
 The form in [components/appointment-form.tsx](components/appointment-form.tsx) validates in the
@@ -143,4 +158,4 @@ integration), replace the `window.location.href = href` line with a server actio
 
 These were placeholders in the static site and remain placeholders here: insights beyond the
 E-Discovery brief, the downloadable Diamond Brief document, business hours, the office map embed,
-and the Privacy Policy / Legal Disclaimer pages all still need real content.
+and the Legal Disclaimer page all still need real content.

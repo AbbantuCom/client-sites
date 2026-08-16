@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blogs',
     '/contact',
     '/cookie-policy',
+    '/privacy-policy',
     ...practices.map((practice) => `/practice/${practice.slug}`),
     ...team.map((person) => `/team/${person.slug}`),
     ...publishedInsights.map((insight) => `/insights/${insight.slug}`),

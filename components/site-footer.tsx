@@ -81,8 +81,8 @@ export function SiteFooter() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
           <span>
-            <Link href="/cookie-policy">Cookie Policy</Link> · Privacy Policy · Legal Disclaimer
-            (pages to be supplied)
+            <Link href="/privacy-policy">Privacy Policy</Link> ·{' '}
+            <Link href="/cookie-policy">Cookie Policy</Link> · Legal Disclaimer (page to be supplied)
           </span>
         </div>
       </div>

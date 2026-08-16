@@ -108,7 +108,11 @@ export default function CookiePolicyPage() {
               <p>
                 Write to <a href={`mailto:${site.email}`}>{site.email}</a> or call{' '}
                 <a href={site.phoneHref}>{site.phone}</a> and we will answer any question about this
-                policy.
+                policy. Our{' '}
+                <Link className="blog-inline-link" href="/privacy-policy">
+                  privacy policy
+                </Link>{' '}
+                covers how we handle personal data more broadly.
               </p>
             </section>
           </div>
