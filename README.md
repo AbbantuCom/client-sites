@@ -50,6 +50,8 @@ if the logo ever changes.
 | `/team/[slug]` | `team-profile.html?person=…` |
 | `/insights` | `insights.html` |
 | `/insights/[slug]` | `article.html` |
+| `/blogs` | new: the Diamond Brief Series |
+| `/blogs/[slug]` | new: one brief, with PDF reader |
 | `/contact` | `contact.html` |
 
 Every page is statically prerendered at build time. The old `.html` URLs (including their query
@@ -74,6 +76,28 @@ inbound links keep working.
 - **Images go through `next/image`,** so they are resized and served as AVIF/WebP instead of the
   original multi-megabyte PNGs. File names were normalised (`images/Practices/energy  law.png` →
   `public/images/practices/energy-law.png`).
+
+## Blogs
+
+`/blogs` lists every Diamond Brief; `/blogs/[slug]` gives one brief its summary, a scrollable PDF
+reader, a download, related briefs and a booking link. Everything comes from
+[lib/blogs.ts](lib/blogs.ts) — adding a brief means adding one entry to the `blogs` array, newest
+first.
+
+Each brief points at its PDF through one of two sources, and `blogPreviewUrl` / `blogDownloadUrl`
+pick the right URLs for whichever is set:
+
+- `path` — a PDF in `public/`, e.g. `/blogs/borderless-identity.pdf`. **Preferred.** It reads in the
+  browser's own PDF viewer, downloads in place, loads faster and involves no third party.
+- `driveId` — a Google Drive file id, used when there is no local copy. The file must be shared as
+  **"Anyone with the link"**, or visitors get a Google sign-in screen instead of the brief. All six
+  current briefs use this.
+
+To move a brief off Google Drive, drop the PDF into `public/blogs/` and set `path` on its entry; the
+reader, the download button and the fallback link all follow automatically.
+
+Cover images currently reuse the practice-area photography, chosen per topic. Swap the `image` field
+on any entry for a real cover when artwork is available.
 
 ## The appointment form
 

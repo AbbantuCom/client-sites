@@ -114,6 +114,9 @@ export function SiteHeader({ variant }: SiteHeaderProps = {}) {
             <Link {...navLinkProps('/insights')} href="/insights">
               Insights
             </Link>
+            <Link {...navLinkProps('/blogs')} href="/blogs">
+              Blogs
+            </Link>
             <Link className="nav-link" href="/#about">
               About
             </Link>
@@ -159,6 +162,9 @@ export function SiteHeader({ variant }: SiteHeaderProps = {}) {
         </Link>
         <Link href="/insights" onClick={closeOverlays}>
           Insights
+        </Link>
+        <Link href="/blogs" onClick={closeOverlays}>
+          Blogs
         </Link>
         <Link href="/contact" onClick={closeOverlays}>
           Contact &amp; Appointment

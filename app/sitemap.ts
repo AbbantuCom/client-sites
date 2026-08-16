@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 
+import { blogs } from '@/lib/blogs';
 import { publishedInsights } from '@/lib/insights';
 import { practices } from '@/lib/practices';
 import { site } from '@/lib/site';
@@ -11,10 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/practice-areas',
     '/team',
     '/insights',
+    '/blogs',
     '/contact',
     ...practices.map((practice) => `/practice/${practice.slug}`),
     ...team.map((person) => `/team/${person.slug}`),
     ...publishedInsights.map((insight) => `/insights/${insight.slug}`),
+    ...blogs.map((blog) => `/blogs/${blog.slug}`),
   ];
 
   return routes.map((route) => ({

@@ -7,6 +7,8 @@
   .practice-grid, .article-listing { grid-template-columns: repeat(2,1fr); }
   .practice-grid--visual .practice-card,
   .practice-grid--visual .practice-card--feature { grid-column: auto; min-height: 440px; }
+  .blog-grid { grid-template-columns: repeat(2,1fr); }
+  .blog-card { min-height: 420px; }
   .practice-tools { align-items: stretch; flex-direction: column; }
   .footer-grid { grid-template-columns: 1.2fr .8fr .8fr; }
   .footer-grid > :last-child { grid-column: 1/-1; }
@@ -32,6 +34,8 @@
   .practice-hero::after { background: linear-gradient(90deg,rgba(6,21,37,.96),rgba(6,21,37,.62)),linear-gradient(0deg,rgba(6,21,37,.95),transparent 65%); }
   .detail-layout--editorial { grid-template-columns: 1fr; }
   .section-nav-label { display: none; }
+  .blog-aside { position: static; }
+  .blog-aside .section-nav-label { display: block; }
   .practice-team-open { grid-template-columns: 1fr; align-items: start; }
   .practice-next .container > div { grid-template-columns: 1fr auto; }
   .practice-next .container > div p { grid-column: 1/-1; }
@@ -67,7 +71,9 @@
   .mobile-menu .mobile-sub { grid-template-columns: 1fr; }
   .mobile-menu .mobile-sub a { font-size: .76rem; }
   .article-header { padding-top: 130px; }
-  .practice-grid--visual { grid-template-columns: 1fr; }
+  .practice-grid--visual, .blog-grid { grid-template-columns: 1fr; }
+  .blog-card { min-height: 390px; }
+  .blog-reader iframe { height: clamp(420px,70vh,620px); }
   .practice-grid--visual .practice-card,
   .practice-grid--visual .practice-card--feature { min-height: 410px; }
   .practice-atlas .section-head > .lead { margin-top: 22px; }
