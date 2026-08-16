@@ -276,7 +276,8 @@ p { margin: 0 0 1.25rem; }
 .form-success { display: none; margin-top: 20px; padding: 18px; color: #155c40; border: 1px solid #78ad98; background: #eef8f3; }
 .form-success.show { display: block; }
 .form-success a { font-weight: 700; text-decoration: underline; }
-.map-placeholder { min-height: 320px; display: grid; place-items: center; margin-top: 40px; color: rgba(255,255,255,.65); background: var(--navy-800); text-align: center; }
+.map-embed { margin-top: 40px; background: var(--navy-800); }
+.map-embed iframe { display: block; width: 100%; height: clamp(320px, 38vw, 460px); border: 0; }
 
 /* Footer */
 .site-footer { padding: 72px 0 28px; color: rgba(255,255,255,.7); background: #04101d; }
