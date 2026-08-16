@@ -30,7 +30,6 @@ export default function TeamPage() {
             <span>One team.</span> <span>Clear purpose.</span>
           </h1>
         </div>
-        {/*  */}
       </section>
       <section className="section">
         <div className="container">
