@@ -283,6 +283,29 @@ p { margin: 0 0 1.25rem; }
 .blog-reader iframe { display: block; width: 100%; height: clamp(520px,80vh,900px); border: 0; }
 .blog-reader-section .form-note { margin-top: 16px; }
 
+/* Cookie consent */
+.cookie-banner { position: fixed; z-index: 1200; right: 20px; bottom: 20px; left: 20px; display: flex; flex-wrap: wrap; gap: 22px; align-items: center; justify-content: space-between; width: min(calc(100% - 40px), 720px); padding: 22px 26px; color: var(--white); border-top: 2px solid var(--gold-500); background: rgba(6,21,37,.98); box-shadow: 0 22px 60px rgba(0,0,0,.4); animation: cookie-in .45s var(--ease) both; }
+.cookie-banner p { margin: 0; color: rgba(255,255,255,.76); font-size: .86rem; line-height: 1.6; }
+.cookie-banner .eyebrow { margin-bottom: 8px; }
+.cookie-banner a { border-bottom: 1px solid var(--gold-500); color: var(--gold-400); font-weight: 700; }
+.cookie-banner-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.cookie-banner-actions .btn { min-height: 44px; padding: 10px 20px; }
+@keyframes cookie-in { from { opacity: 0; transform: translateY(18px); } }
+
+.consent-gate { min-height: 320px; display: grid; place-items: center; margin-top: 40px; padding: 40px 26px; color: var(--white); border: 1px solid rgba(255,255,255,.14); background: var(--navy-800); text-align: center; }
+.consent-gate > div { max-width: 520px; }
+.consent-gate .eyebrow { justify-content: center; }
+.consent-gate-copy { margin-bottom: 24px; color: rgba(255,255,255,.72); font-size: .92rem; }
+.consent-gate .button-row { justify-content: center; }
+.consent-gate-always { margin-top: 20px; padding: 0; color: rgba(255,255,255,.6); border: 0; border-bottom: 1px solid rgba(255,255,255,.3); background: none; cursor: pointer; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; }
+.consent-gate-always:hover { color: var(--gold-400); border-color: var(--gold-400); }
+.blog-reader-section .consent-gate { margin-top: 0; }
+.cookie-preferences .button-row { margin-top: 8px; }
+.cookie-preferences .btn[aria-pressed='true'] { color: var(--navy-950); background: var(--gold-500); }
+.cookie-status { color: var(--slate-700); font-weight: 700; }
+.cookie-preferences .consent-gate-always { color: var(--slate-500); border-color: var(--border-light); }
+.cookie-preferences .consent-gate-always:hover { color: var(--navy-950); border-color: var(--gold-500); }
+
 /* Articles and forms */
 .article-listing { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 .article-listing .insight-card { min-height: 360px; }

@@ -53,6 +53,7 @@ if the logo ever changes.
 | `/blogs` | new: the Diamond Brief Series |
 | `/blogs/[slug]` | new: one brief, with PDF reader |
 | `/contact` | `contact.html` |
+| `/cookie-policy` | new: cookie policy and consent controls |
 
 Every page is statically prerendered at build time. The old `.html` URLs (including their query
 strings) are 301-redirected to the new routes in [next.config.ts](next.config.ts), so existing
@@ -98,6 +99,24 @@ reader, the download button and the fallback link all follow automatically.
 
 Cover images currently reuse the practice-area photography, chosen per topic. Swap the `image` field
 on any entry for a real cover when artwork is available.
+
+## Cookies and consent
+
+The site sets no analytics or advertising cookies of its own. The only third parties involved are
+the Google Maps embed on the contact page and the Google Drive PDF reader on each brief, and both
+are wrapped in [`ConsentGate`](components/consent-gate.tsx): until the visitor accepts, the iframe is
+never rendered, so **no request reaches Google at all**. The placeholder offers to load that one
+embed, or to open the map or PDF directly in a new tab.
+
+- The banner ([components/cookie-banner.tsx](components/cookie-banner.tsx)) appears until a choice is
+  made, and the choice is stored under `da-cookie-consent` in local storage, never sent anywhere.
+- [/cookie-policy](app/cookie-policy/page.tsx) explains what is set and repeats the accept/reject
+  controls, including clearing the choice so the banner returns.
+- [lib/consent.ts](lib/consent.ts) is the shared store. `useHydrated()` keeps consent-dependent UI
+  out of server-rendered markup, so a returning visitor never sees the banner flash.
+
+If you add another third party later (analytics, a chat widget, embedded video), wrap it in
+`ConsentGate` too and add a line to the policy page, or the reject button stops telling the truth.
 
 ## The appointment form
 

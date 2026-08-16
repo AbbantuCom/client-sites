@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { BlogCard } from '@/components/blog-card';
+import { ConsentGate } from '@/components/consent-gate';
 import {
   blogDownloadUrl,
   blogPreviewUrl,
@@ -43,7 +44,8 @@ export default async function BlogPage({ params }: PageProps) {
   const related = getRelatedBlogs(blog.slug);
   const downloadUrl = blogDownloadUrl(blog.pdf);
   // A local PDF saves in place; a Drive file has to open in its own tab.
-  const downloadProps = isLocalPdf(blog.pdf)
+  const localPdf = isLocalPdf(blog.pdf);
+  const downloadProps = localPdf
     ? { href: downloadUrl, download: blog.pdf.fileName }
     : { href: downloadUrl, target: '_blank', rel: 'noopener noreferrer' };
 
@@ -134,14 +136,21 @@ export default async function BlogPage({ params }: PageProps) {
                   Download PDF <span>↓</span>
                 </a>
               </div>
-              <div className="blog-reader">
-                <iframe
-                  title={`${blog.title} (PDF)`}
-                  src={blogPreviewUrl(blog.pdf)}
-                  loading="lazy"
-                  allow="autoplay"
-                />
-              </div>
+              <ConsentGate
+                label="the PDF reader"
+                provider="Google Drive"
+                fallback={{ href: downloadUrl, label: 'Download the PDF instead' }}
+                skip={localPdf}
+              >
+                <div className="blog-reader">
+                  <iframe
+                    title={`${blog.title} (PDF)`}
+                    src={blogPreviewUrl(blog.pdf)}
+                    loading="lazy"
+                    allow="autoplay"
+                  />
+                </div>
+              </ConsentGate>
               <p className="form-note">
                 Scroll inside the reader to page through the brief. If it does not load,{' '}
                 <a className="blog-inline-link" {...downloadProps}>
