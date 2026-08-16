@@ -17,7 +17,7 @@ npm run typecheck
 
 ## Deploying to Vercel
 
-Vercel auto-detects Next.js — import the repository and deploy, no configuration needed. Set the
+Vercel auto-detects Next.js: import the repository and deploy, no configuration needed. Set the
 production domain in [lib/site.ts](lib/site.ts) (`site.url`) so canonical URLs, Open Graph tags,
 `sitemap.xml` and `robots.txt` point at the live host.
 
@@ -88,7 +88,7 @@ Body:    Name / Email / Phone, then the details, then the sending domain
 ```
 
 Nothing is posted to a server, so no enquiry data leaves the visitor's device until they press send
-in their mail client — which also means no privacy notice or spam protection is required for it. The
+in their mail client, which also means no privacy notice or spam protection is required for it. The
 fields stay filled after submitting and the confirmation panel carries the same `mailto:` link, so
 the visitor can still reach us if no mail client is configured.
 

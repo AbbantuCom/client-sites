@@ -174,7 +174,7 @@ p { margin: 0 0 1.25rem; }
 .detail-section h2 { font-size: clamp(2.3rem,4vw,3.6rem); }
 .service-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; padding: 0; list-style: none; }
 .service-list li { padding: 15px 0 15px 24px; border-bottom: 1px solid var(--border-light); position: relative; }
-.service-list li::before { position: absolute; left: 0; color: var(--gold-500); content: '—'; }
+.service-list li::before { position: absolute; left: 0; color: var(--gold-500); content: '–'; }
 .content-placeholder { padding: 24px; color: var(--slate-500); border: 1px dashed rgba(10,32,56,.3); background: var(--ivory); font-size: .85rem; }
 
 /* Practice atlas */

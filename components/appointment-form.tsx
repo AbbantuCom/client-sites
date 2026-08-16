@@ -149,7 +149,7 @@ export function AppointmentForm() {
           </button>
           <div className={`form-success${mailtoHref ? ' show' : ''}`} role="status">
             Thank you. Your email application should now be open with your request addressed to{' '}
-            {site.email} — press send there to reach us. If nothing opened,{' '}
+            {site.email}. Press send there to reach us. If nothing opened,{' '}
             <a href={mailtoHref ?? `mailto:${site.email}`}>open the message manually</a>.
           </div>
         </div>

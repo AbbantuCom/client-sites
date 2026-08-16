@@ -107,7 +107,7 @@ export default function HomePage() {
               </Link>
             ))}
             <Link className="practice-row" data-reveal href="/practice-areas">
-              <span className="practice-number">05—09</span>
+              <span className="practice-number">05-09</span>
               <h3>More practices</h3>
               <p>Disputes, IP Law, Employment Law, Insurance and Energy Law.</p>
               <span className="practice-arrow">→</span>

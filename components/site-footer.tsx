@@ -77,7 +77,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
-          <span>Privacy Policy · Legal Disclaimer — pages to be supplied</span>
+          <span>Privacy Policy · Legal Disclaimer (pages to be supplied)</span>
         </div>
       </div>
     </footer>
