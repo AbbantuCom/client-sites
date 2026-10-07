@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>POS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:'rgb(var(--b) / <alpha-value>)'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+@layer components{
+.card{@apply bg-white dark:bg-[#1c1e21] rounded-xl border border-black/5 dark:border-white/10 shadow-[0_1px_0_rgba(0,0,0,.05)]}
+.btn{@apply inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border border-black/10 dark:border-white/15 bg-white dark:bg-[#26292d] hover:bg-neutral-50 dark:hover:bg-[#2f3338] active:scale-95 transition}
+.btn-p{@apply inline-flex items-center justify-center gap-2 px-3.5 py-1.5 text-sm font-semibold rounded-lg bg-brand text-white hover:brightness-110 active:scale-95 transition shadow-sm disabled:opacity-40 disabled:pointer-events-none}
+.inp{@apply w-full px-3 py-2 text-sm rounded-lg border border-black/15 dark:border-white/15 bg-white dark:bg-[#141517] outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand transition}
+.nav{@apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 transition cursor-pointer}
+.nav.on{@apply bg-white dark:bg-[#26292d] text-neutral-900 dark:text-white shadow-sm}
+.lbl{@apply block text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-1}
+.pill{@apply inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-brand/10 text-brand}
+.chip{@apply px-3 py-1 rounded-full text-sm border border-black/10 dark:border-white/15 bg-white dark:bg-[#26292d] transition cursor-pointer whitespace-nowrap}
+.chip.on{@apply bg-brand text-white border-brand}
+}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.up{animation:up .35s ease both}.pop{animation:pop .2s ease both}
+body{transition:background-color .3s,color .3s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="font-sans bg-[#f1f1f1] dark:bg-[#0f1011] text-neutral-900 dark:text-neutral-100 min-h-screen">
+<div id="root"></div>
+<div id="modal"></div>
+<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50"></div>
+
+<script>
+const COLORS=[['Emerald','0 128 96'],['Indigo','79 70 229'],['Rose','225 29 72'],['Amber','217 119 6'],['Sky','2 132 199'],['Slate','51 65 85']];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=n=>{const c=S?S.org.cur:'USD';return new Intl.NumberFormat('en',{style:'currency',currency:c,maximumFractionDigits:c==='UGX'?0:2}).format(n)};
+const IND={
+'Restaurant & café':[['☕','Espresso','Coffee',2.5,90],['☕','Cappuccino','Coffee',3.8,80],['🥛','Latte','Coffee',4,70],['🍵','Green Tea','Coffee',3,8],['🥐','Butter Croissant','Bakery',3.2,30],['🧁','Blueberry Muffin','Bakery',3.5,22],['🍪','Oat Cookies','Bakery',2.4,45],['🧃','Orange Juice 1L','Drinks',4.5,24],['🥤','Sparkling Water','Drinks',1.9,80],['🧊','Iced Tea','Drinks',3.2,9],['🥪','Club Sandwich','Food',6.9,15],['🥗','Garden Salad','Food',7.5,12],['🍕','Margherita Pizza','Food',11,18],['🍔','Beef Burger','Food',9.5,20],['🍟','French Fries','Food',3.8,40],['🍫','Dark Chocolate Bar','Snacks',2.8,60]],
+'Fashion boutique':[['👕','Cotton T-Shirt','Tops',18,40],['👔','Linen Shirt','Tops',34,16],['🎽','Polo Shirt','Tops',26,22],['👖','Slim Jeans','Bottoms',45,25],['👖','Chino Trousers','Bottoms',40,18],['🩳','Cargo Shorts','Bottoms',28,9],['👗','Summer Dress','Dresses',52,14],['👗','Maxi Dress','Dresses',68,7],['🧥','Denim Jacket','Outerwear',78,9],['🧥','Hoodie','Outerwear',42,26],['👟','Canvas Sneakers','Shoes',60,20],['👞','Leather Loafers','Shoes',88,10],['👜','Leather Tote Bag','Accessories',85,8],['🧣','Wool Scarf','Accessories',24,30],['🧢','Baseball Cap','Accessories',15,50],['⌚','Leather Belt','Accessories',22,35]],
+'Pharmacy':[['💊','Paracetamol 500mg','Pain relief',3.5,120],['💊','Ibuprofen 400mg','Pain relief',4.8,80],['💊','Aspirin 100mg','Pain relief',3.9,9],['🧴','Hand Sanitizer 250ml','Hygiene',4.2,60],['😷','Face Masks 50pk','Hygiene',9,40],['🪥','Toothpaste','Hygiene',2.9,55],['🩹','Plasters 40pk','First aid',3.2,70],['🩺','Bandage Roll','First aid',2.1,45],['🧴','Antiseptic Cream','First aid',5.4,8],['🌡️','Digital Thermometer','Devices',12,15],['🩸','BP Monitor','Devices',38,6],['💧','Oral Rehydration Salts','Treatments',1.2,90],['🍯','Cough Syrup 100ml','Treatments',6.5,25],['💊','Antacid Tablets','Treatments',4.1,35],['🧪','Vitamin C 60 tabs','Vitamins',11,10],['💊','Multivitamin 30 tabs','Vitamins',14,28]],
+'Supermarket':[['🍞','White Bread','Bakery',1.5,50],['🥖','Brown Bread','Bakery',1.8,30],['🥛','Fresh Milk 1L','Dairy',1.4,70],['🥚','Eggs Tray of 30','Dairy',6.5,25],['🧀','Cheddar Cheese','Dairy',4.9,14],['🥣','Yoghurt 1L','Dairy',2.6,32],['🍚','Rice 5kg','Pantry',9.5,40],['🍝','Spaghetti 500g','Pantry',1.8,60],['🛢️','Cooking Oil 2L','Pantry',6.2,7],['🍬','Sugar 2kg','Pantry',2.9,45],['🌾','Wheat Flour 2kg','Pantry',2.4,38],['🍌','Bananas 1kg','Produce',1.7,35],['🍅','Tomatoes 1kg','Produce',2.4,9],['🧅','Onions 1kg','Produce',1.5,40],['🥔','Potatoes 2kg','Produce',2.8,30],['🧼','Laundry Soap','Household',4.8,30],['🧽','Dish Soap','Household',2.2,26],['🧻','Toilet Paper 8pk','Household',5.5,8],['💧','Bottled Water 6pk','Beverages',3.5,60],['🥤','Soda 2L','Beverages',1.8,48]],
+'Electronics shop':[['🎧','Wireless Earbuds','Audio',39,30],['🔊','Bluetooth Speaker','Audio',45,12],['🎧','Over-ear Headphones','Audio',59,9],['📱','Phone Case','Accessories',9,80],['🔌','USB-C Charger','Accessories',19,45],['🔋','Power Bank 10000mAh','Accessories',24,18],['🔗','HDMI Cable','Accessories',8,40],['🛡️','Screen Protector','Accessories',6,70],['⌨️','Wireless Keyboard','Computing',32,14],['🖱️','Optical Mouse','Computing',14,35],['💻','Laptop Stand','Computing',29,16],['📷','HD Webcam','Computing',35,8],['💾','128GB Flash Drive','Storage',12,50],['💽','1TB External SSD','Storage',95,10],['📺','Smart TV 43"','TV',329,6],['📺','Smart TV 55"','TV',499,4]],
+'Hardware store':[['🔨','Claw Hammer','Tools',12,25],['🪛','Screwdriver Set','Tools',16,20],['🔧','Adjustable Wrench','Tools',11,18],['🪚','Hand Saw','Tools',14,9],['🔫','Cordless Drill','Tools',79,7],['📏','Tape Measure','Tools',6,45],['🎨','Wall Paint 5L','Paint',28,22],['🖌️','Paint Brush Set','Paint',9,30],['🪣','Primer 4L','Paint',22,10],['🔩','Screws Box of 200','Fixings',5.5,60],['📌','Nails 1kg','Fixings',4.2,48],['🔘','Wall Plugs Pack','Fixings',3.1,8],['💡','LED Bulb 9W','Electrical',2.8,100],['🔌','Extension Cable 5m','Electrical',13,24],['🔲','Switch Socket','Electrical',4.5,36],['🪜','Step Ladder','Equipment',45,5],['⛑️','Safety Helmet','Equipment',11,15]]};
+const RATE={USD:1,EUR:1,GBP:1,UGX:3700,KES:130};
+const uid=()=>Math.random().toString(36).slice(2,9);
+const ini=n=>n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const pref=()=>matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+let S=null, view='pos', q='', cat='All', cart=[], disc=0, method='Cash';
+try{S=JSON.parse(localStorage.getItem('pos')||'null')}catch(e){}
+const save=()=>{try{localStorage.setItem('pos',JSON.stringify(S))}catch(e){}};
+function wire(f,fn){const run=()=>{if(f.reportValidity())fn()};const b=f.querySelector('.btn-p');b.type='button';b.onclick=run;f.onsubmit=e=>{e.preventDefault();run()};f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();run()}})}
+function theme(){
+  const o=S?S.org:{color:COLORS[0][1],mode:pref()};
+  document.documentElement.classList.toggle('dark',o.mode==='dark');
+  document.documentElement.style.setProperty('--b',o.color);
+  document.title=S?S.org.name+' POS':'Create your POS';
+}
+function toast(m){const t=$('#toast');t.innerHTML=`<div class="pop bg-neutral-900 text-white text-sm px-4 py-2 rounded-lg shadow-lg">${esc(m)}</div>`;setTimeout(()=>t.innerHTML='',2200)}
+function swatches(sel){return COLORS.map(([n,v])=>`<button type="button" data-c="${v}" title="${n}" class="sw w-8 h-8 rounded-full ring-offset-2 dark:ring-offset-[#1c1e21] transition hover:scale-110 ${v===sel?'ring-2 ring-neutral-900 dark:ring-white':''}" style="background:rgb(${v})"></button>`).join('')}
+function bindSwatches(cb){document.querySelectorAll('.sw').forEach(b=>b.onclick=()=>{document.querySelectorAll('.sw').forEach(x=>x.classList.remove('ring-2','ring-neutral-900','dark:ring-white'));b.classList.add('ring-2','ring-neutral-900','dark:ring-white');cb(b.dataset.c)})}
+const field=(l,n,ph='',t='text')=>`<div><label class="lbl">${l}</label><input name="${n}" type="${t}" ${t==='number'?'min="0" step="any"':''} required class="inp" placeholder="${ph}"></div>`;
+const sel=(l,n,opts)=>`<div><label class="lbl">${l}</label><select name="${n}" class="inp">${opts.map(o=>`<option>${o}</option>`).join('')}</select></div>`;
+function sheet(inner){$('#modal').innerHTML=`<div class="fixed inset-0 z-40 bg-black/40 grid place-items-center p-4" id="bd"><div class="card pop w-full max-w-md p-6 space-y-4 max-h-[90vh] overflow-auto">${inner}</div></div>`;$('#bd').onclick=e=>{if(e.target.id==='bd')closeM()}}
+const closeM=()=>$('#modal').innerHTML='';
+function modal(title,body,onsub){
+  sheet(`<form class="space-y-4"><h3 class="font-semibold text-lg">${title}</h3>${body}<div class="flex justify-end gap-2 pt-2"><button type="button" class="btn" id="cx">Cancel</button><button class="btn-p">Save</button></div></form>`);
+  $('#cx').onclick=closeM;const f=$('#bd form');wire(f,()=>{onsub(Object.fromEntries(new FormData(f)));closeM()});
+}
+
+/* ---------- Registration ---------- */
+function register(){
+  theme();let color=COLORS[0][1];
+  $('#root').innerHTML=`<div class="min-h-screen grid lg:grid-cols-2">
+  <div class="hidden lg:flex flex-col justify-between p-12 bg-brand text-white transition-colors duration-500">
+    <div class="text-xl font-bold" id="pv">Your store</div>
+    <div class="up"><h1 class="text-4xl font-bold leading-tight">Sell at the counter.<br>Know your stock.</h1>
+    <p class="mt-4 text-white/80 max-w-md">Pick your industry, ring up sales, track inventory and read your daily numbers.</p></div>
+    <div class="text-sm text-white/70">Demo build. Data stays in this browser.</div></div>
+  <div class="flex items-center justify-center p-6"><form id="rf" class="card w-full max-w-md p-8 up space-y-4">
+    <div><h2 class="text-2xl font-bold">Register your organisation</h2><p class="text-sm text-neutral-500 mt-1">You'll be the admin and can invite cashiers later.</p></div>
+    <div><label class="lbl">Company name</label><input name="company" required class="inp" placeholder="Corner Café"></div>
+    <div class="grid grid-cols-2 gap-3"><div><label class="lbl">Your name</label><input name="name" required class="inp" placeholder="Jane Doe"></div>
+    <div><label class="lbl">Work email</label><input name="email" type="email" required class="inp" placeholder="jane@corner.com"></div></div>
+    <div><label class="lbl">Industry</label><select name="industry" class="inp">${Object.keys(IND).map(k=>`<option>${k}</option>`).join('')}</select></div>
+    <div class="grid grid-cols-2 gap-3"><div><label class="lbl">Password</label><input name="pw" type="password" minlength="6" required class="inp" placeholder="6+ characters"></div>
+    <div><label class="lbl">Currency</label><select name="cur" class="inp"><option>USD</option><option>UGX</option><option>EUR</option><option>GBP</option><option>KES</option></select></div></div>
+    <div><label class="lbl">Brand colour</label><div class="flex gap-2 py-1">${swatches(color)}</div></div>
+    <button class="btn-p w-full py-2.5">Create organisation</button></form></div></div>`;
+  const f=$('#rf');
+  f.company.oninput=()=>$('#pv').textContent=f.company.value||'Your store';
+  bindSwatches(c=>{color=c;document.documentElement.style.setProperty('--b',c)});
+  wire(f,()=>{const d=Object.fromEntries(new FormData(f));
+    const me={id:uid(),name:d.name,email:d.email,role:'Admin',status:'Active'};
+    const rt=RATE[d.cur]||1,sc=v=>rt===1?v:Math.round(v*rt/100)*100;
+    const products=IND[d.industry].map(([icon,name,cat,price,stock])=>({id:uid(),icon,name,cat,price:sc(price),stock}));
+    const wts=products.map(p=>1/Math.sqrt(p.price)),tw=wts.reduce((x,y)=>x+y,0);
+    const pick=()=>{let x=Math.random()*tw;for(let i=0;i<products.length;i++){x-=wts[i];if(x<=0)return products[i]}return products[0]};
+    const sales=[];for(let d=6;d>=0;d--){const n=(d?6:4)+Math.floor(Math.random()*7);for(let i=0;i<n;i++){const items=[];for(let k=0,m=1+Math.floor(Math.random()*3);k<m;k++){const p=pick();if(items.find(x=>x.id===p.id))continue;const mq=p.price<=5*rt?4:p.price<=30*rt?2:1;items.push({id:p.id,name:p.name,cat:p.cat,price:p.price,qty:1+Math.floor(Math.random()*mq)})}const total=items.reduce((x,y)=>x+y.price*y.qty,0)*1.1;sales.push({id:uid().toUpperCase(),ts:Date.now()-d*864e5-Math.random()*5e7*(d?1:.2),items,total,method:['Cash','Card','Mobile'][Math.floor(Math.random()*3)]})}}
+    sales.sort((a,b)=>b.ts-a.ts);
+    S={org:{name:d.company,color,mode:pref(),cur:d.cur,tax:10,industry:d.industry},me:me.id,team:[me],products,sales};
+    save();theme();shell()});
+}
+
+/* ---------- Shell ---------- */
+const NAV=[['pos','◉','Register'],['inventory','▤','Inventory'],['reports','▦','Sales reports'],['team','⚇','Team'],['settings','⚙','Settings']];
+function shell(){
+  theme();
+  $('#root').innerHTML=`<div class="flex min-h-screen">
+  <aside class="w-60 shrink-0 p-4 hidden md:flex flex-col gap-1 sticky top-0 h-screen">
+    <div class="flex items-center gap-2 px-2 py-3 mb-2"><div class="w-8 h-8 rounded-lg bg-brand text-white grid place-items-center font-bold">${esc(S.org.name[0].toUpperCase())}</div><div class="font-semibold truncate">${esc(S.org.name)}</div></div>
+    ${NAV.map(([id,i,l])=>`<a data-v="${id}" class="nav"><span class="w-5 text-center">${i}</span>${l}</a>`).join('')}
+    <div class="mt-auto text-xs text-neutral-500 px-2">${esc(S.org.name)} POS</div></aside>
+  <div class="flex-1 min-w-0 flex flex-col">
+    <header class="flex items-center gap-3 px-4 md:px-8 py-3 sticky top-0 z-20 backdrop-blur bg-[#f1f1f1]/80 dark:bg-[#0f1011]/80">
+      <select id="mnav" class="md:hidden inp w-auto">${NAV.map(([id,,l])=>`<option value="${id}">${l}</option>`).join('')}</select>
+      <input id="search" class="inp max-w-md" placeholder="Search products">
+      <div class="ml-auto flex items-center gap-2"><button id="mode" class="btn">${S.org.mode==='dark'?'☀ Light':'☾ Dark'}</button>
+      <div class="w-8 h-8 rounded-full bg-brand text-white grid place-items-center text-xs font-semibold">${ini(S.team.find(t=>t.id===S.me).name)}</div></div></header>
+    <main id="main" class="px-4 md:px-8 pb-10"></main></div></div>`;
+  document.querySelectorAll('[data-v]').forEach(a=>a.onclick=()=>go(a.dataset.v));
+  $('#mnav').onchange=e=>go(e.target.value);
+  $('#mode').onclick=()=>{S.org.mode=S.org.mode==='dark'?'light':'dark';save();shell()};
+  $('#search').oninput=e=>{q=e.target.value.toLowerCase();if(!['pos','inventory'].includes(view))view='pos';render(view==='pos'?'grid':'')};
+  render();
+}
+function go(v){view=v;q='';const s=$('#search');if(s)s.value='';render()}
+function render(part){
+  document.querySelectorAll('[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===view));
+  $('#mnav').value=view;
+  if(part==='grid'&&view==='pos'){drawGrid();return}
+  $('#main').innerHTML=`<div class="up">${VIEWS[view]()}</div>`;
+  (BIND[view]||(()=>{}))();
+}
+const head=(t,sub,btn)=>`<div class="flex items-center justify-between mb-5 gap-3"><div><h1 class="text-xl font-bold">${t}</h1><p class="text-sm text-neutral-500">${sub}</p></div>${btn||''}</div>`;
+const low=p=>p.stock<=10;
+
+/* ---------- POS logic ---------- */
+function totals(){const sub=cart.reduce((a,c)=>{const p=S.products.find(x=>x.id===c.id);return a+p.price*c.qty},0);const d=sub*disc/100,tax=(sub-d)*S.org.tax/100;return{sub,d,tax,total:sub-d+tax}}
+function gridHtml(){
+  const ps=S.products.filter(p=>(cat==='All'||p.cat===cat)&&p.name.toLowerCase().includes(q));
+  return ps.map(p=>`<button data-add="${p.id}" ${p.stock<1?'disabled':''} class="card p-4 text-left hover:-translate-y-0.5 hover:shadow-md active:scale-95 transition disabled:opacity-40 disabled:pointer-events-none"><div class="text-3xl">${esc(p.icon)}</div><div class="text-sm font-medium mt-2 leading-tight">${esc(p.name)}</div><div class="flex justify-between items-center mt-1"><span class="text-sm font-semibold text-brand">${money(p.price)}</span><span class="text-xs ${low(p)?'text-amber-500':'text-neutral-500'}">${p.stock<1?'Out of stock':p.stock+' left'}</span></div></button>`).join('')||'<div class="col-span-full p-8 text-center text-sm text-neutral-500">No products match. Try another search or category.</div>';
+}
+function drawGrid(){$('#grid').innerHTML=gridHtml();bindGrid()}
+function bindGrid(){document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const p=S.products.find(x=>x.id===b.dataset.add);const c=cart.find(x=>x.id===p.id);if(c){if(c.qty>=p.stock)return toast('Only '+p.stock+' in stock');c.qty++}else cart.push({id:p.id,qty:1});drawCart()})}
+function drawCart(){
+  const t=totals();
+  $('#cart').innerHTML=`<div class="p-4 border-b border-black/5 dark:border-white/10 flex justify-between items-center"><h3 class="font-semibold">Current sale</h3>${cart.length?'<button class="text-xs text-neutral-500 hover:text-red-500" id="clr">Clear</button>':''}</div>
+  <div class="flex-1 overflow-auto p-2 min-h-[120px]">${cart.map(c=>{const p=S.products.find(x=>x.id===c.id);return`<div class="up flex items-center gap-2 p-2 rounded-lg"><span class="text-xl">${esc(p.icon)}</span><div class="min-w-0 flex-1"><div class="text-sm font-medium truncate">${esc(p.name)}</div><div class="text-xs text-neutral-500">${money(p.price)}</div></div>
+  <div class="flex items-center gap-1"><button class="btn !px-2 !py-0.5" data-q="${c.id}" data-d="-1">−</button><span class="w-6 text-center text-sm">${c.qty}</span><button class="btn !px-2 !py-0.5" data-q="${c.id}" data-d="1">+</button></div></div>`}).join('')||'<div class="p-6 text-center text-sm text-neutral-500">Cart is empty. Tap a product to add it.</div>'}</div>
+  <div class="p-4 border-t border-black/5 dark:border-white/10 space-y-2 text-sm">
+    <div class="flex justify-between"><span class="text-neutral-500">Subtotal</span><span>${money(t.sub)}</span></div>
+    <div class="flex justify-between items-center"><span class="text-neutral-500">Discount %</span><input id="disc" type="number" min="0" max="100" value="${disc}" class="inp !w-20 !py-1 text-right"></div>
+    <div class="flex justify-between"><span class="text-neutral-500">Tax (${S.org.tax}%)</span><span>${money(t.tax)}</span></div>
+    <div class="flex justify-between text-lg font-bold pt-1"><span>Total</span><span>${money(t.total)}</span></div>
+    <div class="flex gap-1 pt-1">${['Cash','Card','Mobile'].map(m=>`<button data-m="${m}" class="chip flex-1 ${m===method?'on':''}">${m}</button>`).join('')}</div>
+    <button id="pay" class="btn-p w-full py-2.5 mt-1" ${cart.length?'':'disabled'}>Charge ${money(t.total)}</button></div>`;
+  document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const c=cart.find(x=>x.id===b.dataset.q),p=S.products.find(x=>x.id===c.id);c.qty+=+b.dataset.d;if(c.qty>p.stock){c.qty=p.stock;toast('Only '+p.stock+' in stock')}if(c.qty<1)cart=cart.filter(x=>x!==c);drawCart()});
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{method=b.dataset.m;drawCart()});
+  $('#disc').onchange=e=>{disc=Math.min(100,Math.max(0,+e.target.value||0));drawCart()};
+  const c=$('#clr');if(c)c.onclick=()=>{cart=[];drawCart()};
+  $('#pay').onclick=charge;
+}
+function charge(){
+  const t=totals();
+  const items=cart.map(c=>{const p=S.products.find(x=>x.id===c.id);p.stock-=c.qty;return{id:p.id,name:p.name,cat:p.cat,price:p.price,qty:c.qty}});
+  const sale={id:uid().toUpperCase(),ts:Date.now(),items,total:t.total,method};
+  S.sales.unshift(sale);save();cart=[];disc=0;
+  sheet(`<div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-brand/10 text-brand grid place-items-center text-2xl">✓</div><h3 class="font-semibold text-lg mt-3">Payment received</h3><p class="text-sm text-neutral-500">Receipt ${sale.id} · ${method}</p></div>
+  <div class="text-sm divide-y divide-black/5 dark:divide-white/10">${items.map(i=>`<div class="flex justify-between py-1.5"><span>${i.qty} × ${esc(i.name)}</span><span>${money(i.qty*i.price)}</span></div>`).join('')}</div>
+  <div class="flex justify-between text-sm"><span class="text-neutral-500">Discount ${money(t.d)} · Tax ${money(t.tax)}</span></div>
+  <div class="flex justify-between text-xl font-bold"><span>Total</span><span>${money(t.total)}</span></div><button class="btn-p w-full" id="done">New sale</button>`);
+  $('#done').onclick=()=>{closeM();render()};
+}
+
+/* ---------- Views ---------- */
+const dayKey=ts=>new Date(ts).toDateString();
+const VIEWS={
+pos(){
+  const cats=['All',...new Set(S.products.map(p=>p.cat))];
+  return `<div class="grid lg:grid-cols-[1fr,340px] gap-4 items-start">
+  <div><div class="flex gap-2 overflow-x-auto pb-3">${cats.map(c=>`<button data-cat="${c}" class="chip ${c===cat?'on':''}">${c}</button>`).join('')}</div>
+  <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">${gridHtml()}</div></div>
+  <div id="cart" class="card flex flex-col lg:sticky lg:top-16 max-h-[calc(100vh-6rem)]"></div></div>`;
+},
+inventory(){
+  const rows=S.products.filter(p=>p.name.toLowerCase().includes(q));
+  const val=S.products.reduce((a,p)=>a+p.price*p.stock,0),lowN=S.products.filter(low).length;
+  return head('Inventory',S.products.length+' products · stock value '+money(val)+' · '+lowN+' low','<button class="btn-p" id="addp">Add product</button>')+
+  `<div class="card overflow-x-auto"><table class="w-full text-sm"><thead class="text-left text-xs text-neutral-500"><tr><th class="p-3">Product</th><th>Category</th><th>Price</th><th>Stock</th><th></th></tr></thead><tbody>
+  ${rows.map(p=>`<tr class="border-t border-black/5 dark:border-white/10 hover:bg-black/[.02] dark:hover:bg-white/5 transition"><td class="p-3 font-medium">${esc(p.icon)} ${esc(p.name)}</td><td><span class="pill">${esc(p.cat)}</span></td><td>${money(p.price)}</td>
+  <td><div class="flex items-center gap-2"><input type="number" min="0" value="${p.stock}" data-stock="${p.id}" class="inp !w-20 !py-1"><button class="btn !py-1" data-plus="${p.id}">+10</button>${low(p)?'<span class="text-xs text-amber-500">Low</span>':''}</div></td>
+  <td class="pr-3 text-right"><button class="text-neutral-400 hover:text-red-500 transition" data-delp="${p.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan=5 class="p-8 text-center text-neutral-500">No products match. Try another search or add a product.</td></tr>'}</tbody></table></div>`;
+},
+reports(){
+  const today=S.sales.filter(s=>dayKey(s.ts)===dayKey(Date.now()));
+  const rev=a=>a.reduce((x,s)=>x+s.total,0),qty=a=>a.reduce((x,s)=>x+s.items.reduce((y,i)=>y+i.qty,0),0);
+  const st=[['Revenue today',money(rev(today))],['Orders today',today.length],['Items sold today',qty(today)],['Avg order value',money(today.length?rev(today)/today.length:0)]];
+  const days=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);return{l:d.toLocaleDateString('en',{weekday:'short'}),v:rev(S.sales.filter(s=>dayKey(s.ts)===d.toDateString()))}});
+  const mx=Math.max(1,...days.map(d=>d.v));
+  const cr={};S.sales.forEach(s=>s.items.forEach(i=>{const c=i.cat||(S.products.find(p=>p.id===i.id)||{}).cat||'Other';cr[c]=(cr[c]||0)+i.price*i.qty}));
+  const cl=Object.entries(cr).sort((a,b)=>b[1]-a[1]),ct=cl.reduce((a,x)=>a+x[1],0)||1,cm=cl[0]?cl[0][1]:1;
+  const rl=S.products.filter(low).sort((a,b)=>a.stock-b.stock);
+  const tp={};S.sales.forEach(s=>s.items.forEach(i=>{tp[i.name]=(tp[i.name]||0)+i.qty}));
+  const top=Object.entries(tp).sort((a,b)=>b[1]-a[1]).slice(0,5),tm=top[0]?top[0][1]:1;
+  return head('Sales reports','Last 7 days · '+esc(S.org.name)+(S.org.industry?' · '+esc(S.org.industry):''),'')+
+  `<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${st.map(([l,v])=>`<div class="card p-4"><div class="text-xs text-neutral-500">${l}</div><div class="text-2xl font-bold mt-1">${v}</div></div>`).join('')}</div>
+  <div class="grid lg:grid-cols-3 gap-4 mt-4"><div class="card p-5 lg:col-span-2"><h3 class="font-semibold mb-4">Revenue by day</h3><div class="flex items-end gap-3 h-48">${days.map(d=>`<div class="flex-1 flex flex-col items-center justify-end h-full gap-1"><span class="text-xs text-neutral-500">${money(d.v)}</span><div class="bar w-full bg-brand rounded-t-md transition-all duration-700" style="height:0" data-h="${d.v/mx*85}"></div><span class="text-xs">${d.l}</span></div>`).join('')}</div></div>
+  <div class="card p-5"><h3 class="font-semibold mb-4">Top products</h3>${top.map(([n,v])=>`<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span class="truncate">${esc(n)}</span><span class="text-neutral-500">${v} sold</span></div><div class="h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden"><div class="hbar h-full bg-brand rounded-full transition-all duration-700" style="width:0" data-w="${v/tm*100}"></div></div></div>`).join('')}</div></div>
+  <div class="grid lg:grid-cols-2 gap-4 mt-4"><div class="card p-5"><h3 class="font-semibold mb-4">Sales by category</h3>${cl.map(([n,v])=>`<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span>${esc(n)}</span><span class="text-neutral-500">${money(v)} · ${Math.round(v/ct*100)}%</span></div><div class="h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden"><div class="hbar h-full bg-brand rounded-full transition-all duration-700" style="width:0" data-w="${v/cm*100}"></div></div></div>`).join('')}</div>
+  <div class="card p-5"><h3 class="font-semibold mb-4">Reorder alerts</h3>${rl.map(p=>`<div class="flex items-center gap-3 py-2 border-b last:border-0 border-black/5 dark:border-white/10"><span class="text-xl">${esc(p.icon)}</span><div class="min-w-0 text-sm font-medium truncate">${esc(p.name)}</div><span class="ml-auto text-xs ${p.stock<1?'text-red-500':'text-amber-500'}">${p.stock<1?'Out of stock':p.stock+' left'}</span></div>`).join('')||'<p class="text-sm text-neutral-500">All products are well stocked.</p>'}</div></div>
+  <div class="card mt-4 overflow-x-auto"><h3 class="font-semibold p-4 pb-2">Recent sales</h3><table class="w-full text-sm"><thead class="text-left text-xs text-neutral-500"><tr><th class="p-3">Receipt</th><th>Time</th><th>Items</th><th>Payment</th><th class="pr-3 text-right">Total</th></tr></thead><tbody>${S.sales.slice(0,8).map(s=>`<tr class="border-t border-black/5 dark:border-white/10"><td class="p-3 font-medium">${s.id}</td><td class="text-neutral-500">${new Date(s.ts).toLocaleString('en',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</td><td>${s.items.reduce((a,i)=>a+i.qty,0)}</td><td><span class="pill">${s.method}</span></td><td class="pr-3 text-right font-semibold">${money(s.total)}</td></tr>`).join('')}</tbody></table></div>`;
+},
+team(){
+  return head('Team','Invite people to '+esc(S.org.name),'<button class="btn-p" id="inv">Invite user</button>')+
+  `<div class="card divide-y divide-black/5 dark:divide-white/10">${S.team.map(m=>`<div class="flex items-center gap-3 p-4"><div class="w-9 h-9 rounded-full bg-brand/10 text-brand grid place-items-center text-sm font-semibold">${ini(m.name)}</div><div class="min-w-0"><div class="text-sm font-medium">${esc(m.name)}</div><div class="text-xs text-neutral-500 truncate">${esc(m.email)}</div></div><span class="pill ml-auto">${m.role}</span><span class="text-xs w-16 text-right ${m.status==='Active'?'text-green-600':'text-amber-500'}">${m.status}</span></div>`).join('')}</div>`;
+},
+settings(){
+  return head('Settings','Company profile and appearance','')+
+  `<div class="card p-6 max-w-xl space-y-5"><div class="grid grid-cols-2 gap-3"><div><label class="lbl">Company name</label><input id="sn" class="inp" value="${esc(S.org.name)}"></div><div><label class="lbl">Tax rate %</label><input id="stx" type="number" min="0" class="inp" value="${S.org.tax}"></div></div>
+  <div><label class="lbl">Company theme colour</label><div class="flex gap-2 py-1">${swatches(S.org.color)}</div></div>
+  <div><label class="lbl">Appearance</label><div class="inline-flex rounded-lg border border-black/10 dark:border-white/15 p-0.5">${['light','dark'].map(m=>`<button data-m2="${m}" class="px-4 py-1.5 text-sm rounded-md capitalize transition ${S.org.mode===m?'bg-brand text-white':''}">${m}</button>`).join('')}</div></div>
+  <div class="flex gap-2 pt-2"><button class="btn-p" id="ss">Save changes</button><button class="btn" id="rs">Reset demo</button></div></div>`;
+}};
+const BIND={
+pos(){
+  bindGrid();drawCart();
+  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('on',x===b));drawGrid()});
+},
+inventory(){
+  $('#addp').onclick=()=>modal('Add product','<div><label class="lbl">Icon (emoji)</label><input name="icon" class="inp" placeholder="🛒"></div>'+field('Name','name','Product name')+field('Category','cat','e.g. Drinks')+field('Price','price','0.00','number')+field('Opening stock','stock','0','number'),d=>{S.products.push({id:uid(),icon:d.icon||'📦',name:d.name,cat:d.cat,price:+d.price,stock:+d.stock});save();render();toast('Product added')});
+  document.querySelectorAll('[data-stock]').forEach(i=>i.onchange=()=>{S.products.find(p=>p.id===i.dataset.stock).stock=Math.max(0,+i.value||0);save();render();toast('Stock updated')});
+  document.querySelectorAll('[data-plus]').forEach(b=>b.onclick=()=>{S.products.find(p=>p.id===b.dataset.plus).stock+=10;save();render();toast('Restocked +10')});
+  document.querySelectorAll('[data-delp]').forEach(b=>b.onclick=()=>{S.products=S.products.filter(p=>p.id!==b.dataset.delp);cart=cart.filter(c=>c.id!==b.dataset.delp);save();render();toast('Product deleted')});
+},
+reports(){setTimeout(()=>{document.querySelectorAll('.bar').forEach(b=>b.style.height=b.dataset.h+'%');document.querySelectorAll('.hbar').forEach(b=>b.style.width=b.dataset.w+'%')},60)},
+team(){
+  $('#inv').onclick=()=>modal('Invite a teammate',field('Name','name','Full name')+field('Email','email','name@company.com','email')+sel('Role','role',['Cashier','Manager','Admin']),d=>{
+    S.team.push({id:uid(),...d,status:'Pending'});save();render();
+    const link=location.href.split('#')[0]+'#invite='+uid();navigator.clipboard?.writeText(link).catch(()=>{});toast('Invite sent. Link copied to clipboard')});
+},
+settings(){
+  let color=S.org.color;
+  bindSwatches(c=>{color=c;document.documentElement.style.setProperty('--b',c)});
+  document.querySelectorAll('[data-m2]').forEach(b=>b.onclick=()=>{S.org.mode=b.dataset.m2;save();shell();go('settings')});
+  $('#ss').onclick=()=>{S.org.name=$('#sn').value.trim()||S.org.name;S.org.tax=Math.max(0,+$('#stx').value||0);S.org.color=color;save();shell();go('settings');toast('Settings saved')};
+  $('#rs').onclick=e=>{const b=e.target;if(b.dataset.sure){try{localStorage.removeItem('pos')}catch(x){}S=null;cart=[];register()}else{b.dataset.sure=1;b.textContent='Click again to confirm';setTimeout(()=>{b.dataset.sure='';b.textContent='Reset demo'},3000)}};
+}};
+S?shell():register();
+</script>
+</body>
+</html>

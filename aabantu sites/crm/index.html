@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:'rgb(var(--b) / <alpha-value>)'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+@layer components{
+.card{@apply bg-white dark:bg-[#1c1e21] rounded-xl border border-black/5 dark:border-white/10 shadow-[0_1px_0_rgba(0,0,0,.05)]}
+.btn{@apply inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border border-black/10 dark:border-white/15 bg-white dark:bg-[#26292d] hover:bg-neutral-50 dark:hover:bg-[#2f3338] active:scale-95 transition}
+.btn-p{@apply inline-flex items-center gap-2 px-3.5 py-1.5 text-sm font-semibold rounded-lg bg-brand text-white hover:brightness-110 active:scale-95 transition shadow-sm}
+.inp{@apply w-full px-3 py-2 text-sm rounded-lg border border-black/15 dark:border-white/15 bg-white dark:bg-[#141517] outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand transition}
+.nav{@apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5 transition cursor-pointer}
+.nav.on{@apply bg-white dark:bg-[#26292d] text-neutral-900 dark:text-white shadow-sm}
+.lbl{@apply block text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-1}
+.pill{@apply inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-brand/10 text-brand}
+}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.up{animation:up .35s ease both}.pop{animation:pop .2s ease both}
+body{transition:background-color .3s,color .3s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="font-sans bg-[#f1f1f1] dark:bg-[#0f1011] text-neutral-900 dark:text-neutral-100 min-h-screen">
+<div id="root"></div>
+<div id="modal"></div>
+<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50"></div>
+
+<script>
+const COLORS=[['Emerald','0 128 96'],['Indigo','79 70 229'],['Rose','225 29 72'],['Amber','217 119 6'],['Sky','2 132 199'],['Slate','51 65 85']];
+const STAGES=['Lead','Qualified','Proposal','Won'];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=n=>new Intl.NumberFormat('en',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+const uid=()=>Math.random().toString(36).slice(2,9);
+const ini=n=>n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+let S=null, view='dashboard', q='';
+try{S=JSON.parse(localStorage.getItem('crm')||'null')}catch(e){}
+const save=()=>{try{localStorage.setItem('crm',JSON.stringify(S))}catch(e){}};
+function wire(f,fn){const run=()=>{if(f.reportValidity())fn()};const b=f.querySelector('.btn-p');b.type='button';b.onclick=run;f.onsubmit=e=>{e.preventDefault();run()};f.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();run()}})}
+const pref=()=>matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+
+function theme(){
+  const o=S?S.org:{color:COLORS[0][1],mode:pref()};
+  document.documentElement.classList.toggle('dark',o.mode==='dark');
+  document.documentElement.style.setProperty('--b',o.color);
+  document.title=S?S.org.name+' CRM':'Create your CRM';
+}
+function toast(m){const t=$('#toast');t.innerHTML=`<div class="pop bg-neutral-900 text-white text-sm px-4 py-2 rounded-lg shadow-lg">${esc(m)}</div>`;setTimeout(()=>t.innerHTML='',2200)}
+function swatches(sel){return COLORS.map(([n,v])=>`<button type="button" data-c="${v}" title="${n}" class="sw w-8 h-8 rounded-full ring-offset-2 dark:ring-offset-[#1c1e21] transition hover:scale-110 ${v===sel?'ring-2 ring-neutral-900 dark:ring-white':''}" style="background:rgb(${v})"></button>`).join('')}
+function bindSwatches(cb){document.querySelectorAll('.sw').forEach(b=>b.onclick=()=>{document.querySelectorAll('.sw').forEach(x=>x.classList.remove('ring-2','ring-neutral-900','dark:ring-white'));b.classList.add('ring-2','ring-neutral-900','dark:ring-white');cb(b.dataset.c)})}
+
+/* ---------- Registration ---------- */
+function register(){
+  theme();
+  let color=COLORS[0][1];
+  $('#root').innerHTML=`<div class="min-h-screen grid lg:grid-cols-2">
+  <div class="hidden lg:flex flex-col justify-between p-12 bg-brand text-white transition-colors duration-500">
+    <div class="text-xl font-bold" id="pv">Your CRM</div>
+    <div class="up"><h1 class="text-4xl font-bold leading-tight">Every customer relationship,<br>in one calm place.</h1>
+    <p class="mt-4 text-white/80 max-w-md">Set up your organisation in under a minute. Add contacts, track deals and invite your team.</p></div>
+    <div class="text-sm text-white/70">Demo build. Data stays in this browser.</div></div>
+  <div class="flex items-center justify-center p-6"><form id="rf" class="card w-full max-w-md p-8 up space-y-4">
+    <div><h2 class="text-2xl font-bold">Register your organisation</h2><p class="text-sm text-neutral-500 mt-1">You'll be the admin and can invite others later.</p></div>
+    <div><label class="lbl">Company name</label><input name="company" required class="inp" placeholder="Acme Studio"></div>
+    <div class="grid grid-cols-2 gap-3"><div><label class="lbl">Your name</label><input name="name" required class="inp" placeholder="Jane Doe"></div>
+    <div><label class="lbl">Work email</label><input name="email" type="email" required class="inp" placeholder="jane@acme.com"></div></div>
+    <div><label class="lbl">Password</label><input name="pw" type="password" minlength="6" required class="inp" placeholder="At least 6 characters"></div>
+    <div><label class="lbl">Brand colour</label><div class="flex gap-2 py-1">${swatches(color)}</div></div>
+    <button class="btn-p w-full justify-center py-2.5">Create organisation</button></form></div></div>`;
+  const f=$('#rf');
+  f.company.oninput=()=>$('#pv').textContent=f.company.value||'Your CRM';
+  bindSwatches(c=>{color=c;theme.tmp=c;document.documentElement.style.setProperty('--b',c)});
+  wire(f,()=>{const d=Object.fromEntries(new FormData(f));
+    const me={id:uid(),name:d.name,email:d.email,role:'Admin',status:'Active'};
+    S={org:{name:d.company,color,mode:pref()},me:me.id,team:[me],
+      contacts:[['Amara Okello','amara@kilimo.co','Kilimo Co','Customer'],['Liam Chen','liam@northwind.io','Northwind','Prospect'],['Sofia Rossi','sofia@lumen.eu','Lumen','Lead'],['Daniel Kato','daniel@pearl.ug','Pearl Logistics','Customer'],['Priya Nair','priya@orbit.in','Orbit','Prospect']].map(([name,email,company,status])=>({id:uid(),name,email,company,status})),
+      deals:[['Laptop fleet, 25 units',32500,'Proposal','Product'],['Website redesign',8400,'Qualified','Service'],['Barcode scanners, 10 units',2900,'Won','Product'],['Monthly IT support plan',3600,'Lead','Service']].map(([title,value,stage,type])=>({id:uid(),title,value,stage,type})),
+      tasks:[['Send proposal to Northwind',0],['Call Sofia about demo',0],['Renew Pearl contract',1]].map(([t,d])=>({id:uid(),t,done:!!d}))};
+    save();theme();shell()});
+}
+
+/* ---------- Shell ---------- */
+const NAV=[['dashboard','▦','Dashboard'],['contacts','☺','Contacts'],['deals','◈','Deals'],['tasks','✓','Tasks'],['team','⚇','Team'],['settings','⚙','Settings']];
+function shell(){
+  theme();
+  $('#root').innerHTML=`<div class="flex min-h-screen">
+  <aside class="w-60 shrink-0 p-4 hidden md:flex flex-col gap-1 sticky top-0 h-screen">
+    <div class="flex items-center gap-2 px-2 py-3 mb-2"><div class="w-8 h-8 rounded-lg bg-brand text-white grid place-items-center font-bold">${esc(S.org.name[0].toUpperCase())}</div><div class="font-semibold truncate">${esc(S.org.name)}</div></div>
+    ${NAV.map(([id,i,l])=>`<a data-v="${id}" class="nav"><span class="w-5 text-center">${i}</span>${l}</a>`).join('')}
+    <div class="mt-auto text-xs text-neutral-500 px-2">${esc(S.org.name)} CRM</div></aside>
+  <div class="flex-1 min-w-0 flex flex-col">
+    <header class="flex items-center gap-3 px-4 md:px-8 py-3 sticky top-0 z-20 backdrop-blur bg-[#f1f1f1]/80 dark:bg-[#0f1011]/80">
+      <select id="mnav" class="md:hidden inp w-auto">${NAV.map(([id,,l])=>`<option value="${id}">${l}</option>`).join('')}</select>
+      <input id="search" class="inp max-w-md" placeholder="Search contacts and deals">
+      <div class="ml-auto flex items-center gap-2"><button id="mode" class="btn" title="Toggle light or dark">${S.org.mode==='dark'?'☀ Light':'☾ Dark'}</button>
+      <div class="w-8 h-8 rounded-full bg-brand text-white grid place-items-center text-xs font-semibold">${ini(S.team.find(t=>t.id===S.me).name)}</div></div></header>
+    <main id="main" class="px-4 md:px-8 pb-10"></main></div></div>`;
+  document.querySelectorAll('[data-v]').forEach(a=>a.onclick=()=>go(a.dataset.v));
+  $('#mnav').onchange=e=>go(e.target.value);
+  $('#mode').onclick=()=>{S.org.mode=S.org.mode==='dark'?'light':'dark';save();shell()};
+  $('#search').oninput=e=>{q=e.target.value.toLowerCase();if(!['contacts','deals'].includes(view))view='contacts';render()};
+  render();
+}
+function go(v){view=v;q='';const s=$('#search');if(s)s.value='';render()}
+function render(){
+  document.querySelectorAll('[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===view));
+  $('#mnav').value=view;
+  $('#main').innerHTML=`<div class="up">${VIEWS[view]()}</div>`;
+  (BIND[view]||(()=>{}))();
+}
+const head=(t,sub,btn)=>`<div class="flex items-center justify-between mb-5 gap-3"><div><h1 class="text-xl font-bold">${t}</h1><p class="text-sm text-neutral-500">${sub}</p></div>${btn||''}</div>`;
+function modal(title,body,onsub){
+  $('#modal').innerHTML=`<div class="fixed inset-0 z-40 bg-black/40 grid place-items-center p-4" id="bd"><form class="card pop w-full max-w-md p-6 space-y-4"><h3 class="font-semibold text-lg">${title}</h3>${body}<div class="flex justify-end gap-2 pt-2"><button type="button" class="btn" id="cx">Cancel</button><button class="btn-p">Save</button></div></form></div>`;
+  const close=()=>$('#modal').innerHTML='';$('#cx').onclick=close;$('#bd').onclick=e=>{if(e.target.id==='bd')close()};
+  const mf=$('#bd form');wire(mf,()=>{onsub(Object.fromEntries(new FormData(mf)));close()});
+}
+const field=(l,n,ph='',t='text')=>`<div><label class="lbl">${l}</label><input name="${n}" type="${t}" required class="inp" placeholder="${ph}"></div>`;
+const sel=(l,n,opts)=>`<div><label class="lbl">${l}</label><select name="${n}" class="inp">${opts.map(o=>`<option>${o}</option>`).join('')}</select></div>`;
+
+/* ---------- Views ---------- */
+const VIEWS={
+dashboard(){
+  const won=S.deals.filter(d=>d.stage==='Won').reduce((a,d)=>a+ +d.value,0);
+  const open=S.deals.filter(d=>d.stage!=='Won').reduce((a,d)=>a+ +d.value,0);
+  const st=[['Won revenue',money(won)],['Open pipeline',money(open)],['Contacts',S.contacts.length],['Open tasks',S.tasks.filter(t=>!t.done).length]];
+  const max=Math.max(1,...STAGES.map(s=>S.deals.filter(d=>d.stage===s).length));
+  return head('Good to see you, '+esc(S.team.find(t=>t.id===S.me).name.split(' ')[0]),'Here is how '+esc(S.org.name)+' is doing.')+
+  `<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${st.map(([l,v])=>`<div class="card p-4 hover:-translate-y-0.5 transition"><div class="text-xs text-neutral-500">${l}</div><div class="text-2xl font-bold mt-1">${v}</div></div>`).join('')}</div>
+  <div class="grid lg:grid-cols-2 gap-4 mt-4">
+  <div class="card p-5"><h3 class="font-semibold mb-4">Pipeline by stage</h3>${STAGES.map(s=>{const n=S.deals.filter(d=>d.stage===s).length;return`<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span>${s}</span><span class="text-neutral-500">${n} deals</span></div><div class="h-2 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden"><div class="bar h-full bg-brand rounded-full transition-all duration-700" style="width:0" data-w="${n/max*100}"></div></div></div>`}).join('')}</div>
+  <div class="card p-5"><h3 class="font-semibold mb-4">Recent contacts</h3>${S.contacts.slice(-5).reverse().map(c=>`<div class="flex items-center gap-3 py-2 border-b last:border-0 border-black/5 dark:border-white/10"><div class="w-8 h-8 rounded-full bg-brand/10 text-brand grid place-items-center text-xs font-semibold">${ini(c.name)}</div><div class="min-w-0"><div class="text-sm font-medium">${esc(c.name)}</div><div class="text-xs text-neutral-500 truncate">${esc(c.company)}</div></div><span class="pill ml-auto">${c.status}</span></div>`).join('')}</div></div>`;
+},
+contacts(){
+  const rows=S.contacts.filter(c=>(c.name+c.email+c.company).toLowerCase().includes(q));
+  return head('Contacts',S.contacts.length+' people and companies','<button class="btn-p" id="addc">Add contact</button>')+
+  `<div class="card overflow-x-auto"><table class="w-full text-sm"><thead class="text-left text-xs text-neutral-500"><tr><th class="p-3">Name</th><th>Company</th><th>Email</th><th>Status</th><th></th></tr></thead><tbody>
+  ${rows.map(c=>`<tr class="border-t border-black/5 dark:border-white/10 hover:bg-black/[.02] dark:hover:bg-white/5 transition"><td class="p-3 font-medium">${esc(c.name)}</td><td>${esc(c.company)}</td><td class="text-neutral-500">${esc(c.email)}</td><td><span class="pill">${c.status}</span></td><td class="pr-3 text-right"><button class="text-neutral-400 hover:text-red-500 transition" data-del="${c.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan=5 class="p-8 text-center text-neutral-500">No contacts match. Try another search or add a new contact.</td></tr>'}</tbody></table></div>`;
+},
+deals(){
+  const rows=S.deals.filter(d=>d.title.toLowerCase().includes(q));
+  const tot=rows.reduce((a,d)=>a+ +d.value,0);
+  return head('Deals',rows.length+' deals worth '+money(tot),'<button class="btn-p" id="addd">Add deal</button>')+
+  `<div class="card overflow-x-auto"><table class="w-full text-sm"><thead class="text-left text-xs text-neutral-500"><tr><th class="p-3">Deal</th><th>Type</th><th>Value</th><th>Stage</th><th></th></tr></thead><tbody>
+  ${rows.map(d=>`<tr class="border-t border-black/5 dark:border-white/10 hover:bg-black/[.02] dark:hover:bg-white/5 transition"><td class="p-3 font-medium">${esc(d.title)}</td><td><span class="pill">${d.type||'Service'}</span></td><td class="font-semibold">${money(d.value)}</td><td><select data-stage="${d.id}" class="inp w-auto py-1 pr-8 font-medium ${d.stage==='Won'?'text-green-600':''}">${STAGES.map(s=>`<option ${s===d.stage?'selected':''}>${s}</option>`).join('')}</select></td><td class="pr-3 text-right"><button class="text-neutral-400 hover:text-red-500 transition" data-deld="${d.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan=5 class="p-8 text-center text-neutral-500">No deals match. Try another search or add a new deal.</td></tr>'}</tbody></table></div>`;
+},
+tasks(){
+  return head('Tasks',S.tasks.filter(t=>!t.done).length+' still to do','')+
+  `<form id="tf" class="flex gap-2 mb-4 max-w-xl"><input name="t" required class="inp" placeholder="Add a task and press Enter"><button class="btn-p">Add</button></form>
+  <div class="card max-w-xl">${S.tasks.map(t=>`<label class="flex items-center gap-3 p-3 border-b last:border-0 border-black/5 dark:border-white/10 cursor-pointer"><input type="checkbox" data-t="${t.id}" ${t.done?'checked':''} class="w-4 h-4 accent-[rgb(var(--b))]"><span class="text-sm transition ${t.done?'line-through text-neutral-400':''}">${esc(t.t)}</span></label>`).join('')||'<div class="p-8 text-center text-sm text-neutral-500">Nothing to do. Add your first task above.</div>'}</div>`;
+},
+team(){
+  return head('Team','Invite people to '+esc(S.org.name),'<button class="btn-p" id="inv">Invite user</button>')+
+  `<div class="card divide-y divide-black/5 dark:divide-white/10">${S.team.map(m=>`<div class="flex items-center gap-3 p-4"><div class="w-9 h-9 rounded-full bg-brand/10 text-brand grid place-items-center text-sm font-semibold">${ini(m.name)}</div><div class="min-w-0"><div class="text-sm font-medium">${esc(m.name)}</div><div class="text-xs text-neutral-500 truncate">${esc(m.email)}</div></div><span class="pill ml-auto">${m.role}</span><span class="text-xs w-16 text-right ${m.status==='Active'?'text-green-600':'text-amber-500'}">${m.status}</span></div>`).join('')}</div>`;
+},
+settings(){
+  return head('Settings','Company profile and appearance','')+
+  `<div class="card p-6 max-w-xl space-y-5"><div><label class="lbl">Company name</label><input id="sn" class="inp" value="${esc(S.org.name)}"></div>
+  <div><label class="lbl">Company theme colour</label><div class="flex gap-2 py-1">${swatches(S.org.color)}</div></div>
+  <div><label class="lbl">Appearance</label><div class="inline-flex rounded-lg border border-black/10 dark:border-white/15 p-0.5">${['light','dark'].map(m=>`<button data-m="${m}" class="px-4 py-1.5 text-sm rounded-md capitalize transition ${S.org.mode===m?'bg-brand text-white':''}">${m}</button>`).join('')}</div></div>
+  <div class="flex gap-2 pt-2"><button class="btn-p" id="ss">Save changes</button><button class="btn" id="rs">Reset demo</button></div></div>`;
+}};
+
+const BIND={
+dashboard(){requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll('.bar').forEach(b=>b.style.width=b.dataset.w+'%'),50))},
+contacts(){
+  $('#addc').onclick=()=>modal('Add contact',field('Name','name','Full name')+field('Email','email','name@company.com','email')+field('Company','company','Company')+sel('Status','status',['Lead','Prospect','Customer']),d=>{S.contacts.push({id:uid(),...d});save();render();toast('Contact added')});
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{S.contacts=S.contacts.filter(c=>c.id!==b.dataset.del);save();render();toast('Contact deleted')});
+},
+deals(){
+  $('#addd').onclick=()=>modal('Add deal',field('Deal name','title','Deal name')+sel('Type','type',['Product','Service'])+field('Value (USD)','value','5000','number')+sel('Stage','stage',STAGES),d=>{S.deals.push({id:uid(),...d});save();render();toast('Deal added')});
+  document.querySelectorAll('[data-stage]').forEach(el=>el.onchange=()=>{const d=S.deals.find(x=>x.id===el.dataset.stage);d.stage=el.value;save();render();toast('Moved to '+d.stage)});
+  document.querySelectorAll('[data-deld]').forEach(b=>b.onclick=()=>{S.deals=S.deals.filter(d=>d.id!==b.dataset.deld);save();render();toast('Deal deleted')});
+},
+tasks(){
+  const tf=$('#tf');wire(tf,()=>{S.tasks.unshift({id:uid(),t:tf.t.value,done:false});save();render()});
+  document.querySelectorAll('[data-t]').forEach(c=>c.onchange=()=>{S.tasks.find(t=>t.id===c.dataset.t).done=c.checked;save();render()});
+},
+team(){
+  $('#inv').onclick=()=>modal('Invite a teammate',field('Name','name','Full name')+field('Email','email','name@company.com','email')+sel('Role','role',['Manager','Sales rep','Admin']),d=>{
+    S.team.push({id:uid(),...d,status:'Pending'});save();render();
+    const link=location.href.split('#')[0]+'#invite='+uid();navigator.clipboard?.writeText(link).catch(()=>{});toast('Invite sent. Link copied to clipboard')});
+},
+settings(){
+  let color=S.org.color;
+  bindSwatches(c=>{color=c;document.documentElement.style.setProperty('--b',c)});
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{S.org.mode=b.dataset.m;save();shell();go('settings')});
+  $('#ss').onclick=()=>{S.org.name=$('#sn').value.trim()||S.org.name;S.org.color=color;save();shell();go('settings');toast('Settings saved')};
+  $('#rs').onclick=e=>{const b=e.target;if(b.dataset.sure){try{localStorage.removeItem('crm')}catch(x){}S=null;register()}else{b.dataset.sure=1;b.textContent='Click again to confirm';setTimeout(()=>{b.dataset.sure='';b.textContent='Reset demo'},3000)}};
+}};
+
+S?shell():register();
+</script>
+</body>
+</html>
